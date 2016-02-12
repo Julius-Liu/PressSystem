@@ -1,0 +1,8 @@
+# 忽略.settings文件和.settings目录
+.settings
+
+# 忽略 以下3个文件
+.classpath
+.mymetadata
+.project
+
