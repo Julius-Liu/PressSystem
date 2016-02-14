@@ -1,6 +1,5 @@
 <%@ page language="java" import="java.util.*"  contentType="text/html;charset=UTF-8"%> 
 <%@ page import="com.tgb.model.Book" %>
-<%@ page import="com.tgb.model.BookType" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 
 <%
@@ -8,17 +7,14 @@
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 
     List<Book> bookList = (List<Book>)request.getAttribute("bookList");
-    // 获取所有的bookType信息
-    List<BookType> bookTypeList = (List<BookType>)request.getAttribute("bookTypeList");
-    //BookType bookType = (BookType)request.getAttribute("bookType");
 
     int currentPage =  (Integer)request.getAttribute("currentPage"); //当前页
     int totalPage =   (Integer)request.getAttribute("totalPage");  //一共多少页
     int recordNumber =   (Integer)request.getAttribute("recordNumber");  //一共多少记录
-    String barcode = (String)request.getAttribute("barcode"); //图书条形码查询关键字
-    String bookName = (String)request.getAttribute("bookName"); //图书名称查询关键字
-    int bookType = (Integer)request.getAttribute("bookType"); // 图书类型
-    String publishDate = (String)request.getAttribute("publishDate"); //出版日期查询关键字
+
+    String book_name = (String)request.getAttribute("book_name"); 			// 
+    String sub_book_name = (String)request.getAttribute("sub_book_name"); 	// 
+    String ISBN = (String)request.getAttribute("ISBN"); 					// 
         //String username=(String)session.getAttribute("username");
     //if(username==null){
         //response.getWriter().println("<script>top.location.href='" + basePath + "login/login_view.action';</script>");
@@ -96,8 +92,7 @@ function GoToPage(currentPage, totalPage) {
     	return;
     }
     document.forms[0].currentPage.value = currentPage;
-    //document.forms[0].action = "<%=basePath %>book/queryBook?barcode=<%=barcode%>&bookName=<%=bookName%>&bookType=<%=bookType%>&publishDate=<%=publishDate%>";
-    document.forms[0].action = "<%=basePath %>book/queryBook?bookType=<%=bookType%>";
+    document.forms[0].action = "<%=basePath %>book/queryBook";
     document.forms[0].submit(); 
 }
 
@@ -119,10 +114,23 @@ function QueryBook() {
 	document.forms["bookQueryForm"].submit();
 }
 
+/* 删除 书本 */
+function DelBook(id){
+	$.get("<%=basePath%>book/delBook?id=" + id,function(data){
+		if("success" == data.result){
+			alert("删除成功！");
+			window.location.reload();
+		}else{
+			alert("删除失败！");
+		}
+	});
+}
+
 /* 导出当前记录到Excel */
+/* 需要启用 */
 function OutputToExcel() {
-	document.forms["bookQueryForm"].action = "<%=basePath %>/Book/Book_QueryBookOutputToExcel.action";
-	document.forms["bookQueryForm"].submit(); 
+	//document.forms["bookQueryForm"].action = "<%=basePath %>/Book/Book_QueryBookOutputToExcel.action";
+	//document.forms["bookQueryForm"].submit(); 
 }
 
 </script>
@@ -132,7 +140,8 @@ function OutputToExcel() {
 <form action="<%=basePath %>book/queryBook" name="bookQueryForm" method="post">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td height="30" background="<%=basePath %>images/tab_05.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <td height="30" background="<%=basePath %>images/tab_05.gif">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td width="12" height="30"><img src="<%=basePath %>images/tab_03.gif" width="12" height="30" /></td>
         <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -150,34 +159,15 @@ function OutputToExcel() {
         </table></td>
         <td width="16"><img src="<%=basePath %>images/tab_07.gif" width="16" height="30" /></td>
       </tr>
-    </table></td>
+    </table>
+    </td>
   </tr>
-
-
+  
   <tr>
   <td>
-图书条形码:<input type=text name="barcode" value="<%=barcode%>" />&nbsp;
-图书名称:<input type=text name="bookName" value="<%=bookName%>"/>&nbsp;
-图书所在类别：<select name="bookType">
-				
- 				<option value="0"
- 					<c:if test="${bookType == 0}">selected</c:if>
- 				>不限制</option>
-				
- 				<%
- 					
- 					for(BookType bookTypeTemp:bookTypeList) {
- 			   %>
- 			   <option value="<%=bookTypeTemp.getBookTypeId() %>"
- 			   		<c:if test="${bookType == bookTypeTemp.getBookTypeId()}">selected</c:if>
- 			   ><%=bookTypeTemp.getBookTypeName() %></option>
- 			   <%
- 					}
- 				
- 				%>
- 				
- 			</select>&nbsp;
-出版日期:<input type=text readonly name="publishDate" value="<%=publishDate%>" onclick="setDay(this);"/>&nbsp;
+图书名称：<input type=text name="book_name" value="<%=book_name%>"/>&nbsp;
+丛书名称：<input type=text name="sub_book_name" value="<%=sub_book_name%>"/>&nbsp;
+ISBN：<input type=text name="ISBN" value="<%=ISBN%>"/>&nbsp;
     <input type=hidden name=currentPage value="1" />
     <input type=submit value="查询" onclick="QueryBook();"  />
   </td>
@@ -192,15 +182,11 @@ function OutputToExcel() {
             <td width="3%" height="22" background="images/bg.gif" bgcolor="#FFFFFF"><div align="center">
               <input type="checkbox" name="checkall" onclick="checkAll();" />
             </div></td> -->
-            <td width="3%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">序号</span></div></td>
-            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">图书条形码</span></div></td>
-            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">图书名称</span></div></td>
-            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">图书所在类别</span></div></td>
-            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">图书价格</span></div></td>
-            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">库存</span></div></td>
-            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">出版日期</span></div></td>
-            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">出版社</span></div></td>
-            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">图书图片</span></div></td>
+            <td width="4%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">图书编号</span></div></td>
+            <td height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">图书名称</span></div></td>
+            <td height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">丛书名称</span></div></td>
+            <td height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">ISBN</span></div></td>
+            <td width="4%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">图书单价</span></div></td>
             <td width="10%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF" class="STYLE1"><div align="center">基本操作</div></td>
           </tr>
              <%-- <c:if test="${!empty bookList && !empty bookTypeList}"> --%>
@@ -208,27 +194,20 @@ function OutputToExcel() {
 				<%
 					int bookListSize = bookList.size();
 					int startIndex = (currentPage -1) *10;
-					System.out.println("BookList size = " + bookListSize);
-					int bookTypeListSize = bookTypeList.size();
-				    for(int i=0;i<bookListSize;i++) {
-            			int currentIndex = startIndex + i + 1; // 当前记录的序号
+					System.out.println("bookList size = " + bookListSize);
+				    for(int i=0; i<bookListSize; i++) {
             			Book book = bookList.get(i); // 获取到Book对象
 				 %>
 		          <tr>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center" class="STYLE1">
-		              <div align="center"><%=currentIndex %></div>
-		            </div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=book.getBarcode() %></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=book.getBookName() %></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=book.getBookTypeName() %></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=book.getPrice() %></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=book.getCount() %></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=book.getPublishDate() %></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=book.getPublish() %></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><img src="<%=basePath%>${book.bookPhoto}" width="50px" height="50px" /></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=book.getId() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=book.getBook_name() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=book.getSub_book_name() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=book.getISBN() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=book.getPrice()==0.0 ? "": book.getPrice()%></span></div></td>
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE4">
-		            <span style="cursor:hand;" onclick="location.href='<%=basePath %>book/getBook?barcode=<%=book.getBarcode() %>'"><a href='#'><img src="<%=basePath %>images/edt.gif" width="16" height="16"/>编辑</a></span>&nbsp; &nbsp;
-            		<span style="cursor:hand;" onclick=""><a href='#'><img src="<%=basePath %>images/del.gif" width="16" height="16"/>删除</a></span>
+		            	<span style="cursor:hand;" onclick="location.href='<%=basePath %>book/checkBook?id=<%=book.getId() %>'"><a href='#'><img src="<%=basePath %>images/vie.gif" width="16" height="16"/>详细</a></span>&nbsp;
+		            	<span style="cursor:hand;" onclick="location.href='<%=basePath %>book/getBook?id=<%=book.getId() %>'"><a href='#'><img src="<%=basePath %>images/edt.gif" width="16" height="16"/>编辑</a></span>&nbsp;
+            			<span style="cursor:hand;" onclick=""><a href="javascript:DelBook('<%=book.getId()%>')"><img src="<%=basePath %>images/del.gif" width="16" height="16"/>删除</a></span>
 		            </div></td>
 		          </tr>
 		          <% } %>

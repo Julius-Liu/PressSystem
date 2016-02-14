@@ -25,9 +25,10 @@ public class XuanTi {
 	// 申报人
 	private String originator;
 	
-	// 稿件来源
+	// 稿件来源id
 	private int source;
 	
+	// 稿件来源 content
 	private String gao_jian_source;
 	
 	// 初审意见
@@ -42,6 +43,9 @@ public class XuanTi {
 	
 	// ISBN
 	private String ISBN;
+	
+	// the_book_id
+	private int the_book_id;
 	
 	public String getId() {
 		return id;
@@ -92,6 +96,8 @@ public class XuanTi {
 	public void setOriginator(String originator) {
 		this.originator = originator;
 	}
+	
+	// 获取稿件来源的id
 	public int getSource() {
 		return source;
 	}
@@ -145,5 +151,13 @@ public class XuanTi {
 	}
 	public void setISBN(String iSBN) {
 		ISBN = iSBN;
+	}
+	
+	public int getThe_book_id() {
+		return the_book_id;
+	}
+	
+	public void setThe_book_id(int the_book_id) {
+		this.the_book_id = the_book_id;
 	}
 }

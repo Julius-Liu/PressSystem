@@ -1,6 +1,5 @@
 package com.tgb.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 
@@ -12,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.github.pagehelper.PageHelper;
 import com.tgb.mapper.BookMapper;
 import com.tgb.model.Book;
-import com.tgb.model.BookType;
 import com.tgb.service.BookService;
 
 @Service
@@ -50,64 +48,44 @@ public class BookServiceImpl implements BookService{
 	}
 
 	public boolean delete(int id) {
-		// TODO Auto-generated method stub
-		return false;
+		return bookMapper.delete(id);
 	}
 
-	public Book findByBarcode(String barcode) {
-		Book book = bookMapper.findByBarcode(barcode);
+	public Book findById(int id) {
+		Book book = bookMapper.findById(id);
 		return book;
 	}
-
-	public List<Book> findAll() {
-		List<Book> findAllList = bookMapper.findAll();
-		return findAllList;
-	}
 	
-	public List<Book> findAllAd() {
+	public List<Book> findAll() {
 		// 限制每页显示的个数
 		PageHelper.startPage(1, 10);
-		List<Book> bookListAd = bookMapper.findAllAd();
-		return bookListAd;
+		List<Book> bookList = bookMapper.findAll();
+		return bookList;
 	}
 	
-	public List<Book> queryBookInfo(String barcode, String bookName, int bookType, 
-			String publishDate, int currentPage) {
-		
+	/*
+	 * 查询 书本 信息
+	 */
+	public List<Book> queryBookInfo(String book_name, 
+			String sub_book_name, String ISBN, int currentPage) {
+		// 限制每页显示的个数
 		PageHelper.startPage(currentPage, 10);
-		List<Book> bookListAd = bookMapper.calculateTotalPageAndRecordNumber(barcode, bookName, bookType, publishDate);
+		List<Book> bookList = bookMapper.calculateTotalPageAndRecordNumber(book_name, sub_book_name, ISBN);
 		
-//		Session s = factory.getCurrentSession();
-//    	String hql = "From Book book where 1=1";
-//    	if(!barcode.equals("")) hql = hql + " and book.barcode like '%" + barcode + "%'";
-//    	if(!bookName.equals("")) hql = hql + " and book.bookName like '%" + bookName + "%'";
-//    	if(null != bookType && bookType.getBookTypeId()!=0) hql += " and book.bookType.bookTypeId=" + bookType.getBookTypeId();
-//    	if(!publishDate.equals("")) hql = hql + " and book.publishDate like '%" + publishDate + "%'";
-//    	 Query q = s.createQuery(hql);
-//    	/*���㵱ǰ��ʾҳ��Ŀ�ʼ��¼*/
-//    	int startIndex = (currentPage-1) * this.PAGE_SIZE;
-//    	q.setFirstResult(startIndex);
-//    	q.setMaxResults(this.PAGE_SIZE);
-//    	List bookList = q.list();
-		
-    	return bookListAd;
+    	return bookList;
 	}
 	
-	public void calculateTotalPageAndRecordNumber(String barcode, String bookName, 
-			int bookType, String publishDate) {
-        List<Book> bookList = bookMapper.calculateTotalPageAndRecordNumber(barcode, bookName, bookType, publishDate);
+	/*
+	 * 计算总页数和总记录数
+	 */
+	public void calculateTotalPageAndRecordNumber(String book_name, 
+			String sub_book_name, String ISBN) {
+        List<Book> bookList = bookMapper.calculateTotalPageAndRecordNumber(book_name, sub_book_name, ISBN);
         recordNumber = bookList.size();
         int mod = recordNumber % this.PAGE_SIZE;
         totalPage = recordNumber / this.PAGE_SIZE;
         if(mod != 0) {
         	totalPage++;
         }
-        
-//        Query q = s.createQuery(hql);
-//        List bookList = q.list();
-//        recordNumber = bookList.size();
-//        int mod = recordNumber % this.PAGE_SIZE;
-//        totalPage = recordNumber / this.PAGE_SIZE;
-//        if(mod != 0) totalPage++;
 	}
 }

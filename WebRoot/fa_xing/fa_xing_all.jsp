@@ -220,7 +220,7 @@ function OutputToExcel() {
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE4">
 		            	<span style="cursor:hand;" onclick="location.href='<%=basePath %>fa_xing/checkFaXing?id=<%=faXing.getId() %>'"><a href='#'><img src="<%=basePath %>images/vie.gif" width="16" height="16"/>详细</a></span>&nbsp;
 		            	<span style="cursor:hand;" onclick="location.href='<%=basePath %>fa_xing/getFaXing?id=<%=faXing.getId() %>'"><a href='#'><img src="<%=basePath %>images/edt.gif" width="16" height="16"/>编辑</a></span>&nbsp;
-            			<span style="cursor:hand;" onclick=""><a href="javascript:DelXuanTi('<%=faXing.getId()%>')"><img src="<%=basePath %>images/del.gif" width="16" height="16"/>删除</a></span>
+            			<span style="cursor:hand;" onclick=""><a href="javascript:DelFaXing('<%=faXing.getId()%>')"><img src="<%=basePath %>images/del.gif" width="16" height="16"/>删除</a></span>
 		            </div></td>
 		          </tr>
 		          <% } %>

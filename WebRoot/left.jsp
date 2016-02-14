@@ -3,14 +3,14 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 
-String barcode = "";
-String bookName = "";
-String publishDate = "";
+String the_book_id = "";
+String book_name = "";
+String sub_book_name = "";
+String ISBN = "";
 
 // 选题id初始值为空
 String xuan_ti_id = "";
 String year = "";
-String book_name = "";
 
 String original_author = "";
 String ze_ren_editor = "";
@@ -177,6 +177,18 @@ H1 a {
 <table width="100%" height="280" border="0" cellpadding="0" cellspacing="0" bgcolor="#EEF2FB">
   <tr>
     <td width="182" valign="top"><div id="container">
+      <h1 class="type"><a href="javascript:void(0)">图书管理</a></h1>
+      <div class="content">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td><img src="images/menu_topline.gif" width="182" height="5" /></td>
+          </tr>
+        </table>
+        <ul class="MM">
+          <li><a href="<%=basePath%>book/queryBook?book_name=<%=book_name%>&sub_book_name=<%=sub_book_name%>&ISBN=<%=ISBN%>&currentPage=1" target="main">查看图书信息</a></li>
+          <li><a href="<%=basePath%>book/toAddBook" target="main" target="main">添加图书信息</a></li>
+        </ul>
+      </div>
       <h1 class="type"><a href="javascript:void(0)">编辑管理</a></h1>
       <div class="content">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">

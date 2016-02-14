@@ -14,7 +14,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML>
 <HEAD>
-<TITLE>添加图书</TITLE> 
+<TITLE>查看图书</TITLE> 
 <STYLE type=text/css>
 	BODY {
     	MARGIN-LEFT: 0px; BACKGROUND-COLOR: #ffffff
@@ -26,31 +26,7 @@
 </STYLE>
 
 <script src="<%=basePath %>js/calendar.js"></script>
-<script type="text/javascript">
 
-	/*验证表单*/
-	function checkForm() {
-	    var barcode = document.getElementById("book.id").value;
-	    if(barcode=="") {
-	        alert('请输入图书条形码!');
-	        return false;
-	    }
-	    var bookName = document.getElementById("book.book_name").value;
-	    if(bookName=="") {
-	        alert('请输入图书名称!');
-	        return false;
-	    }
-	    return true; 
-	}
-	
-	function addBook() {
-		var form = document.forms[0];
-		form.action = "<%=basePath%>book/addBook";
-		form.method="post";
-		form.submit();
-	}
-
-</script>
 </HEAD>
 
 <BODY background="<%=basePath %>images/adminBg.jpg">
@@ -65,31 +41,23 @@
 
   	<tr>
     	<td width=30%>图书名称：</td>
-    	<td width=70%><input id="book_name" name="book_name" type="text" size="20" /></td>
+    	<td width=70%><input id="book_name" name="book_name" value="${book.book_name}" type="text" size="20" /></td>
   	</tr>
 
   	<tr>
-    	<td width=30%>丛书：</td>
-    	<td width=70%><input id="sub_book_name" name="sub_book_name" type="text" size="20" /></td>
+    	<td width=30%>丛书名称：</td>
+    	<td width=70%><input id="sub_book_name" name="sub_book_name" value="${book.sub_book_name}" type="text" size="20" /></td>
   	</tr>
   	
   	<tr>
     	<td width=30%>ISBN：</td>
-    	<td width=70%><input id="ISBN" name="ISBN" type="text" size="20" /></td>
+    	<td width=70%><input id="ISBN" name="ISBN" value="${book.ISBN}" type="text" size="20" /></td>
   	</tr>
 
   	<tr>
-    	<td width=30%>图书价格:</td>
-    	<td width=70%><input id="price" name="price" type="text" size="8" /></td>
+    	<td width=30%>图书价格：</td>
+    	<td width=70%><input id="price" name="price" value="${book.price}" type="text" size="8" /></td>
   	</tr>
-
-  	<tr bgcolor='#FFFFFF'>
-      	<td colspan="4" align="center">
-        	<input type='submit' name='button' value='保存' onclick="addBook()">
-        	&nbsp;&nbsp;
-        	<input type="reset" value='重写' />
-      	</td>
-    </tr>
 
 </table>
 </form>

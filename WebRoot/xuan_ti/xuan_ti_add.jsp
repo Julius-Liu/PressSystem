@@ -13,6 +13,11 @@
     List<ChuShenComments> chuShenCommentsList = (List<ChuShenComments>)request.getAttribute("chuShenCommentsList");
     List<XuanTiStatus> xuanTiStatusList = (List<XuanTiStatus>)request.getAttribute("xuanTiStatusList");
     
+    int the_book_id = (Integer)request.getAttribute("the_book_id");
+    String book_name = (String)request.getAttribute("book_name"); 			// 
+    String sub_book_name = (String)request.getAttribute("sub_book_name"); 	// 
+    String ISBN = (String)request.getAttribute("ISBN"); 					// 
+    
     /* 
     String username=(String)session.getAttribute("username");
     if(username==null) {
@@ -58,18 +63,51 @@
 		form.submit();
 	}
 
+	function QueryBook4XuanTi() {
+		document.forms["xuanTi"].action = "<%=basePath%>xuan_ti/queryBook4XuanTi";
+		document.forms["xuanTi"].method = "post";
+		document.forms["xuanTi"].submit();
+	}
+
 </script>
 </HEAD>
 
 <BODY background="<%=basePath %>images/adminBg.jpg">
 <s:fielderror cssStyle="color:red" />
-
+<%-- <form action="<%=basePath %>book/queryBook" name="bookQueryForm" method="post"> --%>
 <TABLE align="center" height="100%" cellSpacing=0 cellPadding=0 width="80%" border=0>
   <TBODY>
   <TR>
     <TD align="left" vAlign=top >
-    <form action="" name="xuanTi">
+    <form action="<%=basePath%>book/queryBookById" name="xuanTi" method="post">
 	<table width='100%' cellspacing='1' cellpadding='3' class="tablewidth">
+
+	<tr>
+		<td>请输入数据库中的图书编号，例如：21，然后点击“查询”按钮。</td>
+		<td>
+			<input id="the_book_id" name="the_book_id" value="<%=the_book_id == 0 ? "":the_book_id %>" type="text" size="12"/> &nbsp;
+			<input type="submit" value="查询" onclick="QueryBook4XuanTi();"  />
+		</td>
+	</tr>
+
+  	<tr>
+    	<td width=30%>书名：</td>
+    	<td width=70%><input id="book_name" name="book_name" value="<%=book_name %>" type="text" size="20" /></td>
+  	</tr>
+
+  	<tr>
+    	<td width=30%>丛书名：</td>
+    	<td width=70%><input id="sub_book_name" name="sub_book_name" value="<%=book_name %>" type="text" size="20" /></td>
+  	</tr>
+
+  	<tr>
+    	<td width=30%>ISBN:</td>
+    	<td width=70%><input id="ISBN" name="ISBN" value="<%=ISBN %>" type="text" size="20"/></td>
+  	</tr>
+  	
+  	<tr>
+  		<td><br/></td>
+  	</tr>
 
 	<tr>
 	    <td width=30%>选题编号：</td>
@@ -89,16 +127,6 @@
 	<tr>
     	<td width=30%>选题季度：</td>
     	<td width=70%><input id="season" name="season" type="text" size="10" /></td>
-  	</tr>
-
-  	<tr>
-    	<td width=30%>书名：</td>
-    	<td width=70%><input id="book_name" name="book_name" type="text" size="20" /></td>
-  	</tr>
-
-  	<tr>
-    	<td width=30%>丛书名：</td>
-    	<td width=70%><input id="sub_book_name" name="sub_book_name" type="text" size="20" /></td>
   	</tr>
 
   	<tr>
@@ -148,11 +176,6 @@
       		</c:forEach>      	
       	</select>
     	</td>
-  	</tr>
-
-  	<tr>
-    	<td width=30%>ISBN:</td>
-    	<td width=70%><input id="ISBN" name="ISBN" type="text" size="20"/></td>
   	</tr>
 
   	<tr bgcolor='#FFFFFF'>

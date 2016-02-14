@@ -13,18 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tgb.model.Book;
-import com.tgb.model.BookType;
 import com.tgb.service.BookService;
-import com.tgb.service.BookTypeService;
 
 @Controller
 @RequestMapping("/book")
-public class BookController {	
+public class BookController {
 	@Autowired
-	private BookService bookService;
-
-	@Autowired
-	private BookTypeService bookTypeService;
+	private BookService bookService;	
 	
 	private int currentPage;
     public void setCurrentPage(int currentPage) {
@@ -51,115 +46,130 @@ public class BookController {
     }
 	
 	/**
-	 * 跳转到添加用户界面
+	 * 跳转到添加 书本 界面
 	 * @param request
 	 * @return
 	 */
 	@RequestMapping("/toAddBook")
-	public String toAddBook(HttpServletRequest request) {	
-		List<BookType> bookTypeList = bookTypeService.findAll();
-		request.setAttribute("bookTypeList", bookTypeList);
-		return "/Book/Book_add";
+	public String toAddBook(HttpServletRequest request) {			
+		return "/book/book_add";
 	}
 	
 	/**
-	 * 添加图书并重定向
-	 * @param user
+	 * 添加 书本 并重定向
+	 * @param book
 	 * @param request
 	 * @return
 	 */
 	@RequestMapping("/addBook")
 	public String addBook(Book book, HttpServletRequest request) {
-		//System.out.println("添加图书");
 		bookService.save(book);
-		return "redirect:queryBook?bookType=0&currentPage=1";
+		return "redirect:queryBook?book_name=&sub_book_name=&ISBN=&currentPage=1";
 	}
 	
 	/**
-	 * 编辑图书
-	 * @param user
+	 * 编辑  书本
+	 * @param book
 	 * @param request
 	 * @return
 	 */
 	@RequestMapping("/updateBook")
 	public String updateBook(Book book, HttpServletRequest request) {	
 		if(bookService.update(book)) {
-			book = bookService.findByBarcode(book.getBarcode());
-			request.setAttribute("book", book);
-			return "redirect:queryBook?barcode=&bookName=&bookType=0&publishDate=&currentPage=1";
+			return "redirect:queryBook?book_name=&sub_book_name=&ISBN=&currentPage=1";
 		}else {
 			return "/error";
 		}
-	}
+	}	
 	
 	/**
-	 * 获取所有图书列表
+	 * 获取指定 图书 列表
 	 * @param request
 	 * @return
 	 */
 	@RequestMapping("/getBook")
-	public String getBook(String barcode, HttpServletRequest request) {		
-		List<BookType> bookTypeList = bookTypeService.findAll();
-		
-		request.setAttribute("bookTypeList", bookTypeList);
-		request.setAttribute("book", bookService.findByBarcode(barcode));
-		return "/Book/Book_edit";
+	public String getBook(int id, HttpServletRequest request) {
+		Book book = bookService.findById(id);
+				
+		request.setAttribute("book", book);
+
+		return "/book/book_edit";
 	}
 	
-	
+	/**
+	 * 查看指定 书本 详细内容
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/checkBook")
+	public String checkBook(int id, HttpServletRequest request) {
+		Book book = bookService.findById(id);
+				
+		request.setAttribute("book", book);
+		
+		return "/book/book_details";
+	}		
 	
 	/**
-	 * 获取所有图书列表
+	 * 删除 书本
+	 * @param id
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping("/delBook")
+	public void delBook(int id, HttpServletRequest request, HttpServletResponse response) {
+		String result = "{\"result\":\"error\"}";		
+		System.out.println("id = " + id);
+		if(bookService.delete(id)) {
+			result = "{\"result\":\"success\"}";
+		}
+		
+		response.setContentType("application/json");
+		
+		try {
+			PrintWriter out = response.getWriter();
+			out.write(result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}	
+	
+	/**
+	 * 查询 书本 列表
 	 * @param request
 	 * @return
 	 */
 	@RequestMapping("/queryBook")
 	public String queryBook(
-			@RequestParam(value="barcode", required=false)String barcode, 
-			@RequestParam(value="bookName", required=false)String bookName,
-			@RequestParam(value="bookType", required=false)int bookType,
-			@RequestParam(value="publishDate", required=false)String publishDate, 
+			@RequestParam(value="book_name", required=false)String book_name,
+			@RequestParam(value="sub_book_name", required=false)String sub_book_name,
+			@RequestParam(value="ISBN", required=false)String ISBN, 
 			@RequestParam(value="currentPage", required=false)int currentPage, 
-			HttpServletRequest request) {
-		System.out.println("barcode: " + barcode);
-		System.out.println("bookName: " + bookName);
-		System.out.println("bookType: " + bookType);
-		System.out.println("publishDate: " + publishDate);
+			HttpServletRequest request) {	
+		System.out.println("book_name: " + book_name);
+		System.out.println("sub_book_name: " + sub_book_name);
+		System.out.println("ISBN: " + ISBN);
 		System.out.println("currentPage: " + currentPage);
 		
-		List<BookType> bookTypeList = bookTypeService.findAll();
-		
-		List<Book> bookList = bookService.queryBookInfo(barcode, bookName, bookType, publishDate, currentPage);
+		List<Book> bookList = bookService.queryBookInfo(book_name, sub_book_name, ISBN, currentPage);
 		
         /*计算总的页数和总的记录数*/
-        //bookDAO.CalculateTotalPageAndRecordNumber(barcode, bookName, bookType, publishDate);
-		bookService.calculateTotalPageAndRecordNumber(barcode, bookName, bookType, publishDate);
+		bookService.calculateTotalPageAndRecordNumber(book_name, sub_book_name, ISBN);
 		
         /*获取到总的页码数目*/
         totalPage = bookService.getTotalPage();
         /*当前查询条件下总记录数*/
         recordNumber = bookService.getRecordNumber();
-		
-//		List<Book> bookList = bookService.findAllAd();
-//		List<BookType> bookTypeList = bookTypeService.findAll();
-//		
-//		recordNumber = bookList.size();
-//        int mod = recordNumber % this.PAGE_SIZE;
-//        totalPage = recordNumber / this.PAGE_SIZE;
-//        if(mod != 0) {
-//        	totalPage++;
-//        }
-//        
-        request.setAttribute("barcode", barcode);
-        request.setAttribute("bookName", bookName);
-        request.setAttribute("bookType", bookType);
-        request.setAttribute("publishDate", publishDate);
+           
+        request.setAttribute("book_name", book_name);
+        request.setAttribute("sub_book_name", sub_book_name);
+        request.setAttribute("ISBN", ISBN);
+        
 		request.setAttribute("bookList", bookList);
-		request.setAttribute("bookTypeList", bookTypeList);
+		
 		request.setAttribute("recordNumber", recordNumber);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("totalPage", totalPage);
-		return "/Book/Book_all";
-	}
-	
+		return "/book/book_all";
+	}	
 }

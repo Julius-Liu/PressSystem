@@ -8,6 +8,11 @@
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
     
+    int the_book_id = (Integer)request.getAttribute("the_book_id");
+    String book_name = (String)request.getAttribute("book_name");
+    String sub_book_name = (String)request.getAttribute("sub_book_name");
+    String ISBN = (String)request.getAttribute("ISBN");
+    
     // 获取所有的 gaoJianSource 信息
     List<GaoJianSource> gaoJianSourceList = (List<GaoJianSource>)request.getAttribute("gaoJianSourceList");
     List<ChuShenComments> chuShenCommentsList = (List<ChuShenComments>)request.getAttribute("chuShenCommentsList");
@@ -47,6 +52,33 @@
     <form action="" name="xuanTi">
 	<table width='100%' cellspacing='1' cellpadding='3' class="tablewidth">
 
+<%-- 	<tr>
+		<td>请输入数据库中的图书编号，例如：21，然后点击“查询”按钮。</td>
+		<td>
+			<input id="the_book_id" name="the_book_id" value="<%=the_book_id == 0 ? "":the_book_id %>" type="text" size="12"/> &nbsp;
+			<input type="submit" value="查询" onclick="QueryBook4XuanTi();"  />
+		</td>
+	</tr> --%>
+
+  	<tr>
+    	<td width=30%>书名：</td>
+    	<td width=70%><input id="book_name" name="book_name" value="<%=book_name %>" type="text" size="20" /></td>
+  	</tr>
+
+  	<tr>
+    	<td width=30%>丛书名：</td>
+    	<td width=70%><input id="sub_book_name" name="sub_book_name" value="<%=sub_book_name %>" type="text" size="20" /></td>
+  	</tr>
+
+  	<tr>
+    	<td width=30%>ISBN:</td>
+    	<td width=70%><input id="ISBN" name="ISBN" value="<%=ISBN %>" type="text" size="20"/></td>
+  	</tr>
+  	
+  	<tr>
+  		<td><br/></td>
+  	</tr>
+
 	<tr>
 	    <td width=30%>选题编号：</td>
 	    <td width=70%><input id="id" name="id" value="${xuanTi.id}" type="text" size="10"/></td>
@@ -65,16 +97,6 @@
 	<tr>
     	<td width=30%>选题季度：</td>
     	<td width=70%><input id="season" name="season" value="${xuanTi.season}" type="text" size="10" /></td>
-  	</tr>
-
-  	<tr>
-    	<td width=30%>书名：</td>
-    	<td width=70%><input id="book_name" name="book_name" value="${xuanTi.book_name}" type="text" size="20" /></td>
-  	</tr>
-
-  	<tr>
-    	<td width=30%>丛书名：</td>
-    	<td width=70%><input id="sub_book_name" name="sub_book_name" value="${xuanTi.sub_book_name}" type="text" size="20" /></td>
   	</tr>
 
   	<tr>
@@ -136,11 +158,6 @@
       		</c:forEach>     	
       	</select>
     	</td>
-  	</tr>
-
-  	<tr>
-    	<td width=30%>ISBN:</td>
-    	<td width=70%><input id="ISBN" name="ISBN" value="${xuanTi.ISBN}" type="text" size="20"/></td>
   	</tr>
 
 </table>

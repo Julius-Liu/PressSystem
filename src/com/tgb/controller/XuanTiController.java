@@ -12,11 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.tgb.model.Book;
 import com.tgb.model.XuanTi;
 import com.tgb.model.GaoJianSource;
 import com.tgb.model.ChuShenComments;
 import com.tgb.model.XuanTiStatus;
 
+import com.tgb.service.BookService;
 import com.tgb.service.XuanTiService;
 import com.tgb.service.GaoJianSourceService;
 import com.tgb.service.ChuShenCommentsService;
@@ -36,6 +38,9 @@ public class XuanTiController {
 	
 	@Autowired
 	private XuanTiStatusService xuanTiStatusService;
+	
+	@Autowired
+	private BookService bookService;
 	
 	private int currentPage;
     public void setCurrentPage(int currentPage) {
@@ -76,6 +81,11 @@ public class XuanTiController {
 		request.setAttribute("chuShenCommentsList", chuShenCommentsList);
 		request.setAttribute("xuanTiStatusList", xuanTiStatusList);
 		
+		request.setAttribute("the_book_id", 0);
+		request.setAttribute("book_name", "");
+		request.setAttribute("sub_book_name", "");
+		request.setAttribute("ISBN", "");
+		
 		return "/xuan_ti/xuan_ti_add";
 	}
 	
@@ -114,10 +124,18 @@ public class XuanTiController {
 	@RequestMapping("/getXuanTi")
 	public String getXuanTi(String id, HttpServletRequest request) {
 		XuanTi xuanTi = xuanTiService.findById(id);
+		
+		Book book = bookService.findById(xuanTi.getThe_book_id());
+		
 		List<GaoJianSource> gaoJianSourceList = gaoJianSourceService.findAll();
 		List<ChuShenComments> chuShenCommentsList = chuShenCommentsService.findAll();
 		List<XuanTiStatus> xuanTiStatusList = xuanTiStatusService.findAll();
 				
+		request.setAttribute("the_book_id", xuanTi.getThe_book_id());
+		request.setAttribute("book_name", book.getBook_name());
+		request.setAttribute("sub_book_name", book.getSub_book_name());
+		request.setAttribute("ISBN", book.getISBN());
+		
 		request.setAttribute("xuanTi", xuanTi);
 		request.setAttribute("gaoJianSourceList", gaoJianSourceList);
 		request.setAttribute("chuShenCommentsList", chuShenCommentsList);
@@ -134,16 +152,52 @@ public class XuanTiController {
 	@RequestMapping("/checkXuanTi")
 	public String checkXuanTi(String id, HttpServletRequest request) {
 		XuanTi xuanTi = xuanTiService.findById(id);
+		
+		Book book = bookService.findById(xuanTi.getThe_book_id());
+		
 		List<GaoJianSource> gaoJianSourceList = gaoJianSourceService.findAll();
 		List<ChuShenComments> chuShenCommentsList = chuShenCommentsService.findAll();
 		List<XuanTiStatus> xuanTiStatusList = xuanTiStatusService.findAll();
 				
+		request.setAttribute("the_book_id", xuanTi.getThe_book_id());
+		request.setAttribute("book_name", book.getBook_name());
+		request.setAttribute("sub_book_name", book.getSub_book_name());
+		request.setAttribute("ISBN", book.getISBN());
+		
 		request.setAttribute("xuanTi", xuanTi);
 		request.setAttribute("gaoJianSourceList", gaoJianSourceList);
 		request.setAttribute("chuShenCommentsList", chuShenCommentsList);
 		request.setAttribute("xuanTiStatusList", xuanTiStatusList);
 		
 		return "/xuan_ti/xuan_ti_details";
+	}	
+	
+	/**
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/queryBook4XuanTi")
+	public String queryBook4XuanTi(
+			@RequestParam(value="the_book_id", required=true)int the_book_id,
+			HttpServletRequest request) {
+		System.out.println("the_book_id: " + the_book_id);
+		Book book = bookService.findById(the_book_id);
+				
+		List<GaoJianSource> gaoJianSourceList = gaoJianSourceService.findAll();
+		List<ChuShenComments> chuShenCommentsList = chuShenCommentsService.findAll();
+		List<XuanTiStatus> xuanTiStatusList = xuanTiStatusService.findAll();		
+		
+		request.setAttribute("the_book_id", the_book_id);
+		request.setAttribute("book_name", book.getBook_name());
+		request.setAttribute("sub_book_name", book.getSub_book_name());
+		request.setAttribute("ISBN", book.getISBN());
+		
+		request.setAttribute("gaoJianSourceList", gaoJianSourceList);
+		request.setAttribute("chuShenCommentsList", chuShenCommentsList);
+		request.setAttribute("xuanTiStatusList", xuanTiStatusList);
+		
+		return "/xuan_ti/xuan_ti_add";
 	}	
 	
 	/**

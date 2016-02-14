@@ -7,14 +7,14 @@ public interface BookService {
 	void save(Book book);
 	boolean update(Book book);			// 更新图书信息	
 	boolean delete(int id);
-	Book findByBarcode(String barcode);
+	Book findById(int id);
 	List<Book> findAll();
-	List<Book> findAllAd();
-	List<Book> queryBookInfo(String barcode, String bookName, int bookType, 
-			String publishDate, int currentPage);
 	
-	void calculateTotalPageAndRecordNumber(String barcode, String bookName, 
-			int bookType, String publishDate);
+	List<Book> queryBookInfo(String book_name, String sub_book_name, 
+			String ISBN, int currentPage);
+	
+	void calculateTotalPageAndRecordNumber(String book_name, 
+			String sub_book_name, String ISBN);
 	
 	int getTotalPage();
 	int getRecordNumber();

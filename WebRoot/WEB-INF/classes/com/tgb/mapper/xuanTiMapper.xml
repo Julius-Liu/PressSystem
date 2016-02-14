@@ -13,40 +13,34 @@
 			type, 
 			year, 
 			season, 
-			book_name, 
-			sub_book_name, 
 			department, 
 			originator, 
 			source,
 			first_comments,
 			status,
-			ISBN) 
+			the_book_id) 
 		values(#{id},
 			#{type},
 			#{year},
 			#{season},
-			#{book_name},
-			#{sub_book_name},
 			#{department},
 			#{originator},
 			#{source},
 			#{first_comments},
 			#{status},
-			#{ISBN})
+			#{the_book_id})
 	</insert>
 	
 	<update id="update" parameterType="XuanTi">
 		update xuan_ti set type=#{type}, 
 			year=#{year}, 
 			season=#{season}, 
-			book_name=#{book_name}, 
-			sub_book_name=#{sub_book_name}, 
 			department=#{department}, 
 			originator=#{originator}, 
 			source=#{source},
 			first_comments=#{first_comments},
 			status=#{status},
-			ISBN=#{ISBN} 
+			the_book_id=#{the_book_id} 
 		where id=#{id}
 	</update>
 	
@@ -55,7 +49,24 @@
 	</delete>
 	
 	<select id="findById" parameterType="String" resultType="XuanTi">
-		select * from xuan_ti where id=#{id}
+		select xuan_ti.id, 
+			type, 
+			year, 
+			season, 
+			book.book_name as xuan_ti_book_name, 
+			book.sub_book_name as xuan_ti_sub_book_name, 
+			department, 
+			originator,
+			gao_jian_source.content as gao_jian_source,
+			chu_shen_comments.content as chu_shen_comments,
+			xuan_ti_status.content as xuan_ti_status,
+			book.ISBN as xuan_ti_ISBN,
+			the_book_id
+		from (((xuan_ti inner join book on xuan_ti.the_book_id=book.id)
+				inner join gao_jian_source on xuan_ti.source=gao_jian_source.id)
+					inner join chu_shen_comments on xuan_ti.first_comments=chu_shen_comments.id)
+						inner join xuan_ti_status on xuan_ti.status=xuan_ti_status.id
+		where xuan_ti.id=#{id}
 	</select>
 	
 	<select id="findAll" resultType="XuanTi">
@@ -63,15 +74,17 @@
 			type, 
 			year, 
 			season, 
-			book_name, 
-			sub_book_name, 
+			book.book_name, 
+			book.sub_book_name, 
 			department, 
 			originator,
 			gao_jian_source.content as gao_jian_source,
 			chu_shen_comments.content as chu_shen_comments,
 			xuan_ti_status.content as xuan_ti_status,
-			ISBN 
-		from ((xuan_ti inner join gao_jian_source on xuan_ti.source=gao_jian_source.id)
+			book.ISBN,
+			the_book_id 
+		from (((xuan_ti inner join book on xuan_ti.the_book_id=book.id)
+				inner join gao_jian_source on xuan_ti.source=gao_jian_source.id)
 					inner join chu_shen_comments on xuan_ti.first_comments=chu_shen_comments.id)
 						inner join xuan_ti_status on xuan_ti.status=xuan_ti_status.id				
 		order by xuan_ti.id asc
@@ -82,15 +95,17 @@
 			type, 
 			year, 
 			season, 
-			book_name, 
-			sub_book_name, 
+			book.book_name, 
+			book.sub_book_name, 
 			department, 
 			originator,
 			gao_jian_source.content as gao_jian_source,
 			chu_shen_comments.content as chu_shen_comments,
 			xuan_ti_status.content as xuan_ti_status,
-			ISBN 
-		from ((xuan_ti inner join gao_jian_source on xuan_ti.source=gao_jian_source.id)
+			book.ISBN, 
+			the_book_id
+		from (((xuan_ti inner join book on xuan_ti.the_book_id=book.id)
+				inner join gao_jian_source on xuan_ti.source=gao_jian_source.id)
 					inner join chu_shen_comments on xuan_ti.first_comments=chu_shen_comments.id)
 						inner join xuan_ti_status on xuan_ti.status=xuan_ti_status.id		
 		<where>

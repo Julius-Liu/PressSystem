@@ -1,93 +1,51 @@
 package com.tgb.model;
 
 public class Book {
-
-    private String id;
-    public String getBarcode() {
-        return id;
-    }
-    public void setBarcode(String barcode) {
-        this.id = barcode;
-    }
-
-    // 图书名称
-    private String bookName;
-    public String getBookName() {
-        return bookName;
-    }
-    public void setBookName(String bookName) {
-        this.bookName = bookName;
-    }
-
-    /*ͼ���������*/
-    private int bookType;
-    public int getBookType() {
-        return bookType;
-    }
-    public void setBookType(int bookType) {
-        this.bookType = bookType;
-    }
-
-    private String bookTypeName;  
-    public String getBookTypeName() {
-		return bookTypeName;
-	}
-	public void setBookTypeName(String bookTypeName) {
-		this.bookTypeName = bookTypeName;
-	}
-
-	/*ͼ��۸�*/
+	// 书的编号
+    private int id;
+    
+    // 书名
+    private String book_name;
+    
+    // 丛书名
+    private String sub_book_name;
+    
+    // 国际标准书号（International Standard Book Number），简称ISBN
+    private String ISBN;
+    
+    // 单价
     private float price;
-    public float getPrice() {
-        return price;
-    }
-    public void setPrice(float price) {
-        this.price = price;
-    }
-
-    /*���*/
-    private int count;
-    public int getCount() {
-        return count;
-    }
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    /*��������*/
-    private String publishDate;
-    public String getPublishDate() {
-        return publishDate;
-    }
-    public void setPublishDate(String publishDate) {
-        this.publishDate = publishDate;
-    }
-
-    /*������*/
-    private String publish;
-    public String getPublish() {
-        return publish;
-    }
-    public void setPublish(String publish) {
-        this.publish = publish;
-    }
-
-    /*ͼ����*/
-    private String introduction;
-    public String getIntroduction() {
-        return introduction;
-    }
-    public void setIntroduction(String introduction) {
-        this.introduction = introduction;
-    }
-
-    /*ͼ��ͼƬ*/
-    private String bookPhoto;
-    public String getBookPhoto() {
-        return bookPhoto;
-    }
-    public void setBookPhoto(String bookPhoto) {
-        this.bookPhoto = bookPhoto;
-    }
+    
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getBook_name() {
+		return book_name;
+	}
+	public void setBook_name(String book_name) {
+		this.book_name = book_name;
+	}
+	public String getSub_book_name() {
+		return sub_book_name;
+	}
+	public void setSub_book_name(String sub_book_name) {
+		this.sub_book_name = sub_book_name;
+	}
+	public String getISBN() {
+		return ISBN;
+	}
+	public void setISBN(String iSBN) {
+		ISBN = iSBN;
+	}
+	public float getPrice() {
+		return price;
+	}
+	public void setPrice(float price) {
+		this.price = price;
+	}
+    
 }
 
