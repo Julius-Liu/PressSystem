@@ -173,7 +173,7 @@ public class XuanTiController {
 	}	
 	
 	/**
-	 * 
+	 * 为 选题 添加 书本 信息
 	 * @param request
 	 * @return
 	 */
@@ -271,6 +271,7 @@ public class XuanTiController {
 		request.setAttribute("recordNumber", recordNumber);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("totalPage", totalPage);
+		
 		return "/xuan_ti/xuan_ti_all";
 	}	
 }

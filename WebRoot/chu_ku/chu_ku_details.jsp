@@ -9,6 +9,12 @@
     // 获取所有的 transportation 信息
     List<Transportation> transportationList = (List<Transportation>)request.getAttribute("transportationList");
     
+    int the_book_id = (Integer)request.getAttribute("the_book_id");			// 获取 the_book_id
+    String book_name = (String)request.getAttribute("book_name"); 			// 获取 book_name
+    String sub_book_name = (String)request.getAttribute("sub_book_name"); 	// 获取 sub_book_name
+    String ISBN = (String)request.getAttribute("ISBN"); 					// 获取 ISBN
+    float price = (Float)request.getAttribute("price");						// 获取 price    
+    
     /* 
     String username=(String)session.getAttribute("username");
     if(username==null) {
@@ -42,6 +48,30 @@
     <TD align="left" vAlign=top >
     <form action="" name="chuKu">
 	<table width='100%' cellspacing='1' cellpadding='3' class="tablewidth">
+
+  	<tr>
+    	<td width=30%>书名：</td>
+    	<td width=70%><input id="book_name" name="book_name" value="<%=book_name %>" type="text" size="20" /></td>
+  	</tr>
+
+  	<tr>
+    	<td width=30%>丛书名：</td>
+    	<td width=70%><input id="sub_book_name" name="sub_book_name" value="<%=book_name %>" type="text" size="20" /></td>
+  	</tr>
+
+  	<tr>
+    	<td width=30%>ISBN：</td>
+    	<td width=70%><input id="ISBN" name="ISBN" value="<%=ISBN %>" type="text" size="20"/></td>
+  	</tr>
+  	
+  	<tr>
+    	<td width=30%>单价：</td>
+    	<td width=70%><input id="price" name="price" value="<%=price == 0.0 ? "":price %>" type="text" size="20"/></td>
+  	</tr>
+  	
+  	<tr>
+  		<td><br/></td>
+  	</tr>
 
 	<tr>
 	    <td width=30%>发书编号：</td>
@@ -84,46 +114,38 @@
   	</tr>
 
   	<tr>
-    	<td width=30%>书名：</td>
-    	<td width=70%><input id="book_name" name="book_name" value="${chuKu.book_name}" type="text" size="10"/></td>
-  	</tr>
-  	  	<tr>
     	<td width=30%>版次：</td>
     	<td width=70%><input id="revision" name="revision" value="${chuKu.revision}" type="text" size="10"/></td>
   	</tr>
-  	  	<tr>
+  	<tr>
     	<td width=30%>数量：</td>
     	<td width=70%><input id="quantity" name="quantity" value="${chuKu.quantity}" type="text" size="10"/></td>
   	</tr>
-  	  	<tr>
-    	<td width=30%>单价：</td>
-    	<td width=70%><input id="price" name="price" value="${chuKu.price}" type="text" size="10"/></td>
-  	</tr>
-  	  	<tr>
+
+  	<tr>
     	<td width=30%>码洋：</td>
     	<td width=70%><input id="fixed_price" name="fixed_price" value="${chuKu.fixed_price}" type="text" size="10"/></td>
   	</tr>
-  	  	<tr>
+  	<tr>
     	<td width=30%>折扣：</td>
     	<td width=70%><input id="discount" name="discount" value="${chuKu.discount}" type="text" size="10"/></td>
   	</tr>
-  	  	<tr>
+  	<tr>
     	<td width=30%>实样：</td>
     	<td width=70%><input id="discounted_price" name="discounted_price" value="${chuKu.discounted_price}" type="text" size="10"/></td>
   	</tr>
-  	  	<tr>
+  	<tr>
     	<td width=30%>所在箱序号：</td>
     	<td width=70%><input id="crate_id" name="crate_id" value="${chuKu.crate_id}" type="text" size="10"/></td>
   	</tr>
-  	  	<tr>
+  	<tr>
     	<td width=30%>送货地址：</td>
     	<td width=70%><input id="deliver_address" name="deliver_address" value="${chuKu.deliver_address}" type="text" size="10"/></td>
   	</tr>
-  	  	<tr>
+  	<tr>
     	<td width=30%>邮编：</td>
     	<td width=70%><input id="postcode" name="postcode" value="${chuKu.postcode}" type="text" size="10"/></td>
-  	</tr>
-  	
+  	</tr>  	
 
 	<tr>
     	<td width=30%>运输方式：</td>

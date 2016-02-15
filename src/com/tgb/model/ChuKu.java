@@ -70,6 +70,8 @@ public class ChuKu {
 	// 联系电话
 	private String contact_phone;
 	
+	private int the_book_id;
+	
 	public String getId() {
 		return id;
 	}
@@ -207,5 +209,11 @@ public class ChuKu {
 	}
 	public void setContact_phone(String contact_phone) {
 		this.contact_phone = contact_phone;
+	}
+	public int getThe_book_id() {
+		return the_book_id;
+	}
+	public void setThe_book_id(int the_book_id) {
+		this.the_book_id = the_book_id;
 	}
 }

@@ -12,9 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.tgb.model.Book;
 import com.tgb.model.ChuKu;
 import com.tgb.model.Transportation;
 
+import com.tgb.service.BookService;
 import com.tgb.service.ChuKuService;
 import com.tgb.service.TransportationService;
 
@@ -26,6 +28,9 @@ public class ChuKuController {
 	
 	@Autowired
 	private TransportationService transportationService;
+	
+	@Autowired
+	private BookService bookService;
 	
 	private int currentPage;
     public void setCurrentPage(int currentPage) {
@@ -61,6 +66,12 @@ public class ChuKuController {
 		List<Transportation> transportationList = transportationService.findAll();
 		
 		request.setAttribute("transportationList", transportationList);
+		
+		request.setAttribute("the_book_id", 0);
+		request.setAttribute("book_name", "");
+		request.setAttribute("sub_book_name", "");
+		request.setAttribute("ISBN", "");
+		request.setAttribute("price", 0);
 		
 		return "/chu_ku/chu_ku_add";
 	}
@@ -100,6 +111,14 @@ public class ChuKuController {
 	@RequestMapping("/getChuKu")
 	public String getChuKu(String id, HttpServletRequest request) {
 		ChuKu chuKu = chuKuService.findById(id);
+		Book book = bookService.findById(chuKu.getThe_book_id());
+		
+		request.setAttribute("the_book_id", chuKu.getThe_book_id());
+		request.setAttribute("book_name", book.getBook_name());
+		request.setAttribute("sub_book_name", book.getSub_book_name());
+		request.setAttribute("ISBN", book.getISBN());
+		request.setAttribute("price", book.getPrice());
+		
 		List<Transportation> transportationList = transportationService.findAll();
 				
 		request.setAttribute("chuKu", chuKu);
@@ -116,6 +135,15 @@ public class ChuKuController {
 	@RequestMapping("/checkChuKu")
 	public String checkChuKu(String id, HttpServletRequest request) {
 		ChuKu chuKu = chuKuService.findById(id);
+		
+		Book book = bookService.findById(chuKu.getThe_book_id());
+		
+		request.setAttribute("the_book_id", chuKu.getThe_book_id());
+		request.setAttribute("book_name", book.getBook_name());
+		request.setAttribute("sub_book_name", book.getSub_book_name());
+		request.setAttribute("ISBN", book.getISBN());
+		request.setAttribute("price", book.getPrice());
+		
 		List<Transportation> transportationList = transportationService.findAll();
 				
 		request.setAttribute("chuKu", chuKu);
@@ -123,6 +151,27 @@ public class ChuKuController {
 		
 		return "/chu_ku/chu_ku_details";
 	}	
+	
+	/**
+	 * 为 出库 添加 书本 信息
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/queryBook4ChuKu")
+	public String queryBook4ChuKu(
+			@RequestParam(value="the_book_id", required=true)int the_book_id,
+			HttpServletRequest request) {
+		System.out.println("the_book_id: " + the_book_id);
+		Book book = bookService.findById(the_book_id);		
+		
+		request.setAttribute("the_book_id", the_book_id);
+		request.setAttribute("book_name", book.getBook_name());
+		request.setAttribute("sub_book_name", book.getSub_book_name());
+		request.setAttribute("ISBN", book.getISBN());	
+		request.setAttribute("price", book.getPrice());
+		
+		return "/chu_ku/chu_ku_add";
+	}
 	
 	/**
 	 * 删除 出库

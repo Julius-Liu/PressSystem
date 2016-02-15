@@ -13,10 +13,10 @@
     List<ChuShenComments> chuShenCommentsList = (List<ChuShenComments>)request.getAttribute("chuShenCommentsList");
     List<XuanTiStatus> xuanTiStatusList = (List<XuanTiStatus>)request.getAttribute("xuanTiStatusList");
     
-    int the_book_id = (Integer)request.getAttribute("the_book_id");
-    String book_name = (String)request.getAttribute("book_name"); 			// 
-    String sub_book_name = (String)request.getAttribute("sub_book_name"); 	// 
-    String ISBN = (String)request.getAttribute("ISBN"); 					// 
+    int the_book_id = (Integer)request.getAttribute("the_book_id");			// 获取 the_book_id
+    String book_name = (String)request.getAttribute("book_name"); 			// 获取 book_name
+    String sub_book_name = (String)request.getAttribute("sub_book_name"); 	// 获取 sub_book_name
+    String ISBN = (String)request.getAttribute("ISBN"); 					// 获取 ISBN
     
     /* 
     String username=(String)session.getAttribute("username");

@@ -82,6 +82,8 @@ public class FaXing {
 	// 备注
 	private String comments;
 	
+	private int the_book_id;
+	
 	public String getId() {
 		return id;
 	}
@@ -237,5 +239,11 @@ public class FaXing {
 	}
 	public void setComments(String comments) {
 		this.comments = comments;
+	}
+	public int getThe_book_id() {
+		return the_book_id;
+	}
+	public void setThe_book_id(int the_book_id) {
+		this.the_book_id = the_book_id;
 	}
 }

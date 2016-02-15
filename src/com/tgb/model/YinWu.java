@@ -23,8 +23,7 @@ public class YinWu {
 	private String book_name;
 	
 	// 图书规格
-	private int book_specs;
-	
+	private int book_specs;	
 	
 	private String book_specs_content;
 	
@@ -53,6 +52,8 @@ public class YinWu {
 	// 印刷质量
 	private int print_quality;
 	private String print_quality_content;
+	
+	private int the_book_id;
 	
 	public int getId() {
 		return id;
@@ -161,6 +162,12 @@ public class YinWu {
 	}
 	public void setPrint_quality_content(String print_quality_content) {
 		this.print_quality_content = print_quality_content;
+	}
+	public int getThe_book_id() {
+		return the_book_id;
+	}
+	public void setThe_book_id(int the_book_id) {
+		this.the_book_id = the_book_id;
 	}
 	
 }

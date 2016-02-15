@@ -12,7 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.tgb.model.Book;
 import com.tgb.model.FaXing;
+
+import com.tgb.service.BookService;
 import com.tgb.service.FaXingService;
 
 @Controller
@@ -20,6 +23,9 @@ import com.tgb.service.FaXingService;
 public class FaXingController {
 	@Autowired
 	private FaXingService faXingService;	
+	
+	@Autowired
+	private BookService bookService;
 	
 	private int currentPage;
     public void setCurrentPage(int currentPage) {
@@ -51,7 +57,13 @@ public class FaXingController {
 	 * @return
 	 */
 	@RequestMapping("/toAddFaXing")
-	public String toAddFaXing(HttpServletRequest request) {			
+	public String toAddFaXing(HttpServletRequest request) {		
+		request.setAttribute("the_book_id", 0);
+		request.setAttribute("book_name", "");
+		request.setAttribute("sub_book_name", "");
+		request.setAttribute("ISBN", "");
+		request.setAttribute("price", 0);
+		
 		return "/fa_xing/fa_xing_add";
 	}
 	
@@ -90,6 +102,13 @@ public class FaXingController {
 	@RequestMapping("/getFaXing")
 	public String getFaXing(String id, HttpServletRequest request) {
 		FaXing faXing = faXingService.findById(id);
+		Book book = bookService.findById(faXing.getThe_book_id());
+		
+		request.setAttribute("the_book_id", faXing.getThe_book_id());
+		request.setAttribute("book_name", book.getBook_name());
+		request.setAttribute("sub_book_name", book.getSub_book_name());
+		request.setAttribute("ISBN", book.getISBN());
+		request.setAttribute("price", book.getPrice());
 				
 		request.setAttribute("faXing", faXing);
 
@@ -104,10 +123,38 @@ public class FaXingController {
 	@RequestMapping("/checkFaXing")
 	public String checkFaXing(String id, HttpServletRequest request) {
 		FaXing faXing = faXingService.findById(id);
+		Book book = bookService.findById(faXing.getThe_book_id());
+		
+		request.setAttribute("the_book_id", faXing.getThe_book_id());
+		request.setAttribute("book_name", book.getBook_name());
+		request.setAttribute("sub_book_name", book.getSub_book_name());
+		request.setAttribute("ISBN", book.getISBN());
+		request.setAttribute("price", book.getPrice());
 				
 		request.setAttribute("faXing", faXing);
 		
 		return "/fa_xing/fa_xing_details";
+	}	
+	
+	/**
+	 * 为 发行 添加 书本 信息
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/queryBook4FaXing")
+	public String queryBook4FaXing(
+			@RequestParam(value="the_book_id", required=true)int the_book_id,
+			HttpServletRequest request) {
+		System.out.println("the_book_id: " + the_book_id);
+		Book book = bookService.findById(the_book_id);		
+		
+		request.setAttribute("the_book_id", the_book_id);
+		request.setAttribute("book_name", book.getBook_name());
+		request.setAttribute("sub_book_name", book.getSub_book_name());
+		request.setAttribute("ISBN", book.getISBN());	
+		request.setAttribute("price", book.getPrice());
+		
+		return "/fa_xing/fa_xing_add";
 	}	
 	
 	/**

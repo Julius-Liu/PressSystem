@@ -12,9 +12,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.tgb.model.Book;
 import com.tgb.model.BianShen;
 import com.tgb.model.BianShenStatus;
+import com.tgb.model.ChuShenComments;
+import com.tgb.model.GaoJianSource;
+import com.tgb.model.XuanTiStatus;
 
+import com.tgb.service.BookService;
 import com.tgb.service.BianShenService;
 import com.tgb.service.BianShenStatusService;
 
@@ -26,6 +31,9 @@ public class BianShenController {
 	
 	@Autowired
 	private BianShenStatusService bianShenStatusService;
+	
+	@Autowired
+	private BookService bookService;
 	
 	private int currentPage;
     public void setCurrentPage(int currentPage) {
@@ -61,6 +69,11 @@ public class BianShenController {
 		List<BianShenStatus> bianShenStatusList = bianShenStatusService.findAll();
 		
 		request.setAttribute("bianShenStatusList", bianShenStatusList);
+		
+		request.setAttribute("the_book_id", 0);
+		request.setAttribute("book_name", "");
+		request.setAttribute("sub_book_name", "");
+		request.setAttribute("ISBN", "");
 		
 		return "/bian_shen/bian_shen_add";
 	}
@@ -100,11 +113,19 @@ public class BianShenController {
 	@RequestMapping("/getBianShen")
 	public String getBianShen(int id, HttpServletRequest request) {
 		BianShen bianShen = bianShenService.findById(id);
+		
+		Book book = bookService.findById(bianShen.getThe_book_id());
+		
 		List<BianShenStatus> bianShenStatusList = bianShenStatusService.findAll();
 				
 		request.setAttribute("bianShen", bianShen);
 		request.setAttribute("bianShenStatusList", bianShenStatusList);
 
+		request.setAttribute("the_book_id", bianShen.getThe_book_id());
+		request.setAttribute("book_name", book.getBook_name());
+		request.setAttribute("sub_book_name", book.getSub_book_name());
+		request.setAttribute("ISBN", book.getISBN());
+		
 		return "/bian_shen/bian_shen_edit";
 	}
 	
@@ -116,12 +137,43 @@ public class BianShenController {
 	@RequestMapping("/checkBianShen")
 	public String checkBianShen(int id, HttpServletRequest request) {
 		BianShen bianShen = bianShenService.findById(id);
+		Book book = bookService.findById(bianShen.getThe_book_id());
+		
 		List<BianShenStatus> bianShenStatusList = bianShenStatusService.findAll();
 				
 		request.setAttribute("bianShen", bianShen);
 		request.setAttribute("bianShenStatusList", bianShenStatusList);
 
+		request.setAttribute("the_book_id", bianShen.getThe_book_id());
+		request.setAttribute("book_name", book.getBook_name());
+		request.setAttribute("sub_book_name", book.getSub_book_name());
+		request.setAttribute("ISBN", book.getISBN());
+		
 		return "/bian_shen/bian_shen_details";
+	}	
+	
+	/**
+	 * 为 编审 添加 书本 信息
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/queryBook4BianShen")
+	public String queryBook4BianShen(
+			@RequestParam(value="the_book_id", required=true)int the_book_id,
+			HttpServletRequest request) {
+		System.out.println("the_book_id: " + the_book_id);
+		Book book = bookService.findById(the_book_id);
+				
+		List<BianShenStatus> bianShenStatusList = bianShenStatusService.findAll();	
+		
+		request.setAttribute("the_book_id", the_book_id);
+		request.setAttribute("book_name", book.getBook_name());
+		request.setAttribute("sub_book_name", book.getSub_book_name());
+		request.setAttribute("ISBN", book.getISBN());
+		
+		request.setAttribute("bianShenStatusList", bianShenStatusList);
+		
+		return "/bian_shen/bian_shen_add";
 	}	
 	
 	/**

@@ -8,7 +8,7 @@ public class BianShen {
 	private int id;
 	
 	// 书号
-	private String book_id;
+	private String ISBN;
 	
 	// 书名
 	private String book_name;
@@ -47,17 +47,20 @@ public class BianShen {
 	// 付印日期
 	private String fu_yin_date;
 	
+	// 书的编号
+	private int the_book_id;
+	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getBook_id() {
-		return book_id;
+	public String getISBN() {
+		return ISBN;
 	}
-	public void setBook_id(String book_id) {
-		this.book_id = book_id;
+	public void setISBN(String ISBN) {
+		this.ISBN = ISBN;
 	}
 	public String getBook_name() {
 		return book_name;
@@ -139,5 +142,11 @@ public class BianShen {
 	}
 	public void setFu_yin_date(String fu_yin_date) {
 		this.fu_yin_date = fu_yin_date;
+	}
+	public int getThe_book_id() {
+		return the_book_id;
+	}
+	public void setThe_book_id(int the_book_id) {
+		this.the_book_id = the_book_id;
 	}
 }

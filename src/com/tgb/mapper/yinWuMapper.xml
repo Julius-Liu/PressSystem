@@ -13,30 +13,28 @@
 			end_date, 
 			publish_company, 
 			print_company, 
-			book_name, 
 			book_specs, 
 			yin_zhang, 
 			revision,
 			print_quantity,
-			ISBN,
 			ze_ren_editor,
 			ze_ren_department,
 			print_status,
-			print_quality) 
+			print_quality,
+			the_book_id) 
 		values(#{start_date},
 			#{end_date},
 			#{publish_company},
 			#{print_company},
-			#{book_name},
 			#{book_specs},
 			#{yin_zhang},
 			#{revision},
 			#{print_quantity},
-			#{ISBN},
 			#{ze_ren_editor},
 			#{ze_ren_department},
 			#{print_status},
-			#{print_quality})
+			#{print_quality},
+			#{the_book_id})
 	</insert>
 	
 	<update id="update" parameterType="YinWu">
@@ -44,16 +42,15 @@
 			end_date=#{end_date}, 
 			publish_company=#{publish_company}, 
 			print_company=#{print_company}, 
-			book_name=#{book_name}, 
 			book_specs=#{book_specs}, 
 			yin_zhang=#{yin_zhang}, 
 			revision=#{revision},
 			print_quantity=#{print_quantity},
-			ISBN=#{ISBN},
 			ze_ren_editor=#{ze_ren_editor},
 			ze_ren_department=#{ze_ren_department},
 			print_status=#{print_status},
-			print_quality=#{print_quality}
+			print_quality=#{print_quality},
+			the_book_id=#{the_book_id}
 		where id=#{id}
 	</update>
 	
@@ -71,17 +68,19 @@
 			end_date, 
 			publish_company, 
 			print_company, 
-			book_name, 
+			book.book_name, 
 			book_specs.content as book_specs_content, 
 			yin_zhang,
 			revision,
 			print_quantity,
-			ISBN,
+			book.ISBN,
 			ze_ren_editor,
 			ze_ren_department,
 			print_status.content as print_status_content,
-			print_quality.content as print_quality_content
-		from ((yin_wu inner join book_specs on yin_wu.book_specs=book_specs.id)				
+			print_quality.content as print_quality_content,
+			the_book_id
+		from (((yin_wu inner join book on yin_wu.the_book_id=book.id)
+			inner join book_specs on yin_wu.book_specs=book_specs.id)				
 					inner join print_status on yin_wu.print_status=print_status.id)
 						inner join print_quality on yin_wu.print_quality=print_quality.id				
 		order by yin_wu.id asc
@@ -93,25 +92,27 @@
 			end_date, 
 			publish_company, 
 			print_company, 
-			book_name, 
+			book.book_name, 
 			book_specs.content as book_specs_content, 
 			yin_zhang,
 			revision,
 			print_quantity,
-			ISBN,
+			book.ISBN,
 			ze_ren_editor,
 			ze_ren_department,
 			print_status.content as print_status_content,
-			print_quality.content as print_quality_content
-		from ((yin_wu inner join book_specs on yin_wu.book_specs=book_specs.id)
+			print_quality.content as print_quality_content,
+			the_book_id
+		from (((yin_wu inner join book on yin_wu.the_book_id=book.id)
+			inner join book_specs on yin_wu.book_specs=book_specs.id)				
 					inner join print_status on yin_wu.print_status=print_status.id)
-						inner join print_quality on yin_wu.print_quality=print_quality.id	
+						inner join print_quality on yin_wu.print_quality=print_quality.id		
 		<where>
 			<if test="print_company != null and print_company != '' ">
 				print_company like CONCAT(CONCAT('%', #{print_company, jdbcType=VARCHAR}), '%')
 			</if>
 			<if test="book_name != null and book_name != '' ">
-				AND book_name like CONCAT(CONCAT('%', #{book_name, jdbcType=VARCHAR}), '%')
+				AND book.book_name like CONCAT(CONCAT('%', #{book_name, jdbcType=VARCHAR}), '%')
 			</if>			
 			<if test="ze_ren_editor != null and ze_ren_editor != '' ">				
 				AND ze_ren_editor like CONCAT(CONCAT('%', #{ze_ren_editor, jdbcType=VARCHAR}), '%')

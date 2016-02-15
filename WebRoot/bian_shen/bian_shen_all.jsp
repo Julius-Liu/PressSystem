@@ -199,7 +199,7 @@ function OutputToExcel() {
               <input type="checkbox" name="checkall" onclick="checkAll();" />
             </div></td> -->
             <td width="3%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">序号</span></div></td>
-            <td width="6%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">书号</span></div></td>
+            <td width="12%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">书号</span></div></td>
             <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">书名</span></div></td>
             <td width="6%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">原著作者</span></div></td>
             <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">原出版社</span></div></td>
@@ -207,7 +207,7 @@ function OutputToExcel() {
             <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">责任编辑</span></div></td>
             <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">编审状态</span></div></td>
             <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">付印日期</span></div></td>
-            <td width="12%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF" class="STYLE1"><div align="center">基本操作</div></td>
+            <td width="15%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF" class="STYLE1"><div align="center">基本操作</div></td>
           </tr>
              <%-- <c:if test="${!empty bookList && !empty bookTypeList}"> --%>
 				<%-- <c:forEach items="${bookList}" var="book"> --%>
@@ -223,7 +223,7 @@ function OutputToExcel() {
 		            <td height="20" bgcolor="#FFFFFF"><div align="center" class="STYLE1">
 		              <div align="center"><%=currentIndex %></div>
 		            </div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=bianShen.getBook_id() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=bianShen.getISBN() %></span></div></td>
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=bianShen.getBook_name() %></span></div></td>
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=bianShen.getOriginal_author() %></span></div></td>
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=bianShen.getOriginal_press() %></span></div></td>

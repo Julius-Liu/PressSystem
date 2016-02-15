@@ -1,7 +1,9 @@
 package com.tgb.controller;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tgb.model.Book;
 import com.tgb.service.BookService;
+
+import com.tgb.utils.ExportExcelUtil;
 
 @Controller
 @RequestMapping("/book")
@@ -170,6 +174,58 @@ public class BookController {
 		request.setAttribute("recordNumber", recordNumber);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("totalPage", totalPage);
+		
 		return "/book/book_all";
 	}	
+	
+	@RequestMapping("/exportExcel")
+	public void exportExcel(HttpServletResponse response) {		
+		//if(barcode == null) barcode = "";
+        //if(bookName == null) bookName = "";
+        //if(publishDate == null) publishDate = "";
+        //List<Book> bookList = bookDAO.QueryBookInfo(barcode,bookName,bookType,publishDate);
+        ExportExcelUtil ex = new ExportExcelUtil();
+        String title = "Book信息记录"; 
+        String[] headers = { "图书条形码","图书名称","图书所在类别","图书价格","库存","出版日期","出版社","图书图片"};
+        List<String[]> dataset = new ArrayList<String[]>(); 
+        /*for(int i=0;i<bookList.size();i++) {
+        	Book book = bookList.get(i); 
+        	dataset.add(new String[]{book.getBarcode(),book.getBookName(),book.getBookType().getBookTypeName(),
+book.getPrice() + "",book.getCount() + "",book.getPublishDate(),book.getPublish(),book.getBookPhoto()});
+        }*/
+        /*
+        OutputStream out = null;
+		try {
+			out = new FileOutputStream("C://output.xls");
+			ex.exportExcel(title,headers, dataset, out);
+		    out.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		*/
+		//HttpServletResponse response = null;//创建一个HttpServletResponse对象 
+		OutputStream out = null;//创建一个输出流对象 
+		try { 
+			//response = ServletActionContext.getResponse();		// 初始化HttpServletResponse对象 
+			out = response.getOutputStream();//
+			response.setHeader("Content-disposition","attachment; filename="+"Book.xls");//filename是下载的xls的名，建议最好用英文 
+			response.setContentType("application/msexcel;charset=UTF-8");//设置类型 
+			response.setHeader("Pragma","No-cache");//设置头 
+			response.setHeader("Cache-Control","no-cache");//设置头 
+			response.setDateHeader("Expires", 0);//设置日期头  
+			//String rootPath = ServletActionContext.getServletContext().getRealPath("/");
+			ex.exportExcel("/book",title,headers, dataset, out);
+			out.flush();
+		} catch (IOException e) { 
+			e.printStackTrace(); 
+		}finally{
+			try{
+				if(out!=null){ 
+					out.close(); 
+				}
+			}catch(IOException e){ 
+				e.printStackTrace(); 
+			} 
+		}
+	}
 }

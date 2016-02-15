@@ -12,7 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.tgb.model.Book;
 import com.tgb.model.RuKu;
+
+import com.tgb.service.BookService;
 import com.tgb.service.RuKuService;
 
 @Controller
@@ -20,6 +23,9 @@ import com.tgb.service.RuKuService;
 public class RuKuController {
 	@Autowired
 	private RuKuService ruKuService;
+	
+	@Autowired
+	private BookService bookService;
 	
 	private int currentPage;
     public void setCurrentPage(int currentPage) {
@@ -51,7 +57,13 @@ public class RuKuController {
 	 * @return
 	 */
 	@RequestMapping("/toAddRuKu")
-	public String toAddRuKu(HttpServletRequest request) {			
+	public String toAddRuKu(HttpServletRequest request) {	
+		request.setAttribute("the_book_id", 0);
+		request.setAttribute("book_name", "");
+		request.setAttribute("sub_book_name", "");
+		request.setAttribute("ISBN", "");
+		request.setAttribute("price", 0);
+		
 		return "/ru_ku/ru_ku_add";
 	}
 	
@@ -89,8 +101,16 @@ public class RuKuController {
 	 */
 	@RequestMapping("/getRuKu")
 	public String getRuKu(int id, HttpServletRequest request) {
-		RuKu ruKu = ruKuService.findById(id);
-				
+		RuKu ruKu = ruKuService.findById(id);			
+		
+		Book book = bookService.findById(ruKu.getThe_book_id());
+		
+		request.setAttribute("the_book_id", ruKu.getThe_book_id());
+		request.setAttribute("book_name", book.getBook_name());
+		request.setAttribute("sub_book_name", book.getSub_book_name());
+		request.setAttribute("ISBN", book.getISBN());
+		request.setAttribute("price", book.getPrice());
+		
 		request.setAttribute("ruKu", ruKu);
 
 		return "/ru_ku/ru_ku_edit";
@@ -104,11 +124,39 @@ public class RuKuController {
 	@RequestMapping("/checkRuKu")
 	public String checkRuKu(int id, HttpServletRequest request) {
 		RuKu ruKu = ruKuService.findById(id);
+		Book book = bookService.findById(ruKu.getThe_book_id());
 		
+		request.setAttribute("the_book_id", ruKu.getThe_book_id());
+		request.setAttribute("book_name", book.getBook_name());
+		request.setAttribute("sub_book_name", book.getSub_book_name());
+		request.setAttribute("ISBN", book.getISBN());
+		request.setAttribute("price", book.getPrice());
 		request.setAttribute("ruKu", ruKu);
+		
 
 		return "/ru_ku/ru_ku_details";
 	}	
+	
+	/**
+	 * 为 入库 添加 书本 信息
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/queryBook4RuKu")
+	public String queryBook4RuKu(
+			@RequestParam(value="the_book_id", required=true)int the_book_id,
+			HttpServletRequest request) {
+		System.out.println("the_book_id: " + the_book_id);
+		Book book = bookService.findById(the_book_id);		
+		
+		request.setAttribute("the_book_id", the_book_id);
+		request.setAttribute("book_name", book.getBook_name());
+		request.setAttribute("sub_book_name", book.getSub_book_name());
+		request.setAttribute("ISBN", book.getISBN());	
+		request.setAttribute("price", book.getPrice());
+		
+		return "/ru_ku/ru_ku_add";
+	}
 	
 	/**
 	 * 删除 编审

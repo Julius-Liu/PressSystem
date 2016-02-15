@@ -8,6 +8,11 @@
     
     // 获取所有的bianShenStatus信息
     List<BianShenStatus> bianShenStatusList = (List<BianShenStatus>)request.getAttribute("bianShenStatusList");
+
+    int the_book_id = (Integer)request.getAttribute("the_book_id");
+    String book_name = (String)request.getAttribute("book_name");
+    String sub_book_name = (String)request.getAttribute("sub_book_name");
+    String ISBN = (String)request.getAttribute("ISBN");
     
     /* 
     String username=(String)session.getAttribute("username");
@@ -44,25 +49,29 @@
     <form action="" name="bianShen">
 	<table width='100%' cellspacing='1' cellpadding='3' class="tablewidth">
 
-	<tr>
-	    <td width=30%>编审编号：</td>
-	    <td width=70%><input id="id" name="id" value="${bianShen.id}" type="text" size="10" /></td>
-	</tr>
-
-  	<tr>
-    	<td width=30%>书号：</td>
-    	<td width=70%><input id="book_id" name="book_id" value="${bianShen.book_id }" type="text" size="10" /></td>
-  	</tr>
-
   	<tr>
     	<td width=30%>书名：</td>
-    	<td width=70%><input id="book_name" name="book_name" value="${bianShen.book_name }" type="text" size="20" /></td>
+    	<td width=70%><input id="book_name" name="book_name" value="<%=book_name %>" type="text" size="20" /></td>
   	</tr>
 
   	<tr>
     	<td width=30%>丛书名：</td>
-    	<td width=70%><input id="sub_book_name" name="sub_book_name" value="${bianShen.sub_book_name }" type="text" size="20" /></td>
+    	<td width=70%><input id="sub_book_name" name="sub_book_name" value="<%=book_name %>" type="text" size="20" /></td>
   	</tr>
+
+  	<tr>
+    	<td width=30%>ISBN:</td>
+    	<td width=70%><input id="ISBN" name="ISBN" value="<%=ISBN %>" type="text" size="20"/></td>
+  	</tr>
+  	
+  	<tr>
+  		<td><br/></td>
+  	</tr>
+
+	<tr>
+	    <td width=30%>编审编号：</td>
+	    <td width=70%><input id="id" name="id" value="${bianShen.id}" type="text" size="10" /></td>
+	</tr>
 
   	<tr>
     	<td width=30%>原著作者：</td>

@@ -16,14 +16,13 @@
 			deliver_company, 
 			receive_company, 
 			store_center, 
-			book_name,
 			revision,
 			quantity,
-			price,
 			fixed_price,
 			check_man,
 			receive_man,
-			comments) 
+			comments,
+			the_book_id) 
 		values(#{ru_ku_date},
 			#{order_id},
 			#{order_create_date},
@@ -31,14 +30,13 @@
 			#{deliver_company},
 			#{receive_company},
 			#{store_center},
-			#{book_name},
 			#{revision},
 			#{quantity},
-			#{price},
 			#{fixed_price},
 			#{check_man},
 			#{receive_man},
-			#{comments})
+			#{comments},
+			#{the_book_id})
 	</insert>
 	
 	<update id="update" parameterType="RuKu">
@@ -49,14 +47,13 @@
 			deliver_company=#{deliver_company}, 
 			receive_company=#{receive_company}, 
 			store_center=#{store_center}, 
-			book_name=#{book_name},
 			revision=#{revision},
 			quantity=#{quantity},
-			price=#{price} ,
 			fixed_price=#{fixed_price},
 			check_man=#{check_man},
 			receive_man=#{receive_man},
 			comments=#{comments},
+			the_book_id=#{the_book_id}
 		where id=#{id}
 	</update>
 	
@@ -65,16 +62,65 @@
 	</delete>
 	
 	<select id="findById" parameterType="int" resultType="RuKu">
-		select * from ru_ku where id=#{id}
+		select ru_ku_date, 
+			order_id, 
+			order_create_date, 
+			publish_company, 
+			deliver_company, 
+			receive_company, 
+			store_center, 
+			book.book_name,
+			revision,
+			quantity,
+			book.price,
+			fixed_price,
+			check_man,
+			receive_man,
+			comments,
+			the_book_id
+		from ru_ku inner join book on ru_ku.the_book_id = book.id
+		where ru_ku.id=#{id}
 	</select>
 	
 	<select id="findAll" resultType="RuKu">
-		select * from ru_ku								
-		order by id asc
+		select ru_ku_date, 
+			order_id, 
+			order_create_date, 
+			publish_company, 
+			deliver_company, 
+			receive_company, 
+			store_center, 
+			book.book_name,
+			revision,
+			quantity,
+			book.price,
+			fixed_price,
+			check_man,
+			receive_man,
+			comments,
+			the_book_id
+		from ru_ku inner join book on ru_ku.the_book_id = book.id					
+		order by ru_ku.id asc
 	</select>
 	
 	<select id="calculateTotalPageAndRecordNumber" parameterType="com.tgb.model.RuKu" resultType="RuKu">
-		select * from ru_ku		
+		select ru_ku_date, 
+			order_id, 
+			order_create_date, 
+			publish_company, 
+			deliver_company, 
+			receive_company, 
+			store_center, 
+			book.book_name,
+			revision,
+			quantity,
+			book.price,
+			fixed_price,
+			check_man,
+			receive_man,
+			comments,
+			the_book_id
+		from ru_ku inner join book on ru_ku.the_book_id = book.id
 		<where>
 			<if test="order_id != null and order_id != '' ">
 				AND order_id like CONCAT(CONCAT('%', #{order_id, jdbcType=VARCHAR}), '%')
@@ -83,13 +129,13 @@
 				deliver_company like CONCAT(CONCAT('%', #{deliver_company, jdbcType=VARCHAR}), '%')
 			</if>
 			<if test="book_name != null and book_name != ''">				
-				AND book_name like CONCAT(CONCAT('%', #{book_name, jdbcType=VARCHAR}), '%')
+				AND book.book_name like CONCAT(CONCAT('%', #{book_name, jdbcType=VARCHAR}), '%')
 			</if>
 			<if test="receive_man != null and receive_man != ''">				
 				AND receive_man like CONCAT(CONCAT('%', #{receive_man, jdbcType=VARCHAR}), '%')
 			</if>
 		</where>
-		order by id asc
+		order by ru_ku.id asc
 	</select>
 	
 </mapper>

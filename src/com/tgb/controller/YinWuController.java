@@ -12,11 +12,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.tgb.model.BianShenStatus;
+import com.tgb.model.Book;
 import com.tgb.model.YinWu;
 import com.tgb.model.BookSpecs;
 import com.tgb.model.PrintStatus;
 import com.tgb.model.PrintQuality;
 
+import com.tgb.service.BookService;
 import com.tgb.service.YinWuService;
 import com.tgb.service.BookSpecsService;
 import com.tgb.service.PrintStatusService;
@@ -36,6 +39,9 @@ public class YinWuController {
 	
 	@Autowired
 	private PrintQualityService printQualityService;
+	
+	@Autowired
+	private BookService bookService;
 	
 	private int currentPage;
     public void setCurrentPage(int currentPage) {
@@ -76,6 +82,11 @@ public class YinWuController {
 		request.setAttribute("printStatusList", printStatusList);
 		request.setAttribute("printQualityList", printQualityList);
 		
+		request.setAttribute("the_book_id", 0);
+		request.setAttribute("book_name", "");
+		request.setAttribute("sub_book_name", "");
+		request.setAttribute("ISBN", "");
+		
 		return "/yin_wu/yin_wu_add";
 	}
 	
@@ -114,10 +125,17 @@ public class YinWuController {
 	@RequestMapping("/getYinWu")
 	public String getYinWu(int id, HttpServletRequest request) {
 		YinWu yinWu = yinWuService.findById(id);
+		Book book = bookService.findById(yinWu.getThe_book_id());
+		
 		List<BookSpecs> bookSpecsList = bookSpecsService.findAll();
 		List<PrintStatus> printStatusList = printStatusService.findAll();
 		List<PrintQuality> printQualityList = printQualityService.findAll();
 				
+		request.setAttribute("the_book_id", yinWu.getThe_book_id());
+		request.setAttribute("book_name", book.getBook_name());
+		request.setAttribute("sub_book_name", book.getSub_book_name());
+		request.setAttribute("ISBN", book.getISBN());
+		
 		request.setAttribute("yinWu", yinWu);
 		request.setAttribute("bookSpecsList", bookSpecsList);
 		request.setAttribute("printStatusList", printStatusList);
@@ -134,16 +152,51 @@ public class YinWuController {
 	@RequestMapping("/checkYinWu")
 	public String checkYinWu(int id, HttpServletRequest request) {
 		YinWu yinWu = yinWuService.findById(id);
+		Book book = bookService.findById(yinWu.getThe_book_id());
+		
 		List<BookSpecs> bookSpecsList = bookSpecsService.findAll();
 		List<PrintStatus> printStatusList = printStatusService.findAll();
 		List<PrintQuality> printQualityList = printQualityService.findAll();
 				
+		request.setAttribute("the_book_id", yinWu.getThe_book_id());
+		request.setAttribute("book_name", book.getBook_name());
+		request.setAttribute("sub_book_name", book.getSub_book_name());
+		request.setAttribute("ISBN", book.getISBN());
+		
 		request.setAttribute("yinWu", yinWu);
 		request.setAttribute("bookSpecsList", bookSpecsList);
 		request.setAttribute("printStatusList", printStatusList);
 		request.setAttribute("printQualityList", printQualityList);
 
 		return "/yin_wu/yin_wu_details";
+	}	
+	
+	/**
+	 * 为 印务 添加 书本 信息
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/queryBook4YinWu")
+	public String queryBook4YinWu(
+			@RequestParam(value="the_book_id", required=true)int the_book_id,
+			HttpServletRequest request) {
+		System.out.println("the_book_id: " + the_book_id);
+		Book book = bookService.findById(the_book_id);
+				
+		List<BookSpecs> bookSpecsList = bookSpecsService.findAll();
+		List<PrintStatus> printStatusList = printStatusService.findAll();
+		List<PrintQuality> printQualityList = printQualityService.findAll();
+		
+		request.setAttribute("the_book_id", the_book_id);
+		request.setAttribute("book_name", book.getBook_name());
+		request.setAttribute("sub_book_name", book.getSub_book_name());
+		request.setAttribute("ISBN", book.getISBN());
+		
+		request.setAttribute("bookSpecsList", bookSpecsList);
+		request.setAttribute("printStatusList", printStatusList);
+		request.setAttribute("printQualityList", printQualityList);
+		
+		return "/yin_wu/yin_wu_add";
 	}	
 	
 	/**

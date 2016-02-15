@@ -8,6 +8,11 @@
     // 获取所有的xuanTiType信息
     List<BianShenStatus> bianShenStatusList = (List<BianShenStatus>)request.getAttribute("bianShenStatusList");
     
+    int the_book_id = (Integer)request.getAttribute("the_book_id");			// 获取 the_book_id
+    String book_name = (String)request.getAttribute("book_name"); 			// 获取 book_name
+    String sub_book_name = (String)request.getAttribute("sub_book_name"); 	// 获取 sub_book_name
+    String ISBN = (String)request.getAttribute("ISBN"); 					// 获取 ISBN
+    
     /* 
     String username=(String)session.getAttribute("username");
     if(username==null) {
@@ -53,6 +58,12 @@
 		form.method="post";
 		form.submit();
 	}
+	
+	function QueryBook4BianShen() {
+		document.forms["bianShen"].action = "<%=basePath%>bian_shen/queryBook4BianShen";
+		document.forms["bianShen"].method = "post";
+		document.forms["bianShen"].submit();
+	}
 
 </script>
 </HEAD>
@@ -67,19 +78,31 @@
     <form action="" name="bianShen">
 	<table width='100%' cellspacing='1' cellpadding='3' class="tablewidth">
 
-  	<tr>
-    	<td width=30%>书号：</td>
-    	<td width=70%><input id="book_id" name="book_id" type="text" size="10" /></td>
-  	</tr>
+	<tr>
+		<td>请输入数据库中的图书编号，例如：21，然后点击“查询”按钮。</td>
+		<td>
+			<input id="the_book_id" name="the_book_id" value="<%=the_book_id == 0 ? "":the_book_id %>" type="text" size="12"/> &nbsp;
+			<input type="submit" value="查询" onclick="QueryBook4BianShen();"  />
+		</td>
+	</tr>
 
   	<tr>
     	<td width=30%>书名：</td>
-    	<td width=70%><input id="book_name" name="book_name" type="text" size="20" /></td>
+    	<td width=70%><input id="book_name" name="book_name" value="<%=book_name %>" type="text" size="20" /></td>
   	</tr>
 
   	<tr>
     	<td width=30%>丛书名：</td>
-    	<td width=70%><input id="sub_book_name" name="sub_book_name" type="text" size="20" /></td>
+    	<td width=70%><input id="sub_book_name" name="sub_book_name" value="<%=book_name %>" type="text" size="20" /></td>
+  	</tr>
+
+  	<tr>
+    	<td width=30%>ISBN:</td>
+    	<td width=70%><input id="ISBN" name="ISBN" value="<%=ISBN %>" type="text" size="20"/></td>
+  	</tr>
+  	
+  	<tr>
+  		<td><br/></td>
   	</tr>
 
   	<tr>

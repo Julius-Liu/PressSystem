@@ -129,8 +129,8 @@ function DelBook(id){
 /* 导出当前记录到Excel */
 /* 需要启用 */
 function OutputToExcel() {
-	//document.forms["bookQueryForm"].action = "<%=basePath %>/Book/Book_QueryBookOutputToExcel.action";
-	//document.forms["bookQueryForm"].submit(); 
+	document.forms["bookQueryForm"].action = "<%=basePath%>/book/exportExcel";
+	document.forms["bookQueryForm"].submit(); 
 }
 
 </script>
@@ -185,9 +185,9 @@ ISBN：<input type=text name="ISBN" value="<%=ISBN%>"/>&nbsp;
             <td width="4%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">图书编号</span></div></td>
             <td height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">图书名称</span></div></td>
             <td height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">丛书名称</span></div></td>
-            <td height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">ISBN</span></div></td>
+            <td width="12%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">ISBN</span></div></td>
             <td width="4%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">图书单价</span></div></td>
-            <td width="10%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF" class="STYLE1"><div align="center">基本操作</div></td>
+            <td width="15%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF" class="STYLE1"><div align="center">基本操作</div></td>
           </tr>
              <%-- <c:if test="${!empty bookList && !empty bookTypeList}"> --%>
 				<%-- <c:forEach items="${bookList}" var="book"> --%>
@@ -225,7 +225,9 @@ ISBN：<input type=text name="ISBN" value="<%=ISBN%>"/>&nbsp;
         <td width="12" height="35"><img src="<%=basePath %>images/tab_18.gif" width="12" height="35" /></td>
         <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <td class="STYLE4">&nbsp;&nbsp;共有<%=recordNumber %>条记录，当前第 <%=currentPage %>/<%=totalPage %> 页&nbsp;&nbsp;<span style="color:red;text-decoration:underline;cursor:hand" onclick="OutputToExcel();">导出当前记录到excel</span></td>
+            <td class="STYLE4">&nbsp;&nbsp;共有<%=recordNumber %>条记录，当前第 <%=currentPage %>/<%=totalPage %> 页&nbsp;&nbsp;
+            <span onclick="OutputToExcel();"><a style="cursor:hand;color:red;text-decoration:underline;" href='#'>导出当前记录到excel</a></span>
+            </td>
             <td><table border="0" align="right" cellpadding="0" cellspacing="0">
                 <tr>
                   <td width="40"><img src="<%=basePath %>images/first.gif" width="37" height="15" style="cursor:hand;" onclick="GoToPage(1,<%=totalPage %>);" /></td>
