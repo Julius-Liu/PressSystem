@@ -193,7 +193,7 @@
   	</tr>
   	<tr>
     	<td width=30%>账号：</td>
-    	<td width=70%><input id="bank_account" name="bank_account" type="text" size="10" /></td>
+    	<td width=70%><input id="bank_account" name="bank_account" type="text" size="25" /></td>
   	</tr>
   	<tr>
     	<td width=30%>配书人：</td>

@@ -119,7 +119,7 @@
 			comments,
 			the_book_id
 		from fa_xing inner join book on fa_xing.the_book_id = book.id	
-		where id=#{id}
+		where fa_xing.id=#{id}
 	</select>
 	
 	<select id="findAll" resultType="FaXing">

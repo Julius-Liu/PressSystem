@@ -74,7 +74,7 @@
 
 	<tr>
 	    <td width=30%>印务编号：</td>
-	    <td width=70%><input id="id" name="id" value="${yinWu.id }" type="text" /></td>
+	    <td width=70%><input id="id" name="id" value="${yinWu.id }" type="text" size="5"/></td>
 	</tr>
 
   	<tr>
@@ -89,12 +89,12 @@
 
   	<tr>
     	<td width=30%>出版单位：</td>
-    	<td width=70%><input id="publish_company" name="publish_company" value="${yinWu.publish_company }" type="text" size="10" /></td>
+    	<td width=70%><input id="publish_company" name="publish_company" value="${yinWu.publish_company }" type="text" size="20" /></td>
   	</tr>
 
   	<tr>
     	<td width=30%>印刷单位：</td>
-    	<td width=70%><input id="print_company" name="print_company" value="${yinWu.print_company }" type="text" size="10" /></td>
+    	<td width=70%><input id="print_company" name="print_company" value="${yinWu.print_company }" type="text" size="20" /></td>
   	</tr>
 
 	<tr>
