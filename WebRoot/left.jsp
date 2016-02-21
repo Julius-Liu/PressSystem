@@ -242,7 +242,7 @@ H1 a {
         </ul>
       </div>
     </div>
-        <h1 class="type"><a href="javascript:void(0)">资金管理</a></h1>
+        <h1 class="type"><a href="javascript:void(0)">财务管理</a></h1>
       <div class="content">
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
@@ -250,8 +250,8 @@ H1 a {
             </tr>
           </table>
         <ul class="MM">
-          <li><a href="<%=basePath%>assets_balance/queryAssetsBalance?assets_balance_id=<%=assets_balance_id%>&customer_name=<%=customer_name%>&bank_name=<%=bank_name %>&record_creator=<%=record_creator %>&currentPage=1" target="main">查看资金信息</a></li>
-          <li><a href="<%=basePath%>assets_balance/toAddAssetsBalance" target="main">添加资金信息</a></li>
+          <li><a href="<%=basePath%>assets_balance/queryAssetsBalance?assets_balance_id=<%=assets_balance_id%>&customer_name=<%=customer_name%>&bank_name=<%=bank_name %>&record_creator=<%=record_creator %>&currentPage=1" target="main">查看财务信息</a></li>
+          <li><a href="<%=basePath%>assets_balance/toAddAssetsBalance" target="main">添加财务信息</a></li>
         </ul>
       </div>
       </div>

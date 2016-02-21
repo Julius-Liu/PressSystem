@@ -75,12 +75,12 @@
 
   	<tr>
     	<td width=30%>科目名称：</td>
-    	<td width=70%><input id="department_title" name="department_title" type="text" size="10" /></td>
+    	<td width=70%><input id="department_title" name="department_title" type="text" size="15" /></td>
   	</tr>
 
 	<tr>
     	<td width=30%>客户名称：</td>
-    	<td width=70%><input id="customer_name" name="customer_name" type="text" size="10" /></td>
+    	<td width=70%><input id="customer_name" name="customer_name" type="text" size="20" /></td>
   	</tr>
 
   	<tr>
@@ -115,7 +115,7 @@
 
   	<tr>
     	<td width=30%>银行：</td>
-    	<td width=70%><input id="bank_name" name="bank_name" type="text" size="10" /></td>
+    	<td width=70%><input id="bank_name" name="bank_name" type="text" size="15" /></td>
   	</tr>
 
   	<tr>

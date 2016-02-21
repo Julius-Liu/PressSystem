@@ -124,12 +124,12 @@
 
   	<tr>
     	<td width=30%>出版单位：</td>
-    	<td width=70%><input id="publish_company" name="publish_company" type="text" size="10"/></td>
+    	<td width=70%><input id="publish_company" name="publish_company" type="text" size="20"/></td>
   	</tr>
 
   	<tr>
     	<td width=30%>送书单位：</td>
-    	<td width=70%><input id="deliver_company" name="deliver_company" type="text" size="10" /></td>
+    	<td width=70%><input id="deliver_company" name="deliver_company" type="text" size="20" /></td>
   	</tr>
 
   	<tr>
@@ -139,7 +139,7 @@
 
   	<tr>
     	<td width=30%>储运中心：</td>
-    	<td width=70%><input id="store_center" name="store_center" type="text" size="10" /></td>
+    	<td width=70%><input id="store_center" name="store_center" type="text" size="20" /></td>
   	</tr>
 
   	<tr>

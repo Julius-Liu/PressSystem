@@ -62,28 +62,12 @@
 	</delete>
 	
 	<select id="findById" parameterType="int" resultType="RuKu">
-		select ru_ku_date, 
-			order_id, 
-			order_create_date, 
-			publish_company, 
-			deliver_company, 
-			receive_company, 
-			store_center, 
-			book.book_name,
-			revision,
-			quantity,
-			book.price,
-			fixed_price,
-			check_man,
-			receive_man,
-			comments,
-			the_book_id
-		from ru_ku inner join book on ru_ku.the_book_id = book.id
-		where ru_ku.id=#{id}
+		select * from ru_ku where id=#{id}
 	</select>
 	
 	<select id="findAll" resultType="RuKu">
-		select ru_ku_date, 
+		select ru_ku.id,
+			ru_ku_date, 
 			order_id, 
 			order_create_date, 
 			publish_company, 
@@ -104,7 +88,8 @@
 	</select>
 	
 	<select id="calculateTotalPageAndRecordNumber" parameterType="com.tgb.model.RuKu" resultType="RuKu">
-		select ru_ku_date, 
+		select ru_ku.id,
+			ru_ku_date, 
 			order_id, 
 			order_create_date, 
 			publish_company, 

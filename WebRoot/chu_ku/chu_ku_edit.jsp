@@ -128,7 +128,7 @@
 
 	<tr>
     	<td width=30%>客户名称：</td>
-    	<td width=70%><input id="customer_name" name="customer_name" value="${chuKu.customer_name}" type="text" size="10" /></td>
+    	<td width=70%><input id="customer_name" name="customer_name" value="${chuKu.customer_name}" type="text" size="20" /></td>
   	</tr>
 
   	<tr>
@@ -138,7 +138,7 @@
 
   	<tr>
     	<td width=30%>货主名称：</td>
-    	<td width=70%><input id="book_owner_name" name="book_owner_name" value="${chuKu.book_owner_name}" type="text" size="10" /></td>
+    	<td width=70%><input id="book_owner_name" name="book_owner_name" value="${chuKu.book_owner_name}" type="text" size="20" /></td>
   	</tr>
 
   	<tr>
@@ -205,7 +205,7 @@
 
   	<tr>
     	<td width=30%>到站:</td>
-    	<td width=70%><input id="site_arrived" name="site_arrived" value="${chuKu.site_arrived}" type="text" size="10"/></td>
+    	<td width=70%><input id="site_arrived" name="site_arrived" value="${chuKu.site_arrived}" type="text" size="20"/></td>
   	</tr>
   	  	<tr>
     	<td width=30%>联系人：</td>

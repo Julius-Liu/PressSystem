@@ -131,8 +131,7 @@ public class RuKuController {
 		request.setAttribute("sub_book_name", book.getSub_book_name());
 		request.setAttribute("ISBN", book.getISBN());
 		request.setAttribute("price", book.getPrice());
-		request.setAttribute("ruKu", ruKu);
-		
+		request.setAttribute("ruKu", ruKu);	
 
 		return "/ru_ku/ru_ku_details";
 	}	
