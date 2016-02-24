@@ -188,10 +188,6 @@ public class BookController {
 			@RequestParam(value="sub_book_name", required=false)String sub_book_name,
 			@RequestParam(value="ISBN", required=false)String ISBN, 
 			HttpServletResponse response) {		
-		//if(barcode == null) barcode = "";
-        //if(bookName == null) bookName = "";
-        //if(publishDate == null) publishDate = "";
-        //List<Book> bookList = bookDAO.QueryBookInfo(barcode,bookName,bookType,publishDate);
 		List<Book> bookList = bookService.queryBookInfo(book_name, sub_book_name, ISBN, currentPage);
 		
         ExportExcelUtil ex = new ExportExcelUtil();
@@ -206,29 +202,14 @@ public class BookController {
         			book.getISBN(),
         			book.getPrice() + ""});
         }
-        /*
-        OutputStream out = null;
-		try {
-			out = new FileOutputStream("C://output.xls");
-			ex.exportExcel(title,headers, dataset, out);
-		    out.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		*/
-		//HttpServletResponse response = null;//创建一个HttpServletResponse对象 
-        //File file = new File();
-        //String fileName = file.getName();
 		OutputStream out = null; // 创建一个输出流对象 
 		try { 
-			//response = ServletActionContext.getResponse();		// 初始化HttpServletResponse对象 
-			out = response.getOutputStream();//
+			out = response.getOutputStream();
 			response.setHeader("Content-Disposition","attachment;filename="+"book.xls"); // filename是下载的xls的名，建议最好用英文 
 			response.setContentType("application/msexcel;charset=UTF-8");//设置类型 
-			response.setHeader("Pragma","No-cache");//设置头 
-			response.setHeader("Cache-Control","no-cache");//设置头 
-			response.setDateHeader("Expires", 0);//设置日期头  
-			//String rootPath = ServletActionContext.getServletContext().getRealPath("/");
+			response.setHeader("Pragma","No-cache");	// 设置头 
+			response.setHeader("Cache-Control","no-cache");	// 设置头 
+			response.setDateHeader("Expires", 0);	// 设置日期头  
 			ex.exportExcel("book.xls", title, headers, dataset, out);
 			out.flush();
 		} catch (IOException e) { 

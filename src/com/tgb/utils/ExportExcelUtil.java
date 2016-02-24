@@ -50,7 +50,7 @@ public class ExportExcelUtil {
 	 *            如果有时间数据，设定输出格式。默认为"yyy-MM-dd"
 	 */
 	@SuppressWarnings("unchecked")
-	public void exportExcel(String rootPath,String title, String[] headers,
+	public void exportExcel(String rootPath, String title, String[] headers,
 			Collection<String[]> dataset, OutputStream out, String pattern) {
 		// 声明一个工作薄
 		HSSFWorkbook workbook = new HSSFWorkbook();
@@ -58,7 +58,7 @@ public class ExportExcelUtil {
 		HSSFSheet sheet = workbook.createSheet(title);
 		// 设置表格默认列宽度为15个字节
 		sheet.setDefaultColumnWidth((short) 15);
-		sheet.autoSizeColumn(0);
+		//sheet.autoSizeColumn(0);
 		// 生成一个样式
 		HSSFCellStyle style = workbook.createCellStyle();
 		// 设置这些样式
