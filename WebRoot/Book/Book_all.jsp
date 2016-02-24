@@ -129,8 +129,9 @@ function DelBook(id){
 /* 导出当前记录到Excel */
 /* 需要启用 */
 function OutputToExcel() {
-	document.forms["bookQueryForm"].action = "<%=basePath%>/book/exportExcel";
-	document.forms["bookQueryForm"].submit(); 
+	//document.forms["bookQueryForm"].action = "<%=basePath%>/book/exportExcel";
+	//document.forms["bookQueryForm"].submit(); 
+	window.location.href = "<%=basePath%>/book/exportExcel";
 }
 
 </script>

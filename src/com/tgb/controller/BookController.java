@@ -1,5 +1,6 @@
 package com.tgb.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -178,21 +179,33 @@ public class BookController {
 		return "/book/book_all";
 	}	
 	
+	/*
+	 * 导出 Excel 表格
+	 */
 	@RequestMapping("/exportExcel")
-	public void exportExcel(HttpServletResponse response) {		
+	public void exportExcel(
+			@RequestParam(value="book_name", required=false)String book_name,
+			@RequestParam(value="sub_book_name", required=false)String sub_book_name,
+			@RequestParam(value="ISBN", required=false)String ISBN, 
+			HttpServletResponse response) {		
 		//if(barcode == null) barcode = "";
         //if(bookName == null) bookName = "";
         //if(publishDate == null) publishDate = "";
         //List<Book> bookList = bookDAO.QueryBookInfo(barcode,bookName,bookType,publishDate);
+		List<Book> bookList = bookService.queryBookInfo(book_name, sub_book_name, ISBN, currentPage);
+		
         ExportExcelUtil ex = new ExportExcelUtil();
-        String title = "Book信息记录"; 
-        String[] headers = { "图书条形码","图书名称","图书所在类别","图书价格","库存","出版日期","出版社","图书图片"};
+        String title = "图书信息表"; 
+        String[] headers = { "图书编号", "图书名称", "丛书名称", "ISBN", "单价"};
         List<String[]> dataset = new ArrayList<String[]>(); 
-        /*for(int i=0;i<bookList.size();i++) {
+        for(int i=0;i<bookList.size();i++) {
         	Book book = bookList.get(i); 
-        	dataset.add(new String[]{book.getBarcode(),book.getBookName(),book.getBookType().getBookTypeName(),
-book.getPrice() + "",book.getCount() + "",book.getPublishDate(),book.getPublish(),book.getBookPhoto()});
-        }*/
+        	dataset.add(new String[] {book.getId() + "",
+        			book.getBook_name(),
+        			book.getSub_book_name(),
+        			book.getISBN(),
+        			book.getPrice() + ""});
+        }
         /*
         OutputStream out = null;
 		try {
@@ -204,17 +217,19 @@ book.getPrice() + "",book.getCount() + "",book.getPublishDate(),book.getPublish(
 		}
 		*/
 		//HttpServletResponse response = null;//创建一个HttpServletResponse对象 
-		OutputStream out = null;//创建一个输出流对象 
+        //File file = new File();
+        //String fileName = file.getName();
+		OutputStream out = null; // 创建一个输出流对象 
 		try { 
 			//response = ServletActionContext.getResponse();		// 初始化HttpServletResponse对象 
 			out = response.getOutputStream();//
-			response.setHeader("Content-disposition","attachment; filename="+"Book.xls");//filename是下载的xls的名，建议最好用英文 
+			response.setHeader("Content-Disposition","attachment;filename="+"book.xls"); // filename是下载的xls的名，建议最好用英文 
 			response.setContentType("application/msexcel;charset=UTF-8");//设置类型 
 			response.setHeader("Pragma","No-cache");//设置头 
 			response.setHeader("Cache-Control","no-cache");//设置头 
 			response.setDateHeader("Expires", 0);//设置日期头  
 			//String rootPath = ServletActionContext.getServletContext().getRealPath("/");
-			ex.exportExcel("/book",title,headers, dataset, out);
+			ex.exportExcel("book.xls", title, headers, dataset, out);
 			out.flush();
 		} catch (IOException e) { 
 			e.printStackTrace(); 

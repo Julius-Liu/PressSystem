@@ -68,8 +68,10 @@ public class BookServiceImpl implements BookService{
 	 */
 	public List<Book> queryBookInfo(String book_name, 
 			String sub_book_name, String ISBN, int currentPage) {
-		// 限制每页显示的个数
-		PageHelper.startPage(currentPage, 10);
+		if(currentPage != 0) {
+			// 限制每页显示的个数
+			PageHelper.startPage(currentPage, 10);
+		}
 		List<Book> bookList = bookMapper.calculateTotalPageAndRecordNumber(book_name, sub_book_name, ISBN);
 		
     	return bookList;

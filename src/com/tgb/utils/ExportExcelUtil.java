@@ -25,18 +25,18 @@ public class ExportExcelUtil {
 		exportExcel("","测试POI导出EXCEL文档", null, dataset, out, "yyyy-MM-dd");
 	}
 
-	public void exportExcel(String rootPath,String title, String[] headers,
+	public void exportExcel(String rootPath, String title, String[] headers,
 			Collection<String[]> dataset, OutputStream out) {
-		exportExcel(rootPath,title, headers, dataset, out, "yyyy-MM-dd");
+		exportExcel(rootPath, title, headers, dataset, out, "yyyy-MM-dd");
 	}
 
 	public void exportExcel(String[] headers, Collection<String[]> dataset,
 			OutputStream out, String pattern) {
-		exportExcel("","测试POI导出EXCEL文档", headers, dataset, out, pattern);
+		exportExcel("", "测试POI导出EXCEL文档", headers, dataset, out, pattern);
 	}
 
 	/**
-	 * 这是一个通用的方法，可以将放置在JAVA集合中并且符号一定条件的数据以EXCEL 的形式输出到指定IO设备上
+	 * 这是一个通用的方法，可以将放置在JAVA集合中并且符号一定条件的数据以 EXCEL 的形式输出到指定IO设备上
 	 * 
 	 * @param title
 	 *            表格标题名
@@ -58,6 +58,7 @@ public class ExportExcelUtil {
 		HSSFSheet sheet = workbook.createSheet(title);
 		// 设置表格默认列宽度为15个字节
 		sheet.setDefaultColumnWidth((short) 15);
+		sheet.autoSizeColumn(0);
 		// 生成一个样式
 		HSSFCellStyle style = workbook.createCellStyle();
 		// 设置这些样式
@@ -99,7 +100,7 @@ public class ExportExcelUtil {
 		// 设置注释内容
 		comment.setString(new HSSFRichTextString("可以在POI中添加注释！"));
 		// 设置注释作者，当鼠标移动到单元格上是可以在状态栏中看到该内容.
-		comment.setAuthor("leno");
+		comment.setAuthor("Author");
 
 		// 产生表格标题行
 		HSSFRow row = sheet.createRow(0);
