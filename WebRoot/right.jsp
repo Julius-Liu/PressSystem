@@ -37,12 +37,11 @@ body {
         <td valign="top">&nbsp;</td>
       </tr>
       <tr>
-        <td colspan="2" valign="top"><span class="left_bt">感谢您使用 商家信息网 网站管理系统程序</span><br>
+        <td colspan="2" valign="top"><span class="left_bt">感谢您使用 出版社管理系统</span><br>
               <br>
             <span class="left_txt">&nbsp;<img src="images/ts.gif" width="16" height="16"> 提示：<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您现在使用的是www.865171.cn开发的一套用于构建商务信息类门户型网站的专业系统！如果您有任何疑问请点左下解的</span><span class="left_ts">在线客服</span><span class="left_txt">进行咨询！<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;七大栏目完美整合，一站通使用方式，功能强大，操作简单，后台操作易如反掌，只需会打字，会上网，就会管理网站！<br>
-           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;此程序是您建立地区级商家信息门户的首选方案！　 <br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您现在使用的是 何中辰 开发的一套图书出版社信息管理的专业系统！如果您有任何疑问，或者是改进意见，请联系</span><span class="left_ts">开发人员</span><span class="left_txt">！<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;图书出版社管理系统是专业的出版社管理ERP系统，共有六大管理模块，方便易用！<br>
 </span></td>
         <td width="7%">&nbsp;</td>
         <td width="40%" valign="top"><table width="100%" height="144" border="0" cellpadding="0" cellspacing="0" class="line_table">
@@ -51,8 +50,8 @@ body {
             <td width="93%" background="images/news-title-bg.gif" class="left_bt2">最新动态</td>
           </tr>
           <tr>
-            <td height="102" valign="top">&nbsp;</td>
             <td height="102" valign="top"></td>
+            <td height="102" valign="top">暂无最新动态！</td>
           </tr>
           <tr>
             <td height="5" colspan="2">&nbsp;</td>
@@ -100,44 +99,44 @@ cellPadding=0 width=100% border=0>
                           </TR>
                           <TR>
                             <TD width="4%" height="28" background="images/news-title-bg.gif"></TD>
-                            <TD height="25" colspan="2" background="images/news-title-bg.gif" class="left_txt">亲爱的管理员： <font color="#FFFFFF" class="left_ts"><b></b></TD>
+                            <TD height="25" colspan="2" background="images/news-title-bg.gif" class="left_txt">&nbsp;<font color="#FFFFFF" class="left_ts"><b></b></TD>
                           </TR>
                           <TR>
                             <TD bgcolor="#FAFBFC">&nbsp;</TD>
-                            <TD width="42%" height="25" bgcolor="#FAFBFC"><span class="left_txt">您有未验证分类信息： </span>
+                            <TD width="42%" height="25" bgcolor="#FAFBFC"><span class="left_txt">&nbsp;</span>
                                
                                 <span class="left_ts"> </span></TD>
-                            <TD width="54%" height="25" bgcolor="#FAFBFC"><span class="left_txt">您有未验证广告张贴： </span>
-                               
-                                <span class="left_ts"> </span></TD>
-                          </TR>
-                          <TR>
-                            <TD bgcolor="#FAFBFC">&nbsp;</TD>
-                            <TD height="25" bgcolor="#FAFBFC"><span class="left_txt">您有未验证商家展示： </span>
-                               
-                                <span class="left_ts"> </span></TD>
-                            <TD height="25" bgcolor="#FAFBFC"><span class="left_txt">您有未验证网上商城： </span>
+                            <TD width="54%" height="25" bgcolor="#FAFBFC"><span class="left_txt">&nbsp;</span>
                                
                                 <span class="left_ts"> </span></TD>
                           </TR>
                           <TR>
                             <TD bgcolor="#FAFBFC">&nbsp;</TD>
-                            <TD height="25" bgcolor="#FAFBFC"><span class="left_txt">您有未验证网上名片： </span>
+                            <TD height="25" bgcolor="#FAFBFC"><span class="left_txt"></span>
+                               
                                 <span class="left_ts"> </span></TD>
-                            <TD height="25" bgcolor="#FAFBFC"><span class="left_txt">您有未验证市场联盟： </span>
+                            <TD height="25" bgcolor="#FAFBFC"><span class="left_txt"></span>
                                
                                 <span class="left_ts"> </span></TD>
                           </TR>
                           <TR>
                             <TD bgcolor="#FAFBFC">&nbsp;</TD>
-                            <TD height="25" bgcolor="#FAFBFC"><span class="left_txt">您有未验证市场资讯： </span>
-                               
+                            <TD height="25" bgcolor="#FAFBFC"><span class="left_txt">&nbsp;</span>
                                 <span class="left_ts"> </span></TD>
-                            <TD height="25" bgcolor="#FAFBFC"><span class="left_txt">您有未验证商家商品： </span>
+                            <TD height="25" bgcolor="#FAFBFC"><span class="left_txt">&nbsp;</span>
+                               
                                 <span class="left_ts"> </span></TD>
                           </TR>
                           <TR>
-                            <TD height="5" colspan="3"></TD>
+                            <TD bgcolor="#FAFBFC">&nbsp;</TD>
+                            <TD height="25" bgcolor="#FAFBFC"><span class="left_txt">&nbsp; </span>
+                               
+                                <span class="left_ts"> </span></TD>
+                            <TD height="25" bgcolor="#FAFBFC"><span class="left_txt">&nbsp;</span>
+                                <span class="left_ts"> </span></TD>
+                          </TR>
+                          <TR>
+                            <TD height="5" colspan="6"></TD>
                           </TR>
                         </TBODY>
                     </TABLE></TD>
@@ -279,10 +278,10 @@ cellPadding=0 width=100% border=0>
             <td height="102" valign="top">&nbsp;</td>
             <td height="102" valign="top"><label></label>
               <label>
-              <textarea name="textarea" cols="48" rows="8" class="left_txt">一、专业的地区级商家门户建站首选方案！
-二、全站一号通，一次注册，终身使用，一个帐号，全站通用！
-三、分类信息、商家展示（百业联盟）、网上商城、网上名片（网上黄页）、广告张贴、市场联盟、市场资讯七大栏目完美整合。
-四、界面设计精美，后台功能强大。傻瓜式后台操作，无需专业的网站制作知识，只要会打字，就会管理维护网站。</textarea>
+              <textarea name="textarea" cols="48" rows="8" class="left_txt">
+图书出版社信息管理系统，是专业的ERP管理系统！
+共有六大模块，方便易用。您可以使用左边的管理菜单，在各个管理模块之间切换！
+			</textarea>
               </label></td>
           </tr>
           <tr>
@@ -299,8 +298,8 @@ cellPadding=0 width=100% border=0>
       </tr>
       <tr>
         <td width="2%">&nbsp;</td>
-        <td width="51%" class="left_txt"><img src="images/icon-mail2.gif" width="16" height="11"> 客户服务邮箱：215288671@qq.com<br>
-              <img src="images/icon-phone.gif" width="17" height="14"> 官方网站：http://www.865171.cn</td>
+        <td width="51%" class="left_txt"><img src="images/icon-mail2.gif" width="16" height="11"> 客户服务邮箱：presssystem@hotmail.com<br>
+              <img src="images/icon-phone.gif" width="17" height="14"> 官方网站：http://julius-liu.github.io</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
       </tr>

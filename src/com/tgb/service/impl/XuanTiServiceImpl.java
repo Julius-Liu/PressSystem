@@ -67,8 +67,10 @@ public class XuanTiServiceImpl implements XuanTiService{
 	 */
 	public List<XuanTi> queryXuanTiInfo(String xuan_ti_id, String year, 
 			int source, int status, int currentPage) {
-		// 限制每页显示的个数
-		PageHelper.startPage(currentPage, 10);
+		if(currentPage != 0) {
+			// 限制每页显示的个数
+			PageHelper.startPage(currentPage, 10);
+		}
 		List<XuanTi> xuanTiList = xuanTiMapper.calculateTotalPageAndRecordNumber(xuan_ti_id, year, source, status);
 		
     	return xuanTiList;

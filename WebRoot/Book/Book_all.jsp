@@ -129,9 +129,8 @@ function DelBook(id){
 /* 导出当前记录到Excel */
 /* 需要启用 */
 function OutputToExcel() {
-	//document.forms["bookQueryForm"].action = "<%=basePath%>/book/exportExcel";
-	//document.forms["bookQueryForm"].submit(); 
-	window.location.href = "<%=basePath%>/book/exportExcel";
+	document.forms["bookQueryForm"].action = "<%=basePath%>book/exportExcel";
+	document.forms["bookQueryForm"].submit(); 
 }
 
 </script>
@@ -227,7 +226,7 @@ ISBN：<input type=text name="ISBN" value="<%=ISBN%>"/>&nbsp;
         <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
             <td class="STYLE4">&nbsp;&nbsp;共有<%=recordNumber %>条记录，当前第 <%=currentPage %>/<%=totalPage %> 页&nbsp;&nbsp;
-            <span onclick="OutputToExcel();"><a style="cursor:hand;color:red;text-decoration:underline;" href='#'>导出当前记录到excel</a></span>
+              <span onclick="OutputToExcel();"><a style="cursor:hand;color:red;text-decoration:underline;" href='#'>导出当前记录到excel</a></span>
             </td>
             <td><table border="0" align="right" cellpadding="0" cellspacing="0">
                 <tr>

@@ -1,7 +1,9 @@
 package com.tgb.controller;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +25,7 @@ import com.tgb.service.XuanTiService;
 import com.tgb.service.GaoJianSourceService;
 import com.tgb.service.ChuShenCommentsService;
 import com.tgb.service.XuanTiStatusService;
+import com.tgb.utils.ExportExcelUtil;
 
 @Controller
 @RequestMapping("/xuan_ti")
@@ -274,4 +277,59 @@ public class XuanTiController {
 		
 		return "/xuan_ti/xuan_ti_all";
 	}	
+	
+	/*
+	 * 导出 Excel 表格
+	 */
+	@RequestMapping("/exportExcel")
+	public void exportExcel(
+			@RequestParam(value="xuan_ti_id", required=false)String xuan_ti_id, 
+			@RequestParam(value="year", required=false)String year,
+			@RequestParam(value="source", required=false)int source,
+			@RequestParam(value="status", required=false)int status, 
+			HttpServletResponse response) {		
+		List<XuanTi> xuanTiList = xuanTiService.queryXuanTiInfo(xuan_ti_id, year, source, status, currentPage);
+		
+        ExportExcelUtil ex = new ExportExcelUtil();
+        String title = "选题信息表"; 
+        String[] headers = { "选题编号", "选题类型", "选题年份", "选题季度", "图书名称",
+        		"丛书名称", "部门", "申报人", "稿件来源", "初审意见", "选题状态", "ISBN"};
+        List<String[]> dataset = new ArrayList<String[]>(); 
+        for(int i=0;i<xuanTiList.size();i++) {
+        	XuanTi xuanTi = xuanTiList.get(i); 
+        	dataset.add(new String[] {xuanTi.getId() + "",
+        			xuanTi.getType(),
+        			xuanTi.getYear(),
+        			xuanTi.getSeason() + "",
+        			xuanTi.getBook_name(),
+        			xuanTi.getSub_book_name(),
+        			xuanTi.getDepartment(),
+        			xuanTi.getOriginator(),
+        			xuanTi.getGaoJianSource(),
+        			xuanTi.getChuShenComments(),
+        			xuanTi.getXuanTiStatus(),
+        			xuanTi.getISBN()});
+        }
+		OutputStream out = null; // 创建一个输出流对象 
+		try { 
+			out = response.getOutputStream();
+			response.setHeader("Content-Disposition","attachment;filename="+"xuan_ti.xls"); // filename是下载的xls的名，建议最好用英文 
+			response.setContentType("application/msexcel;charset=UTF-8");//设置类型 
+			response.setHeader("Pragma","No-cache");	// 设置头 
+			response.setHeader("Cache-Control","no-cache");	// 设置头 
+			response.setDateHeader("Expires", 0);	// 设置日期头  
+			ex.exportExcel("book.xls", title, headers, dataset, out);
+			out.flush();
+		} catch (IOException e) { 
+			e.printStackTrace(); 
+		}finally{
+			try{
+				if(out!=null){ 
+					out.close(); 
+				}
+			}catch(IOException e){ 
+				e.printStackTrace(); 
+			} 
+		}
+	}
 }
