@@ -27,6 +27,8 @@ import com.tgb.service.ChuShenCommentsService;
 import com.tgb.service.XuanTiStatusService;
 import com.tgb.utils.ExportExcelUtil;
 
+import org.apache.log4j.Logger;
+
 @Controller
 @RequestMapping("/xuan_ti")
 public class XuanTiController {
@@ -46,6 +48,9 @@ public class XuanTiController {
 	private BookService bookService;
 	
 	private int currentPage;
+	
+	public static Logger log = Logger.getLogger(XuanTiController.class.getName());
+	
     public void setCurrentPage(int currentPage) {
         this.currentPage = currentPage;
     }
@@ -70,7 +75,7 @@ public class XuanTiController {
     }
 	
 	/**
-	 * 跳转到添加 选题 界面
+	 * è·³è½¬åˆ°æ·»åŠ  é€‰é¢˜ ç•Œé�¢
 	 * @param request
 	 * @return
 	 */
@@ -87,13 +92,15 @@ public class XuanTiController {
 		request.setAttribute("the_book_id", 0);
 		request.setAttribute("book_name", "");
 		request.setAttribute("sub_book_name", "");
-		request.setAttribute("ISBN", "");
+		request.setAttribute("ISBN", "");	
+		
+		log.info("Now you are in toAddXuanTi");
 		
 		return "/xuan_ti/xuan_ti_add";
 	}
 	
 	/**
-	 * 添加 选题 并重定向
+	 * æ·»åŠ  é€‰é¢˜ å¹¶é‡�å®šå�‘
 	 * @param xuanTi
 	 * @param request
 	 * @return
@@ -105,7 +112,7 @@ public class XuanTiController {
 	}
 	
 	/**
-	 * 编辑 选题
+	 * ç¼–è¾‘ é€‰é¢˜
 	 * @param xuanTi
 	 * @param request
 	 * @return
@@ -120,7 +127,7 @@ public class XuanTiController {
 	}	
 	
 	/**
-	 * 获取指定 选题 列表
+	 * èŽ·å�–æŒ‡å®š é€‰é¢˜ åˆ—è¡¨
 	 * @param request
 	 * @return
 	 */
@@ -148,7 +155,7 @@ public class XuanTiController {
 	}
 	
 	/**
-	 * 查看指定 选题 详细内容
+	 * æŸ¥çœ‹æŒ‡å®š é€‰é¢˜ è¯¦ç»†å†…å®¹
 	 * @param request
 	 * @return
 	 */
@@ -176,7 +183,7 @@ public class XuanTiController {
 	}	
 	
 	/**
-	 * 为 选题 添加 书本 信息
+	 * ä¸º é€‰é¢˜ æ·»åŠ  ä¹¦æœ¬ ä¿¡æ�¯
 	 * @param request
 	 * @return
 	 */
@@ -204,7 +211,7 @@ public class XuanTiController {
 	}	
 	
 	/**
-	 * 删除 选题
+	 * åˆ é™¤ é€‰é¢˜
 	 * @param id
 	 * @param request
 	 * @param response
@@ -228,7 +235,7 @@ public class XuanTiController {
 	}	
 	
 	/**
-	 * 查询 选题 列表
+	 * æŸ¥è¯¢ é€‰é¢˜ åˆ—è¡¨
 	 * @param request
 	 * @return
 	 */
@@ -252,12 +259,12 @@ public class XuanTiController {
 		
 		List<XuanTi> xuanTiList = xuanTiService.queryXuanTiInfo(xuan_ti_id, year, source, status, currentPage);
 		
-        /*计算总的页数和总的记录数*/
+        /*è®¡ç®—æ€»çš„é¡µæ•°å’Œæ€»çš„è®°å½•æ•°*/
 		xuanTiService.calculateTotalPageAndRecordNumber(xuan_ti_id, year, source, status);
 		
-        /*获取到总的页码数目*/
+        /*èŽ·å�–åˆ°æ€»çš„é¡µç �æ•°ç›®*/
         totalPage = xuanTiService.getTotalPage();
-        /*当前查询条件下总记录数*/
+        /*å½“å‰�æŸ¥è¯¢æ�¡ä»¶ä¸‹æ€»è®°å½•æ•°*/
         recordNumber = xuanTiService.getRecordNumber();
         
         request.setAttribute("xuan_ti_id", xuan_ti_id);        
@@ -279,7 +286,7 @@ public class XuanTiController {
 	}	
 	
 	/*
-	 * 导出 Excel 表格
+	 * å¯¼å‡º Excel è¡¨æ ¼
 	 */
 	@RequestMapping("/exportExcel")
 	public void exportExcel(
@@ -291,9 +298,9 @@ public class XuanTiController {
 		List<XuanTi> xuanTiList = xuanTiService.queryXuanTiInfo(xuan_ti_id, year, source, status, currentPage);
 		
         ExportExcelUtil ex = new ExportExcelUtil();
-        String title = "选题信息表"; 
-        String[] headers = { "选题编号", "选题类型", "选题年份", "选题季度", "图书名称",
-        		"丛书名称", "部门", "申报人", "稿件来源", "初审意见", "选题状态", "ISBN"};
+        String title = "é€‰é¢˜ä¿¡æ�¯è¡¨"; 
+        String[] headers = { "é€‰é¢˜ç¼–å�·", "é€‰é¢˜ç±»åž‹", "é€‰é¢˜å¹´ä»½", "é€‰é¢˜å­£åº¦", "å›¾ä¹¦å��ç§°",
+        		"ä¸›ä¹¦å��ç§°", "éƒ¨é—¨", "ç”³æŠ¥äºº", "ç¨¿ä»¶æ�¥æº�", "åˆ�å®¡æ„�è§�", "é€‰é¢˜çŠ¶æ€�", "ISBN"};
         List<String[]> dataset = new ArrayList<String[]>(); 
         for(int i=0;i<xuanTiList.size();i++) {
         	XuanTi xuanTi = xuanTiList.get(i); 
@@ -310,14 +317,14 @@ public class XuanTiController {
         			xuanTi.getXuanTiStatus(),
         			xuanTi.getISBN()});
         }
-		OutputStream out = null; // 创建一个输出流对象 
+		OutputStream out = null; // åˆ›å»ºä¸€ä¸ªè¾“å‡ºæµ�å¯¹è±¡ 
 		try { 
 			out = response.getOutputStream();
-			response.setHeader("Content-Disposition","attachment;filename="+"xuan_ti.xls"); // filename是下载的xls的名，建议最好用英文 
-			response.setContentType("application/msexcel;charset=UTF-8");//设置类型 
-			response.setHeader("Pragma","No-cache");	// 设置头 
-			response.setHeader("Cache-Control","no-cache");	// 设置头 
-			response.setDateHeader("Expires", 0);	// 设置日期头  
+			response.setHeader("Content-Disposition","attachment;filename="+"xuan_ti.xls"); // filenameæ˜¯ä¸‹è½½çš„xlsçš„å��ï¼Œå»ºè®®æœ€å¥½ç”¨è‹±æ–‡ 
+			response.setContentType("application/msexcel;charset=UTF-8");//è®¾ç½®ç±»åž‹ 
+			response.setHeader("Pragma","No-cache");	// è®¾ç½®å¤´ 
+			response.setHeader("Cache-Control","no-cache");	// è®¾ç½®å¤´ 
+			response.setDateHeader("Expires", 0);	// è®¾ç½®æ—¥æœŸå¤´  
 			ex.exportExcel("book.xls", title, headers, dataset, out);
 			out.flush();
 		} catch (IOException e) { 

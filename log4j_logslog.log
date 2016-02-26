@@ -1,0 +1,11 @@
+2016-02-26 16:19:51 [ main:0 ] - [ INFO ] Loading XML bean definitions from class path resource [config/spring-common.xml]
+ 2016-02-26 16:19:51 [ main:376 ] - [ INFO ] Refreshing org.springframework.context.support.GenericApplicationContext@6b359c1b: startup date [Fri Feb 26 16:19:51 CST 2016]; root of context hierarchy
+ 2016-02-26 16:19:51 [ main:610 ] - [ INFO ] Loaded JDBC driver: com.mysql.jdbc.Driver
+ 2016-02-26 16:19:53 [ main:2638 ] - [ INFO ] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+ 2016-02-26 16:19:54 [ Thread-2:3153 ] - [ INFO ] Closing org.springframework.context.support.GenericApplicationContext@6b359c1b: startup date [Fri Feb 26 16:19:51 CST 2016]; root of context hierarchy
+ 2016-02-26 16:22:26 [ main:0 ] - [ INFO ] Loading XML bean definitions from class path resource [config/spring-common.xml]
+ 2016-02-26 16:22:26 [ main:251 ] - [ INFO ] Refreshing org.springframework.context.support.GenericApplicationContext@6b359c1b: startup date [Fri Feb 26 16:22:26 CST 2016]; root of context hierarchy
+ 2016-02-26 16:22:27 [ main:469 ] - [ INFO ] Loaded JDBC driver: com.mysql.jdbc.Driver
+ 2016-02-26 16:22:28 [ main:1655 ] - [ INFO ] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+ 2016-02-26 16:22:28 [ Thread-2:2077 ] - [ INFO ] Closing org.springframework.context.support.GenericApplicationContext@6b359c1b: startup date [Fri Feb 26 16:22:26 CST 2016]; root of context hierarchy
+ 

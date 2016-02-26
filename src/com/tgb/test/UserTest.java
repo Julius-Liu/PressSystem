@@ -1,6 +1,5 @@
 package com.tgb.test;
 
-
 import java.util.List;
 
 import org.junit.Test;
@@ -9,45 +8,45 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.tgb.mapper.UserMapper;
-import com.tgb.model.User;
+import com.tgb.mapper.BookMapper;
+import com.tgb.model.Book;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/config/spring-common.xml")
 public class UserTest {
 
 	@Autowired
-	private UserMapper userMapper;
+	private BookMapper bookMapper;
 	
 	@Test
 	public void testAdd() {
-		User user = new User(-1, "23", "jiuqiyuliang");
-		userMapper.save(user);		
+		Book book = new Book(0, "测试书名", "测试丛书名", "ISBN", (float) 30.5);
+		bookMapper.save(book);		
 	}
 	
-	@Test
+	/*@Test
 	public void testFindAll(){
-		List<User> findAllList = userMapper.findAll();
+		List<User> findAllList = bookMapper.findAll();
 		System.out.println(findAllList.size());
-	}
+	}*/
 	
-	@Test
+	/*@Test
 	public void testFindById(){
-		User user = userMapper.findById(2);
+		User user = bookMapper.findById(2);
 		System.out.println(user.getId());
 		System.out.println(user.getUserName());
-	}
+	}*/
 
 
-	@Test
+	/*@Test
 	public void testUpdate(){
 		
 		User user = new User(2, "23", "yuliang");
-		userMapper.update(user);
-	}
+		bookMapper.update(user);
+	}*/
 	
-	@Test
+	/*@Test
 	public void testDelete(){
-		userMapper.delete(1);
-	}
+		bookMapper.delete(1);
+	}*/
 }

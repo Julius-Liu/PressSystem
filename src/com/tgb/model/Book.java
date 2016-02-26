@@ -1,19 +1,32 @@
 package com.tgb.model;
 
 public class Book {
-	// 书的编号
+	
+	public Book(int id, 
+			String book_name, 
+			String sub_book_name, 
+			String ISBN, 
+			float price) {
+		this.id = id;
+		this.book_name = book_name;
+		this.sub_book_name = sub_book_name;
+		this.ISBN = ISBN;
+		this.price = price;
+	}
+	
+	// ä¹¦çš„ç¼–å�·
     private int id;
     
-    // 书名
+    // ä¹¦å��
     private String book_name;
     
-    // 丛书名
+    // ä¸›ä¹¦å��
     private String sub_book_name;
     
-    // 国际标准书号（International Standard Book Number），简称ISBN
+    // å›½é™…æ ‡å‡†ä¹¦å�·ï¼ˆInternational Standard Book Numberï¼‰ï¼Œç®€ç§°ISBN
     private String ISBN;
     
-    // 单价
+    // å�•ä»·
     private float price;
     
 	public int getId() {
