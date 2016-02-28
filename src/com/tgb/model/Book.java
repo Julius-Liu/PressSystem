@@ -1,18 +1,6 @@
 package com.tgb.model;
 
-public class Book {
-	
-	public Book(int id, 
-			String book_name, 
-			String sub_book_name, 
-			String ISBN, 
-			float price) {
-		this.id = id;
-		this.book_name = book_name;
-		this.sub_book_name = sub_book_name;
-		this.ISBN = ISBN;
-		this.price = price;
-	}
+public class Book {		
 	
 	// ä¹¦çš„ç¼–å�·
     private int id;
@@ -59,6 +47,27 @@ public class Book {
 	public void setPrice(float price) {
 		this.price = price;
 	}
-    
+	
+	/*public Book(int id, String book_name, String sub_book_name, String ISBN,
+			float price) {
+		super();
+		this.id = id;
+		this.book_name = book_name;
+		this.sub_book_name = sub_book_name;
+		this.ISBN = ISBN;
+		this.price = price;
+	}*/
+	/*public Book(int id, 
+			String book_name, 
+			String sub_book_name, 
+			String ISBN, 
+			float price) {
+		this.id = id;
+		this.book_name = book_name;
+		this.sub_book_name = sub_book_name;
+		this.ISBN = ISBN;
+		this.price = price;
+	}*/
+	
 }
 

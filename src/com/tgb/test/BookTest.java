@@ -13,14 +13,17 @@ import com.tgb.model.Book;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/config/spring-common.xml")
-public class UserTest {
+public class BookTest {
 
 	@Autowired
 	private BookMapper bookMapper;
 	
 	@Test
 	public void testAdd() {
-		Book book = new Book(0, "测试书名", "测试丛书名", "ISBN", (float) 30.5);
+		Book book = new Book();
+		book.setBook_name("测试书名");
+		book.setSub_book_name("测试丛书名");
+		book.setISBN("ISBN");
 		bookMapper.save(book);		
 	}
 	

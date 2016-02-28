@@ -37,7 +37,7 @@ body {
         <td valign="top">&nbsp;</td>
       </tr>
       <tr>
-        <td colspan="2" valign="top"><span class="left_bt">感谢您使用 出版社管理系统</span><br>
+        <td colspan="2" valign="top"><span class="left_bt">感谢您使用出版社信息管理系统</span><br>
               <br>
             <span class="left_txt">&nbsp;<img src="images/ts.gif" width="16" height="16"> 提示：<br>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您现在使用的是 何中辰 开发的一套图书出版社信息管理的专业系统！如果您有任何疑问，或者是改进意见，请联系</span><span class="left_ts">开发人员</span><span class="left_txt">！<br>
