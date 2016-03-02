@@ -121,12 +121,38 @@
 
   	<tr>
     	<td width=30%>选题年度：</td>
-    	<td width=70%><input id="year" name="year" value="${xuanTi.year}" type="text" size="10" /></td>
+    	<%-- <td width=70%><input id="year" name="year" value="${xuanTi.year}" type="text" size="10" /></td> --%>
+    	<td width=70%>
+      	<select name="year">
+      		<c:forEach begin="2000" end="2020" varStatus="loop" >
+      			<option value="${loop.index }"
+      				<c:if test="${loop.index == xuanTi.year }">
+      					<c:out value='selected="selected"'></c:out>
+      				</c:if>
+      			>
+      				${loop.index }
+      			</option>
+      		</c:forEach>      	
+      	</select>
+    	</td>
   	</tr>
 
 	<tr>
     	<td width=30%>选题季度：</td>
-    	<td width=70%><input id="season" name="season" value="${xuanTi.season}" type="text" size="10" /></td>
+    	<%-- <td width=70%><input id="season" name="season" value="${xuanTi.season}" type="text" size="10" /></td> --%>
+    	<td width=70%>
+    	<select name="season">
+      		<c:forEach begin="1" end="4" varStatus="loop" >
+      			<option value="${loop.index }"
+      				<c:if test="${loop.index == xuanTi.season }">
+      					<c:out value='selected="selected"'></c:out>
+      				</c:if>
+      			>
+      				${loop.index }
+      			</option>
+      		</c:forEach>      	
+      	</select>
+      	</td>
   	</tr>
 
   	<tr>
