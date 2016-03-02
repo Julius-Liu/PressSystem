@@ -46,7 +46,7 @@ public class AssetsBalanceController {
     }
 	
 	/**
-	 * 跳转到添加 资金 界面
+	 * è·³è½¬åˆ°æ·»åŠ  èµ„é‡‘ ç•Œé�¢
 	 * @param request
 	 * @return
 	 */
@@ -56,7 +56,7 @@ public class AssetsBalanceController {
 	}
 	
 	/**
-	 * 添加 资金 并重定向
+	 * æ·»åŠ  èµ„é‡‘ å¹¶é‡�å®šå�‘
 	 * @param xuanTi
 	 * @param request
 	 * @return
@@ -68,7 +68,7 @@ public class AssetsBalanceController {
 	}
 	
 	/**
-	 * 编辑 资金
+	 * ç¼–è¾‘ èµ„é‡‘
 	 * @param xuanTi
 	 * @param request
 	 * @return
@@ -76,14 +76,14 @@ public class AssetsBalanceController {
 	@RequestMapping("/updateAssetsBalance")
 	public String updateAssetsBalance(AssetsBalance assetsBalance, HttpServletRequest request) {	
 		if(assetsBalanceService.update(assetsBalance)) {
-			return "redirect:queryFaXing?assets_balance_id=&customer_name=&bank_name=&record_creator=&currentPage=1";
+			return "redirect:queryAssetsBalance?assets_balance_id=&customer_name=&bank_name=&record_creator=&currentPage=1";
 		}else {
 			return "/error";
 		}
 	}	
 	
 	/**
-	 * 获取指定 资金 列表
+	 * èŽ·å�–æŒ‡å®š èµ„é‡‘ åˆ—è¡¨
 	 * @param request
 	 * @return
 	 */
@@ -97,7 +97,7 @@ public class AssetsBalanceController {
 	}
 	
 	/**
-	 * 查看指定 资金 详细内容
+	 * æŸ¥çœ‹æŒ‡å®š èµ„é‡‘ è¯¦ç»†å†…å®¹
 	 * @param request
 	 * @return
 	 */
@@ -111,7 +111,7 @@ public class AssetsBalanceController {
 	}	
 	
 	/**
-	 * 删除 资金
+	 * åˆ é™¤ èµ„é‡‘
 	 * @param id
 	 * @param request
 	 * @param response
@@ -135,7 +135,7 @@ public class AssetsBalanceController {
 	}	
 	
 	/**
-	 * 查询 资金 列表
+	 * æŸ¥è¯¢ èµ„é‡‘ åˆ—è¡¨
 	 * @param request
 	 * @return
 	 */
@@ -156,13 +156,13 @@ public class AssetsBalanceController {
 		List<AssetsBalance> assetsBalanceList = assetsBalanceService.queryAssetsBalanceInfo(assets_balance_id, customer_name, 
 				bank_name, record_creator, currentPage);
 		
-        /*计算总的页数和总的记录数*/
+        /*è®¡ç®—æ€»çš„é¡µæ•°å’Œæ€»çš„è®°å½•æ•°*/
 		assetsBalanceService.calculateTotalPageAndRecordNumber(assets_balance_id, customer_name, 
 				bank_name, record_creator);
 		
-        /*获取到总的页码数目*/
+        /*èŽ·å�–åˆ°æ€»çš„é¡µç �æ•°ç›®*/
         totalPage = assetsBalanceService.getTotalPage();
-        /*当前查询条件下总记录数*/
+        /*å½“å‰�æŸ¥è¯¢æ�¡ä»¶ä¸‹æ€»è®°å½•æ•°*/
         recordNumber = assetsBalanceService.getRecordNumber();
         
         request.setAttribute("assets_balance_id", assets_balance_id);        
