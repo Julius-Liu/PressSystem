@@ -4,6 +4,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.PageHelper;
@@ -12,6 +13,7 @@ import com.tgb.model.AssetsBalance;
 import com.tgb.service.AssetsBalanceService;
 
 @Service
+@Component
 @Transactional
 public class AssetsBalanceServiceImpl implements AssetsBalanceService{
 	@Resource

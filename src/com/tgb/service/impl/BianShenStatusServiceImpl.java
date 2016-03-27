@@ -3,6 +3,7 @@ package com.tgb.service.impl;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tgb.model.BianShenStatus;
@@ -10,6 +11,7 @@ import com.tgb.service.BianShenStatusService;
 import com.tgb.mapper.BianShenStatusMapper;
 
 @Service
+@Component
 @Transactional
 public class BianShenStatusServiceImpl implements BianShenStatusService{
 	@Resource
