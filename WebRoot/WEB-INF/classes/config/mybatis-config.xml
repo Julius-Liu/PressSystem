@@ -28,6 +28,8 @@
 		<typeAlias alias="ChuKu" type="com.tgb.model.ChuKu" />
 		<typeAlias alias="Transportation" type="com.tgb.model.Transportation" />
 		<typeAlias alias="AssetsBalance" type="com.tgb.model.AssetsBalance" />
+		
+		<typeAlias alias="Log" type="com.tgb.model.Log" />
 	</typeAliases>
 	
 	<!-- 
@@ -99,6 +101,8 @@
 		<mapper resource="com/tgb/mapper/chuKuMapper.xml" />
 		<mapper resource="com/tgb/mapper/transportationMapper.xml" />
 		<mapper resource="com/tgb/mapper/assetsBalanceMapper.xml" />
+		
+		<mapper resource="com/tgb/mapper/logMapper.xml" />
 	</mappers>
 	
 </configuration>  

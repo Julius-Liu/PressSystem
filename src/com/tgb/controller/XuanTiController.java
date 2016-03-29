@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -30,6 +31,7 @@ import com.tgb.utils.ExportExcelUtil;
 import org.apache.log4j.Logger;
 
 @Controller
+@Component
 @RequestMapping("/xuan_ti")
 public class XuanTiController {
 	@Autowired

@@ -11,7 +11,7 @@ import com.tgb.model.Log;
 import com.tgb.service.LogService;
 
 @Service
-@Transactional
+
 public class LogServiceImpl implements LogService{
 	
 	@Resource
@@ -21,6 +21,7 @@ public class LogServiceImpl implements LogService{
 	 * 新增日志
 	 * @see com.tgb.service.LogService#save(com.tgb.model.Log)
 	 */
+	@Transactional("txManager")
 	public void save(Log log) {
 		logMapper.save(log);
 	}

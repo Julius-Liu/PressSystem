@@ -22,10 +22,10 @@ public class XuanTiTest {
 	@Autowired
 	private BookMapper bookMapper;
 	
-	/*@Test
+	@Test
 	public void testAddXuanTi() {
 		XuanTi xuanTi = new XuanTi();
-		xuanTi.setId("XT0041");
+		xuanTi.setId("XT0048");
 		xuanTi.setType("语言文字");
 		xuanTi.setYear("2013");
 		xuanTi.setSeason(2);
@@ -36,7 +36,7 @@ public class XuanTiTest {
 		xuanTi.setStatus(1);
 		xuanTi.setThe_book_id(2);
 		xuanTiMapper.save(xuanTi);		
-	}*/
+	}
 	
 	/*@Test
 	public void testFindAll() {
@@ -53,8 +53,10 @@ public class XuanTiTest {
 		System.out.println("选题状态："+xuanTi.getXuanTiStatus());		
 	}*/
 	
+	/*
 	@Test
 	public void testDeleteXuanTi() {
 		xuanTiMapper.delete("XT0041");
 	}
+	*/
 }

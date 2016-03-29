@@ -1,12 +1,15 @@
 package com.tgb.utils;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;  
 
 import javax.annotation.Resource;
 
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;  
+import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;  
 
 import com.tgb.model.Log;
@@ -16,12 +19,31 @@ import java.util.Date;
 import java.lang.reflect.Method;
 
 @Aspect
+@Component
 public class LogAspect {
 	@Autowired
 	private LogServiceImpl logServiceImpl;
 	
-	@AfterReturning(pointcut="execution(* com.tgb.service.impl.*.save(..))", 
+	@Around("execution(* com.tgb.service.impl.*.*(..))")
+    public Object around(ProceedingJoinPoint pjp) throws Throwable {
+        before();
+        Object result = pjp.proceed();
+        after();
+        return result;
+    }
+
+    private void before() {
+        System.out.println("This is LogAspect Before");
+    }
+
+    private void after() {
+        System.out.println("This is LogAspect After");
+    }
+	
+    /*
+	@AfterReturning(pointcut="execution(* com.tgb.controller.*.add*(..))", 
 			argNames="returnValue", returning="returnValue")
+	*/
 	public void saveLogInsert(JoinPoint joinPoint, Object returnValue) throws Throwable {
 		System.out.println("This is saveLogInsert!");
 		int userId = 89757;

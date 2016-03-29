@@ -8,22 +8,43 @@
        xmlns:jee="http://www.springframework.org/schema/jee"  
        xsi:schemaLocation="  
             http://www.springframework.org/schema/beans  
-            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
             http://www.springframework.org/schema/context  
-            http://www.springframework.org/schema/context/spring-context-3.0.xsd  
+            http://www.springframework.org/schema/context/spring-context.xsd  
             http://www.springframework.org/schema/mvc  
-            http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd  
+            http://www.springframework.org/schema/mvc/spring-mvc.xsd  
             http://www.springframework.org/schema/aop  
-            http://www.springframework.org/schema/aop/spring-aop-3.0.xsd  
+            http://www.springframework.org/schema/aop/spring-aop.xsd  
             http://www.springframework.org/schema/tx  
-            http://www.springframework.org/schema/tx/spring-tx-3.0.xsd  
+            http://www.springframework.org/schema/tx/spring-tx.xsd  
             http://www.springframework.org/schema/jee  
-            http://www.springframework.org/schema/jee/spring-tx-3.0.xsd">  
+            http://www.springframework.org/schema/jee/spring-tx.xsd">  
 
 	<!-- 加入Aspectj配置 -->    
+	
     <aop:aspectj-autoproxy />    
-    <bean id="logAspect" class="com.tgb.utils.LogAspect" />  
-    <context:component-scan base-package="com.tgb.service.impl" />
+    <context:annotation-config />    
+    
+    <context:component-scan base-package="com.tgb" />
+	
+	<!-- 
+		配置日志 使用 Aop 记录日志  
+		注意:
+			1). 此处proxy-target-class="true" 否则Action内的参数会被拦截掉,导致action内无法获得前台传递的参数 
+			2). Action需交给spring容器去管理
+	-->
+	<aop:config expose-proxy="true" proxy-target-class="true">
+		<aop:aspect id="aopRiZhiAspect" ref="logAspect"> 
+			<!-- 对那些方法进行日志记录, 此处屏蔽action内的set get方法 -->
+            <aop:pointcut id="aopRiZhi" expression="(execution(* com.tgb.*.*.*(..)))" />  
+            <aop:after-returning pointcut-ref="aopRiZhi" method="saveLogInsert"/>  
+        </aop:aspect>
+	</aop:config>
+	
+	<bean id="logAspect" class="com.tgb.utils.LogAspect" />  <!-- Aop日志类 -->
+	
+	<!-- 要使用spring aop记录日志的action 需要交给spring容器来管理 -->
+	<bean id="xuanTiController" class="com.tgb.controller.XuanTiController" scope="prototype" ></bean>	
 
 	<!-- 1. 数据源 : DriverManagerDataSource -->
 	<bean id="dataSource"
@@ -64,6 +85,6 @@
 	<!-- 5. 使用声明式事务
 		 transaction-manager：引用上面定义的事务管理器
 	 -->
-	<tx:annotation-driven transaction-manager="txManager" />
+	<tx:annotation-driven transaction-manager="txManager" proxy-target-class="true" />
 
 </beans>

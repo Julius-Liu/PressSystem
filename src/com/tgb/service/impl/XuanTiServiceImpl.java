@@ -4,6 +4,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.PageHelper;
@@ -12,6 +13,7 @@ import com.tgb.model.XuanTi;
 import com.tgb.service.XuanTiService;
 
 @Service
+@Component
 @Transactional
 public class XuanTiServiceImpl implements XuanTiService{
 	@Resource
@@ -38,6 +40,7 @@ public class XuanTiServiceImpl implements XuanTiService{
 	private int PAGE_SIZE = 10;
 	
 	public void save(XuanTi xuanTi) {
+		System.out.println("This is XuanTiServiceImpl - save()");
 		xuanTiMapper.save(xuanTi);		
 	}
 

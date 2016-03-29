@@ -3,7 +3,6 @@ package com.tgb.mapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-import com.tgb.model.AssetsBalance;
 import com.tgb.model.Book;
 
 public interface BookMapper {

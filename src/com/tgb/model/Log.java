@@ -2,11 +2,13 @@ package com.tgb.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import org.springframework.stereotype.Component;
 
 /*
  * 系统日志
  */
-public class Log implements Serializable {
+@Component
+public class Log implements Serializable{
 	
 	private static final long serialVersionUID = -7372303516713218870L; 
 	
