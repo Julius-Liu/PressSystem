@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -29,7 +29,9 @@ body {
 
 <body>
 
-<a href="<%=basePath%>index.jsp">进入用户管理页</a></h5>
+<a href="<%=basePath%>index.jsp">进入用户管理页</a>
+<br/>
+<a href="<%=basePath%>testAOP.jsp">AOP测试</a>
 
 <s:fielderror cssStyle="color:red" />
 <form action="<%=basePath%>user/valUser" method="post" name="form1">

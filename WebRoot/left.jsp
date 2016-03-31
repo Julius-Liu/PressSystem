@@ -186,7 +186,7 @@ H1 a {
         </table>
         <ul class="MM">
           <li><a href="<%=basePath%>book/queryBook?book_name=<%=book_name%>&sub_book_name=<%=sub_book_name%>&ISBN=<%=ISBN%>&currentPage=1" target="main">查看图书信息</a></li>
-          <li><a href="<%=basePath%>book/toAddBook" target="main" target="main">添加图书信息</a></li>
+          <li><a href="<%=basePath%>book/toAddBook" target="main">添加图书信息</a></li>
         </ul>
       </div>
       <h1 class="type"><a href="javascript:void(0)">编辑管理</a></h1>
@@ -198,7 +198,7 @@ H1 a {
         </table>
         <ul class="MM">
           <li><a href="<%=basePath%>xuan_ti/queryXuanTi?xuan_ti_id=<%=xuan_ti_id%>&year=<%=year%>&source=0&status=0&currentPage=1" target="main">查看选题信息</a></li>
-          <li><a href="<%=basePath%>xuan_ti/toAddXuanTi" target="main" target="main">添加选题信息</a></li>
+          <li><a href="<%=basePath%>xuan_ti/toAddXuanTi" target="main">添加选题信息</a></li>
           <li><a href="<%=basePath%>bian_shen/queryBianShen?book_name=<%=book_name%>&original_author=<%=original_author%>&ze_ren_editor=<%=ze_ren_editor%>&bian_shen_status=0&currentPage=1" target="main">查看编审信息</a></li>
           <li><a href="<%=basePath%>bian_shen/toAddBianShen" target="main">添加编审信息</a></li>
         </ul>
@@ -264,7 +264,7 @@ H1 a {
 		);
 		myAccordion.showThisHideOpen(contents[0]);
 	</script>
-        </td>
+    </td>
   </tr>
 </table>
 </body>
