@@ -9,7 +9,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +28,7 @@ import com.tgb.service.XuanTiService;
 import com.tgb.service.GaoJianSourceService;
 import com.tgb.service.ChuShenCommentsService;
 import com.tgb.service.XuanTiStatusService;
+import com.tgb.service.impl.TestAOPControllerImpl;
 import com.tgb.utils.ExportExcelUtil;
 
 import org.apache.log4j.Logger;
@@ -77,7 +80,7 @@ public class XuanTiController {
     }
 	
 	/**
-	 * è·³è½¬åˆ°æ·»åŠ  é€‰é¢˜ ç•Œé�¢
+	 * 跳转到添加选题的页面
 	 * @param request
 	 * @return
 	 */
@@ -102,14 +105,19 @@ public class XuanTiController {
 	}
 	
 	/**
-	 * æ·»åŠ  é€‰é¢˜ å¹¶é‡�å®šå�‘
+	 * 保存记录
 	 * @param xuanTi
 	 * @param request
 	 * @return
 	 */
 	@RequestMapping("/addXuanTi")
 	public String addXuanTi(XuanTi xuanTi, HttpServletRequest request) {
+		//xuanTiService.save(xuanTi);
+		
+		BeanFactory factory = new ClassPathXmlApplicationContext("config/bean.xml");		
+		XuanTiService xuanTiService = (XuanTiService)factory.getBean("xuanTiService");
 		xuanTiService.save(xuanTi);
+		
 		return "redirect:queryXuanTi?xuan_ti_id=&year=&source=0&status=0&currentPage=1";
 	}
 	

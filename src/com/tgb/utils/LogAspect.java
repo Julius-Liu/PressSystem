@@ -24,26 +24,9 @@ public class LogAspect {
 	@Autowired
 	private LogServiceImpl logServiceImpl;
 	
-	@Around("execution(* com.tgb.service.impl.*.*(..))")
-    public Object around(ProceedingJoinPoint pjp) throws Throwable {
-        before();
-        Object result = pjp.proceed();
-        after();
-        return result;
-    }
-
-    private void before() {
-        System.out.println("This is LogAspect Before");
-    }
-
-    private void after() {
-        System.out.println("This is LogAspect After");
-    }
-	
-    /*
-	@AfterReturning(pointcut="execution(* com.tgb.controller.*.add*(..))", 
+    
+	@AfterReturning(pointcut="execution(* com.tgb.service.impl.*.save(..))", 
 			argNames="returnValue", returning="returnValue")
-	*/
 	public void saveLogInsert(JoinPoint joinPoint, Object returnValue) throws Throwable {
 		System.out.println("This is saveLogInsert!");
 		int userId = 89757;

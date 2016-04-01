@@ -5,9 +5,9 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
-@Aspect
+//@Aspect
 public class TestAOPAspect {
-	@Around("execution(* com.tgb.controller.TestAOPController.*(..))")
+	//@Around("execution(* com.tgb.controller.TestAOPController.*(..))")
     public Object around(ProceedingJoinPoint pjp) throws Throwable {
         before();
         Object result = pjp.proceed();

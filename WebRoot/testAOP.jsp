@@ -1,10 +1,17 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page import="com.tgb.controller.TestAOPController" %>
+<%@ page import="org.springframework.beans.factory.BeanFactory"%>
+<%@ page import="org.springframework.context.support.ClassPathXmlApplicationContext"%>
+
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 	
+	//BeanFactory factory = new ClassPathXmlApplicationContext("config/spring-common.xml");    
+	//TestAOPController testAOPController = (TestAOPController)factory.getBean("testAOPController");
 	String result = (String)request.getAttribute("result");
 %>
+<jsp:directive.page import="org.springframework.web.context.WebApplicationContext"/>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -21,11 +28,14 @@
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 	<script type="text/javascript">
-		function testAOPAction() {
-			alert("hello");
-			alert(<%=basePath%>);
+		function testAOPAction() {			
+			//alert("hello");
 			document.forms["testAOPForm"].action = "<%=basePath%>testAOP/testAOPMethod";
 			document.forms["testAOPForm"].submit();
+		}
+		
+		function testAOPAction1() {
+			testAOPController.testAOPMethod(null);
 		}
 	</script>
   </head>
