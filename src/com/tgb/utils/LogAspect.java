@@ -22,9 +22,8 @@ import java.lang.reflect.Method;
 @Component
 public class LogAspect {
 	@Autowired
-	private LogServiceImpl logServiceImpl;
+	private LogServiceImpl logServiceImpl;	
 	
-    
 	@AfterReturning(pointcut="execution(* com.tgb.service.impl.*.save(..))", 
 			argNames="returnValue", returning="returnValue")
 	public void saveLogInsert(JoinPoint joinPoint, Object returnValue) throws Throwable {

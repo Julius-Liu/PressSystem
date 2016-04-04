@@ -5,7 +5,6 @@ import com.tgb.model.XuanTi;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
-@Component
 public interface XuanTiMapper {
 	void save(XuanTi xuanTi);
 	boolean update(XuanTi xuanTi);			// 更新选题信息

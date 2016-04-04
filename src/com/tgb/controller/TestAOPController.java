@@ -24,10 +24,7 @@ public class TestAOPController {
 	@RequestMapping("/testAOPMethod")
 	public String testAOPMethod(HttpServletRequest request) {			
 		
-		BeanFactory factory = new ClassPathXmlApplicationContext("config/bean.xml");
-		//TestAOPController testAOPController = (TestAOPController)factory.getBean("testAOPController");
-		//testAOPController.testAOPMethod(null);
-		
+		BeanFactory factory = new ClassPathXmlApplicationContext("config/bean.xml");		
 		TestAOPControllerImpl testAOPControllerImpl = (TestAOPControllerImpl)factory.getBean("testAOPControllerImpl");
 		String result = testAOPControllerImpl.implMethod();
 		request.setAttribute("result", result);

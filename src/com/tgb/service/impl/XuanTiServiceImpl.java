@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.PageHelper;
@@ -39,9 +40,13 @@ public class XuanTiServiceImpl implements XuanTiService{
 	
 	private int PAGE_SIZE = 10;
 	
+	/*
+	 * 保存选题
+	 * @see com.tgb.service.XuanTiService#save(com.tgb.model.XuanTi)
+	 */
 	public void save(XuanTi xuanTi) {
-		System.out.println("This is XuanTiServiceImpl - save()");
-		xuanTiMapper.save(xuanTi);		
+		//System.out.println("This is XuanTiServiceImpl - save()");
+		xuanTiMapper.save(xuanTi);
 	}
 
 	public boolean update(XuanTi xuanTi) {

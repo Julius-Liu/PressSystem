@@ -11,7 +11,6 @@ import com.tgb.model.Log;
 import com.tgb.service.LogService;
 
 @Service
-
 public class LogServiceImpl implements LogService{
 	
 	@Resource

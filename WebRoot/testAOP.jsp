@@ -34,9 +34,6 @@
 			document.forms["testAOPForm"].submit();
 		}
 		
-		function testAOPAction1() {
-			testAOPController.testAOPMethod(null);
-		}
 	</script>
   </head>
   

@@ -8,6 +8,7 @@ public interface BianShenMapper {
 	void save(BianShen bianShen);
 	boolean update(BianShen bianShen);			// 更新选题信息
 	boolean delete(int id);
+	
 	BianShen findById(int id);
 
 	List<BianShen> findAll();

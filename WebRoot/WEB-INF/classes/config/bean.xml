@@ -15,19 +15,28 @@
     <aop:aspectj-autoproxy />    
     <!-- <context:annotation-config />     -->
     
-    <context:component-scan base-package="com.tgb" />
+    <!-- <context:component-scan base-package="com.tgb" /> -->
 	
     <!-- <aop:aspectj-autoproxy proxy-target-class="true"/> -->
 	
-	<!-- <bean id="testAOPControllerImpl" class="com.tgb.service.impl.TestAOPControllerImpl"/>
+	<!-- 连接点 -->
+	<bean id="testAOPControllerImpl" class="com.tgb.service.impl.TestAOPControllerImpl"/>
+	
+	<bean id="xuanTiService" class="com.tgb.service.impl.XuanTiServiceImpl" >
+	</bean>	
 
+	<!-- 切面 -->
     <bean id="testAOPAspect" class="com.tgb.utils.TestAOPAspect"/>
+    <bean id="logAspect" class="com.tgb.utils.LogAspect"/>
 
     <aop:config expose-proxy="true" proxy-target-class="true">
         <aop:aspect ref="testAOPAspect">
             <aop:around method="around" pointcut="execution(* com.tgb.service.impl.TestAOPControllerImpl.*(..))"/>
         </aop:aspect>
-    </aop:config> -->
+        <aop:aspect ref="logAspect">
+            <aop:after-returning method="saveLogInsert" pointcut="execution(* com.tgb.service.impl.*.save(..))" returning="returnValue" />
+        </aop:aspect>
+    </aop:config>
 	
 	<!-- 
 		配置日志 使用 Aop 记录日志  

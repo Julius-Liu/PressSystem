@@ -33,6 +33,8 @@ import com.tgb.utils.ExportExcelUtil;
 
 import org.apache.log4j.Logger;
 
+import com.tgb.service.impl.XuanTiServiceImpl;
+
 @Controller
 @Component
 @RequestMapping("/xuan_ti")
@@ -50,12 +52,11 @@ public class XuanTiController {
 	private XuanTiStatusService xuanTiStatusService;
 	
 	@Autowired
-	private BookService bookService;
-	
-	private int currentPage;
+	private BookService bookService;	
 	
 	public static Logger log = Logger.getLogger(XuanTiController.class.getName());
 	
+	private int currentPage;
     public void setCurrentPage(int currentPage) {
         this.currentPage = currentPage;
     }
@@ -105,24 +106,24 @@ public class XuanTiController {
 	}
 	
 	/**
-	 * 保存记录
+	 * 保存选题
 	 * @param xuanTi
 	 * @param request
 	 * @return
 	 */
 	@RequestMapping("/addXuanTi")
 	public String addXuanTi(XuanTi xuanTi, HttpServletRequest request) {
-		//xuanTiService.save(xuanTi);
-		
-		BeanFactory factory = new ClassPathXmlApplicationContext("config/bean.xml");		
-		XuanTiService xuanTiService = (XuanTiService)factory.getBean("xuanTiService");
 		xuanTiService.save(xuanTi);
+		
+//		BeanFactory factory = new ClassPathXmlApplicationContext("config/bean.xml");		
+//		XuanTiService xuanTiService = (XuanTiServiceImpl)factory.getBean("xuanTiService");
+//		xuanTiService.save(xuanTi);
 		
 		return "redirect:queryXuanTi?xuan_ti_id=&year=&source=0&status=0&currentPage=1";
 	}
 	
 	/**
-	 * ç¼–è¾‘ é€‰é¢˜
+	 * 更新选题信息
 	 * @param xuanTi
 	 * @param request
 	 * @return
@@ -137,7 +138,7 @@ public class XuanTiController {
 	}	
 	
 	/**
-	 * èŽ·å�–æŒ‡å®š é€‰é¢˜ åˆ—è¡¨
+	 * 获取选题信息
 	 * @param request
 	 * @return
 	 */
