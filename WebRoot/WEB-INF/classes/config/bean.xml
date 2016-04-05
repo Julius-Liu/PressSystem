@@ -22,7 +22,7 @@
 	<!-- 连接点 -->
 	<bean id="testAOPControllerImpl" class="com.tgb.service.impl.TestAOPControllerImpl"/>
 	
-	<bean id="xuanTiService" class="com.tgb.service.impl.XuanTiServiceImpl" >
+	<bean id="xuanTiService" class="com.tgb.service.impl.XuanTiServiceImpl">
 	</bean>	
 
 	<!-- 切面 -->
