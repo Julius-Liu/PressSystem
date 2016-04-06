@@ -13,9 +13,10 @@
     <!-- 加入Aspectj配置 -->    
 	
     <aop:aspectj-autoproxy />    
-    <!-- <context:annotation-config />     -->
+    <context:annotation-config />
     
-    <!-- <context:component-scan base-package="com.tgb" /> -->
+    <context:component-scan base-package="com.tgb.service" />
+    <context:component-scan base-package="com.tgb.mapper" />
 	
     <!-- <aop:aspectj-autoproxy proxy-target-class="true"/> -->
 	
@@ -58,5 +59,9 @@
 	
 	<!-- 要使用spring aop记录日志的action 需要交给spring容器来管理 -->
 	<!-- <bean id="xuanTiController" class="com.tgb.controller.XuanTiController" scope="prototype" ></bean> -->	
-
+	
+	<!-- scan for mappers and let them be autowired -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.comcast.triage.persistance" />
+    </bean>
 </beans>
