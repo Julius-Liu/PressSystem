@@ -1,7 +1,11 @@
 package com.tgb.service;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.tgb.model.Log;
 
 public interface LogService {
-	void save(Log log);
+	
+	@Transactional
+	void log(Log log);
 }

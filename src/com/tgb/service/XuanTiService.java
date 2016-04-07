@@ -4,11 +4,19 @@ import java.util.List;
 import com.tgb.model.XuanTi;
 import org.springframework.stereotype.Component;
 
-@Component
+import org.springframework.transaction.annotation.Transactional;
+
+//@Component
 public interface XuanTiService {
+	@Transactional
 	void save(XuanTi xuanTi);
+	
+	@Transactional
 	boolean update(XuanTi xuanTi);			// 更新选题信息	
+	
+	@Transactional
 	boolean delete(String id);
+	
 	XuanTi findById(String id);
 	List<XuanTi> findAll();
 	

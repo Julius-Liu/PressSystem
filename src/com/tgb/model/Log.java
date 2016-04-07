@@ -24,6 +24,9 @@ public class Log implements Serializable{
 	// 日志内容
 	private String content;
 	
+	// 用户所做的操作
+	private String operation;
+	
 	public long getId() {
 		return id;
 	}
@@ -47,5 +50,11 @@ public class Log implements Serializable{
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public String getOperation() {
+		return operation;
+	}
+	public void setOperation(String operation) {
+		this.operation = operation;
 	}
 }

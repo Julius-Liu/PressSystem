@@ -113,11 +113,11 @@ public class XuanTiController {
 	 */
 	@RequestMapping("/addXuanTi")
 	public String addXuanTi(XuanTi xuanTi, HttpServletRequest request) {
-		//xuanTiService.save(xuanTi);
+		xuanTiService.save(xuanTi);
 		
-		BeanFactory factory = new ClassPathXmlApplicationContext("config/bean.xml");		
-		XuanTiService xuanTiServiceBean = (XuanTiService)factory.getBean("xuanTiService");
-		xuanTiServiceBean.save(xuanTi);
+//		BeanFactory factory = new ClassPathXmlApplicationContext("config/bean.xml");		
+//		XuanTiService xuanTiServiceBean = (XuanTiService)factory.getBean("xuanTiService");
+//		xuanTiServiceBean.save(xuanTi);
 		
 		return "redirect:queryXuanTi?xuan_ti_id=&year=&source=0&status=0&currentPage=1";
 	}

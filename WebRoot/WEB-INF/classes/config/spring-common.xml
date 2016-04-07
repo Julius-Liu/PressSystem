@@ -21,11 +21,25 @@
             http://www.springframework.org/schema/jee/spring-tx.xsd">  
 
 	<!-- 加入Aspectj配置 -->    
-	
     <aop:aspectj-autoproxy />    
-    <context:annotation-config />
     
-    <context:component-scan base-package="com.tgb" />
+    <!-- 日志 AOP -->
+    <bean id="logAspect" class="com.tgb.utils.LogAspect" />
+    
+    <!-- 选题业务逻辑对象，这是连接点 -->
+    <bean id="xuanTiService" class="com.tgb.service.impl.XuanTiServiceImpl" />
+    
+    <!-- 日志记录业务逻辑对象 -->
+    <bean id="LogService" class="com.tgb.service.impl.LogServiceImpl" />
+    
+    <!-- 加入Aspectj配置：结束 -->      
+    
+    <!-- enable component scanning (beware that this does not enable mapper scanning!) -->    
+    <context:component-scan base-package="com.tgb.service" />
+    <context:component-scan base-package="com.tgb.service.impl" />
+    
+    <!-- enable autowire -->
+    <context:annotation-config />
 
 	<!-- 1. 数据源 : DriverManagerDataSource -->
 	<bean id="dataSource"
@@ -43,7 +57,6 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="configLocation" value="classpath:config/mybatis-config.xml" /> <!-- 加载mybatis配置 -->
-		
 	</bean>
 
 	<!--
@@ -66,7 +79,8 @@
 	<!-- 
 		5. 使用声明式事务
 		transaction-manager：引用上面定义的事务管理器
-	 -->
+	-->
+	<!-- enable transaction demarcation with annotations -->
 	<tx:annotation-driven transaction-manager="txManager" proxy-target-class="true" />
 
 </beans>

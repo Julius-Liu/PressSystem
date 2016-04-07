@@ -13,16 +13,20 @@ import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;  
 
 import com.tgb.model.Log;
-import com.tgb.service.impl.LogServiceImpl;
+import com.tgb.model.XuanTi;
+import com.tgb.service.LogService;
+import com.tgb.service.XuanTiService;
 
 import java.util.Date;
 import java.lang.reflect.Method;
 
 @Aspect
-@Component
 public class LogAspect {
 	@Autowired
-	private LogServiceImpl logServiceImpl;	
+	private LogService logService;	
+	
+	@Autowired
+	private XuanTiService xuanTiService;
 	
 	@AfterReturning(pointcut="execution(* com.tgb.service.impl.*.save(..))", 
 			argNames="returnValue", returning="returnValue")
@@ -38,16 +42,18 @@ public class LogAspect {
 			return ;
 		}
 		
-		//获取方法名   
+		// 获取方法名   
         String methodName = joinPoint.getSignature().getName();  
-        //获取操作内容  
-        String opContent = optionContent(joinPoint.getArgs(),methodName);  
-          
+        // 获取操作内容  
+        String opContent = optionContent(joinPoint.getArgs(), methodName);  
+        
+        // 创建日志对象
         Log log = new Log();  
         log.setUserId(userId);  
         log.setCreateDate(new Date());
         log.setContent("添加操作被执行 - " + opContent);  
-        logServiceImpl.save(log);
+        log.setOperation("添加");
+        logService.log(log);
 	}
 	
 	@AfterReturning(pointcut="execution(* com.tgb.service.impl.*.update(..))", 
@@ -73,33 +79,52 @@ public class LogAspect {
         log.setUserId(userId);  
         log.setCreateDate(new Date());
         log.setContent("更新操作被执行 - " + opContent);  
-        logServiceImpl.save(log);
+        log.setOperation("更新");
+        logService.log(log);
 	}
 	
-	@AfterReturning(pointcut="execution(* com.tgb.service.impl.*.delete(..))", 
-			argNames="returnValue", returning="returnValue")
-	public void deleteLogInsert(JoinPoint joinPoint, Object returnValue) throws Throwable {
+	@Around("execution(* com.tgb.service.impl.*.delete(..))")
+	public Object deleteLogInsert(ProceedingJoinPoint pjp) throws Throwable {
 		System.out.println("This is deleteLogInsert!");
 		int userId = 89757;
 		
-		if(userId == 0) {	// 没有管理员登录
-			return ;
-		}
-		
-		if(joinPoint.getArgs() == null) {	// 没有参数
-			return ;
-		}
-		
-		//获取方法名   
-        String methodName = joinPoint.getSignature().getName();  
-        //获取操作内容  
-        String opContent = optionContent(joinPoint.getArgs(),methodName);  
-          
-        Log log = new Log();  
-        log.setUserId(userId);  
-        log.setCreateDate(new Date());
-        log.setContent("删除操作被执行 - " + opContent);  
-        logServiceImpl.save(log);
+		Object result = null;
+	     //环绕通知处理方法
+	     try {
+	    	
+	    	//获取方法参数(被删除的影片id)
+	    	String id = (String)pjp.getArgs()[0];
+	 		XuanTi obj = null;//影片对象
+	    	if(id != null){
+	    		//删除前先查询出影片对象
+	    		obj = xuanTiService.findById(id);
+	    	}
+	 		
+	    	//执行删除影片操作
+	    	result = pjp.proceed();
+	    	
+	    	if(obj != null){
+	    		
+		        //创建日志对象
+		    	Log log = new Log();
+				log.setUserId(userId);//用户编号
+				log.setCreateDate(new Date());//操作时间
+				
+				StringBuffer msg = new StringBuffer("影片名 : ");
+				msg.append(obj.getId());
+				log.setContent(msg.toString());//操作内容
+				
+				log.setOperation("删除");//操作
+				
+				logService.log(log);//添加日志
+	    	}
+	    	
+	     }
+	     catch(Exception ex) {
+	        ex.printStackTrace();
+	     }
+	     
+	     return result;
 	}
 	
 	/** 
@@ -110,23 +135,23 @@ public class LogAspect {
      * @return 
      */  
     public String optionContent(Object[] args, String mName){  
-        if(args == null){  
+        if(args == null) {  
             return null;  
         }  
         StringBuffer rs = new StringBuffer();  
         rs.append(mName);  
         String className = null;  
         int index = 1;  
-        //遍历参数对象   
-        for(Object info : args){  
-            //获取对象类型  
+        // 遍历参数对象   
+        for(Object info : args) {  
+            // 获取对象类型  
             className = info.getClass().getName();  
             className = className.substring(className.lastIndexOf(".") + 1);  
             rs.append("[参数"+index+"，类型:" + className + "，值:");  
-            //获取对象的所有方法  
+            // 获取对象的所有方法  
             Method[] methods = info.getClass().getDeclaredMethods();  
             // 遍历方法，判断get方法   
-            for(Method method : methods){  
+            for(Method method : methods) {  
                 String methodName = method.getName();  
                 // 判断是不是get方法  
                 if(methodName.indexOf("get") == -1){//不是get方法   
@@ -139,7 +164,7 @@ public class LogAspect {
                 }catch (Exception e) {  
                     continue;  
                 }  
-                //将值加入内容中  
+                // 将值加入内容中  
                 rs.append("(" + methodName+ ":" + rsValue + ")");  
             }  
             rs.append("]");  

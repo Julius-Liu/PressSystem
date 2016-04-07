@@ -8,13 +8,15 @@
  
 <mapper namespace="com.tgb.mapper.LogMapper">
 	
-	<insert id="save" parameterType="Log" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+	<insert id="log" parameterType="Log" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
 		insert into log(userId, 
 			createDate, 
-			content) 
+			content,
+			operation) 
 		values(#{userId},
 			#{createDate},
-			#{content})
+			#{content},
+			#{operation})
 	</insert>
 	
 </mapper>
