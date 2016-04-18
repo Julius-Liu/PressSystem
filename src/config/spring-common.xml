@@ -21,13 +21,14 @@
             http://www.springframework.org/schema/jee/spring-tx.xsd">  
 
 	<!-- 加入Aspectj配置 -->    
+	
     <aop:aspectj-autoproxy />    
+        
+    <!-- 选题业务逻辑对象，这是连接点 -->
+    <bean id="xuanTiService" class="com.tgb.service.impl.XuanTiServiceImpl" />
     
     <!-- 日志 AOP -->
     <bean id="logAspect" class="com.tgb.utils.LogAspect" />
-    
-    <!-- 选题业务逻辑对象，这是连接点 -->
-    <bean id="xuanTiService" class="com.tgb.service.impl.XuanTiServiceImpl" />
     
     <!-- 日志记录业务逻辑对象 -->
     <bean id="LogService" class="com.tgb.service.impl.LogServiceImpl" />

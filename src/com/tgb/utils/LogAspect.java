@@ -73,7 +73,7 @@ public class LogAspect {
 		//获取方法名   
         String methodName = joinPoint.getSignature().getName();  
         //获取操作内容  
-        String opContent = optionContent(joinPoint.getArgs(),methodName);  
+        String opContent = optionContent(joinPoint.getArgs(), methodName);  
           
         Log log = new Log();  
         log.setUserId(userId);  
@@ -89,42 +89,46 @@ public class LogAspect {
 		int userId = 89757;
 		
 		Object result = null;
-	     //环绕通知处理方法
-	     try {
+	    // 环绕通知处理方法
+	    try {
 	    	
-	    	//获取方法参数(被删除的影片id)
+	    	//获取方法名   
+	        //String methodName = pjp.getSignature().getName();  
+	        //获取操作内容  
+	        //String opContent = optionContent(pjp.getArgs(), methodName);  
+	    	
+	    	// 获取方法参数(被删除的影片id)
 	    	String id = (String)pjp.getArgs()[0];
-	 		XuanTi obj = null;//影片对象
-	    	if(id != null){
-	    		//删除前先查询出影片对象
+	 		XuanTi obj = null; // 选题对象
+	    	if(id != null) {
+	    		// 删除前先查询出影片对象
 	    		obj = xuanTiService.findById(id);
 	    	}
 	 		
 	    	//执行删除影片操作
 	    	result = pjp.proceed();
 	    	
-	    	if(obj != null){
+	    	if(obj != null) {
 	    		
 		        //创建日志对象
 		    	Log log = new Log();
-				log.setUserId(userId);//用户编号
-				log.setCreateDate(new Date());//操作时间
+				log.setUserId(userId); // 用户编号
+				log.setCreateDate(new Date()); // 操作时间
 				
 				StringBuffer msg = new StringBuffer("影片名 : ");
 				msg.append(obj.getId());
-				log.setContent(msg.toString());//操作内容
+				log.setContent(msg.toString()); // 操作内容
 				
-				log.setOperation("删除");//操作
+				log.setOperation("删除"); // 操作
 				
-				logService.log(log);//添加日志
-	    	}
-	    	
-	     }
-	     catch(Exception ex) {
+				logService.log(log); // 添加日志
+	    	}	    	
+	    }
+	    catch(Exception ex) {
 	        ex.printStackTrace();
-	     }
+	    }
 	     
-	     return result;
+	    return result;
 	}
 	
 	/** 
@@ -168,7 +172,7 @@ public class LogAspect {
                 rs.append("(" + methodName+ ":" + rsValue + ")");  
             }  
             rs.append("]");  
-            index ++;  
+            index++;  
         }  
         return rs.toString();  
     }  
