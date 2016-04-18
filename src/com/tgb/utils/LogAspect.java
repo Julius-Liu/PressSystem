@@ -51,7 +51,7 @@ public class LogAspect {
         Log log = new Log();  
         log.setUserId(userId);  
         log.setCreateDate(new Date());
-        log.setContent("添加操作被执行 - " + opContent);  
+        log.setContent(opContent);  
         log.setOperation("添加");
         logService.log(log);
 	}
@@ -78,7 +78,7 @@ public class LogAspect {
         Log log = new Log();  
         log.setUserId(userId);  
         log.setCreateDate(new Date());
-        log.setContent("更新操作被执行 - " + opContent);  
+        log.setContent(opContent);  
         log.setOperation("更新");
         logService.log(log);
 	}
@@ -90,39 +90,40 @@ public class LogAspect {
 		
 		Object result = null;
 	    // 环绕通知处理方法
-	    try {
-	    	
-	    	//获取方法名   
-	        //String methodName = pjp.getSignature().getName();  
-	        //获取操作内容  
-	        //String opContent = optionContent(pjp.getArgs(), methodName);  
+	    try {	
 	    	
 	    	// 获取方法参数(被删除的影片id)
-	    	String id = (String)pjp.getArgs()[0];
+	    	/*String id = (String)pjp.getArgs()[0];
 	 		XuanTi obj = null; // 选题对象
 	    	if(id != null) {
 	    		// 删除前先查询出影片对象
 	    		obj = xuanTiService.findById(id);
-	    	}
+	    	}*/
 	 		
 	    	//执行删除影片操作
 	    	result = pjp.proceed();
 	    	
-	    	if(obj != null) {
+	    	//if(obj != null) {
 	    		
 		        //创建日志对象
 		    	Log log = new Log();
 				log.setUserId(userId); // 用户编号
 				log.setCreateDate(new Date()); // 操作时间
 				
-				StringBuffer msg = new StringBuffer("影片名 : ");
-				msg.append(obj.getId());
-				log.setContent(msg.toString()); // 操作内容
+				//StringBuffer msg = new StringBuffer("影片名 : ");
+				//msg.append(obj.getId());
+				
+				// 获取方法名   
+		        String methodName = pjp.getSignature().getName();  
+		        // 获取操作内容  
+		        String opContent = optionContent(pjp.getArgs(), methodName);  
+				
+				log.setContent(opContent); // 操作内容
 				
 				log.setOperation("删除"); // 操作
 				
 				logService.log(log); // 添加日志
-	    	}	    	
+	    	//}	    	
 	    }
 	    catch(Exception ex) {
 	        ex.printStackTrace();
