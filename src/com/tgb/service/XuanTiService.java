@@ -3,18 +3,21 @@ package com.tgb.service;
 import java.util.List;
 import com.tgb.model.XuanTi;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
 
-//@Component
+@Service
+@Component
+@Transactional
 public interface XuanTiService {
-	@Transactional
+	//@Transactional
 	void save(XuanTi xuanTi);
 	
-	@Transactional
+	//@Transactional
 	boolean update(XuanTi xuanTi);			// 更新选题信息	
 	
-	@Transactional
+	//@Transactional
 	boolean delete(String id);
 	
 	XuanTi findById(String id);

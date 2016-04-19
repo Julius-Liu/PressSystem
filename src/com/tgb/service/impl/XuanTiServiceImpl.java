@@ -13,9 +13,9 @@ import com.tgb.mapper.XuanTiMapper;
 import com.tgb.model.XuanTi;
 import com.tgb.service.XuanTiService;
 
-//@Service
-//@Component
-//@Transactional
+@Service
+@Component
+@Transactional
 public class XuanTiServiceImpl implements XuanTiService{
 	@Autowired
 	private XuanTiMapper xuanTiMapper;
