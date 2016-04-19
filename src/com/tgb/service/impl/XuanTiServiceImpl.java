@@ -45,7 +45,6 @@ public class XuanTiServiceImpl implements XuanTiService{
 	 * @see com.tgb.service.XuanTiService#save(com.tgb.model.XuanTi)
 	 */
 	public void save(XuanTi xuanTi) {
-		//System.out.println("This is XuanTiServiceImpl - save()");
 		xuanTiMapper.save(xuanTi);
 	}
 

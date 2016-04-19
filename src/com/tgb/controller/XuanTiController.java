@@ -35,7 +35,7 @@ import org.apache.log4j.Logger;
 import com.tgb.service.impl.XuanTiServiceImpl;
 
 @Controller
-@Component
+//@Component
 @RequestMapping("/xuan_ti")
 public class XuanTiController {
 	@Autowired

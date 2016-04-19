@@ -21,12 +21,13 @@ import java.util.Date;
 import java.lang.reflect.Method;
 
 @Aspect
+//@Component
 public class LogAspect {
 	@Autowired
 	private LogService logService;	
 	
-	@Autowired
-	private XuanTiService xuanTiService;
+	//@Autowired
+	//private XuanTiService xuanTiService;
 	
 	@AfterReturning(pointcut="execution(* com.tgb.service.impl.*.save(..))", 
 			argNames="returnValue", returning="returnValue")
@@ -81,11 +82,11 @@ public class LogAspect {
         log.setContent(opContent);  
         log.setOperation("更新");
         logService.log(log);
-	}
+	}	
 	
-	@Around("execution(* com.tgb.service.impl.*.delete(..))")
-	public Object deleteLogInsert(ProceedingJoinPoint pjp) throws Throwable {
-		System.out.println("This is deleteLogInsert!");
+	@Around("execution(* com.tgb.service.impl.*.delete(..)) && args(id)")
+	public Object deleteLogInsert(ProceedingJoinPoint pjp, String id) throws Throwable {
+		System.out.println("This is deleteLogInsert with args!");
 		int userId = 89757;
 		
 		Object result = null;
@@ -93,32 +94,32 @@ public class LogAspect {
 	    try {	
 	    	
 	    	// 获取方法参数(被删除的影片id)
-	    	/*String id = (String)pjp.getArgs()[0];
-	 		XuanTi obj = null; // 选题对象
-	    	if(id != null) {
+	    	//String id = (String)pjp.getArgs()[0];
+	 		//XuanTi obj = null; // 选题对象
+	    	//if(id != null) {
 	    		// 删除前先查询出影片对象
-	    		obj = xuanTiService.findById(id);
-	    	}*/
+	    		//obj = xuanTiService.findById(id);
+	    	//}
 	 		
 	    	//执行删除影片操作
 	    	result = pjp.proceed();
 	    	
 	    	//if(obj != null) {
 	    		
-		        //创建日志对象
+		        // 创建日志对象
 		    	Log log = new Log();
 				log.setUserId(userId); // 用户编号
 				log.setCreateDate(new Date()); // 操作时间
 				
-				//StringBuffer msg = new StringBuffer("影片名 : ");
-				//msg.append(obj.getId());
+				StringBuffer msg = new StringBuffer("被删除的 id： ");
+				msg.append(id);
 				
 				// 获取方法名   
-		        String methodName = pjp.getSignature().getName();  
+		        //String methodName = pjp.getSignature().getName();  
 		        // 获取操作内容  
-		        String opContent = optionContent(pjp.getArgs(), methodName);  
+		        //String opContent = optionContent(pjp.getArgs(), methodName);  
 				
-				log.setContent(opContent); // 操作内容
+				log.setContent(msg.toString()); // 操作内容
 				
 				log.setOperation("删除"); // 操作
 				
@@ -130,7 +131,7 @@ public class LogAspect {
 	    }
 	     
 	    return result;
-	}
+	}	
 	
 	/** 
      * 使用Java反射来获取被拦截方法(insert、update)的参数值，  
@@ -159,8 +160,8 @@ public class LogAspect {
             for(Method method : methods) {  
                 String methodName = method.getName();  
                 // 判断是不是get方法  
-                if(methodName.indexOf("get") == -1){//不是get方法   
-                    continue;//不处理  
+                if(methodName.indexOf("get") == -1){ 	// 不是get方法   
+                    continue;							// 不处理  
                 }  
                 Object rsValue = null;  
                 try{  
