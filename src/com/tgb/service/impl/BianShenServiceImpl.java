@@ -12,9 +12,9 @@ import com.tgb.mapper.BianShenMapper;
 import com.tgb.model.BianShen;
 import com.tgb.service.BianShenService;
 
-@Service
+//@Service
 @Component
-@Transactional
+//@Transactional
 public class BianShenServiceImpl implements BianShenService{
 	@Resource
 	private BianShenMapper bianShenMapper;

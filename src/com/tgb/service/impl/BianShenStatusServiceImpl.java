@@ -10,9 +10,9 @@ import com.tgb.model.BianShenStatus;
 import com.tgb.service.BianShenStatusService;
 import com.tgb.mapper.BianShenStatusMapper;
 
-@Service
+//@Service
 @Component
-@Transactional
+//@Transactional
 public class BianShenStatusServiceImpl implements BianShenStatusService{
 	@Resource
 	private BianShenStatusMapper bianShenStatusMapper;

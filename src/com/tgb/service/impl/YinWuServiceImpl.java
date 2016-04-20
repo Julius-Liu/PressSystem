@@ -4,6 +4,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.PageHelper;
@@ -11,8 +12,9 @@ import com.tgb.mapper.YinWuMapper;
 import com.tgb.model.YinWu;
 import com.tgb.service.YinWuService;
 
-@Service
-@Transactional
+//@Service
+@Component
+//@Transactional
 public class YinWuServiceImpl implements YinWuService{
 	@Resource
 	private YinWuMapper yinWuMapper;

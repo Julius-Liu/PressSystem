@@ -3,9 +3,8 @@ package com.tgb.service.impl;
 import java.util.List;
 import javax.annotation.Resource;
 
-//import org.hibernate.Query;
-//import org.hibernate.Session;
 import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.PageHelper;
@@ -13,8 +12,9 @@ import com.tgb.mapper.BookMapper;
 import com.tgb.model.Book;
 import com.tgb.service.BookService;
 
-@Service
-@Transactional  //此处不再进行创建SqlSession和提交事务，都已交由spring去管理了。
+//@Service
+//@Component
+//@Transactional  //此处不再进行创建SqlSession和提交事务，都已交由spring去管理了。
 public class BookServiceImpl implements BookService{
 	@Resource
 	private BookMapper bookMapper;

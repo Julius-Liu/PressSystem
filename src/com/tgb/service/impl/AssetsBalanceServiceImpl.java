@@ -13,11 +13,11 @@ import com.tgb.mapper.AssetsBalanceMapper;
 import com.tgb.model.AssetsBalance;
 import com.tgb.service.AssetsBalanceService;
 
-@Service
+//@Service
 @Component
-@Transactional
+//@Transactional
 public class AssetsBalanceServiceImpl implements AssetsBalanceService{
-	@Autowired
+	@Resource
 	private AssetsBalanceMapper assetsBalanceMapper;
 
 	private int totalPage;

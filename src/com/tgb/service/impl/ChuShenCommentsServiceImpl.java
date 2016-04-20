@@ -3,14 +3,16 @@ package com.tgb.service.impl;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tgb.model.ChuShenComments;
 import com.tgb.service.ChuShenCommentsService;
 import com.tgb.mapper.ChuShenCommentsMapper;
 
-@Service
-@Transactional
+//@Service
+@Component
+//@Transactional
 public class ChuShenCommentsServiceImpl implements ChuShenCommentsService{
 	@Resource
 	private ChuShenCommentsMapper chuShenCommentsMapper;

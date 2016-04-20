@@ -21,13 +21,9 @@ import java.util.Date;
 import java.lang.reflect.Method;
 
 @Aspect
-//@Component
 public class LogAspect {
 	@Autowired
 	private LogService logService;	
-	
-	//@Autowired
-	//private XuanTiService xuanTiService;
 	
 	@AfterReturning(pointcut="execution(* com.tgb.service.impl.*.save(..))", 
 			argNames="returnValue", returning="returnValue")

@@ -5,7 +5,6 @@ import com.tgb.model.AssetsBalance;
 import org.springframework.stereotype.Component;
 import org.apache.ibatis.annotations.Param;
 
-@Component
 public interface AssetsBalanceMapper {
 	void save(AssetsBalance assetsBalance);
 	boolean update(AssetsBalance assetsBalance);			

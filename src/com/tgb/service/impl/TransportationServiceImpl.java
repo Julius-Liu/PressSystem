@@ -3,14 +3,16 @@ package com.tgb.service.impl;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tgb.model.Transportation;
 import com.tgb.service.TransportationService;
 import com.tgb.mapper.TransportationMapper;
 
-@Service
-@Transactional
+//@Service
+@Component
+//@Transactional
 public class TransportationServiceImpl implements TransportationService{
 	@Resource
 	private TransportationMapper transportationMapper;

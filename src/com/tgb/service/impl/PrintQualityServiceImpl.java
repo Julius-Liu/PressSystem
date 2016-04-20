@@ -3,14 +3,16 @@ package com.tgb.service.impl;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tgb.model.PrintQuality;
 import com.tgb.service.PrintQualityService;
 import com.tgb.mapper.PrintQualityMapper;
 
-@Service
-@Transactional
+//@Service
+@Component
+//@Transactional
 public class PrintQualityServiceImpl implements PrintQualityService{
 	@Resource
 	private PrintQualityMapper printQualityMapper;

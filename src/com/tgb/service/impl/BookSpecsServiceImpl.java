@@ -3,14 +3,16 @@ package com.tgb.service.impl;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tgb.model.BookSpecs;
 import com.tgb.service.BookSpecsService;
 import com.tgb.mapper.BookSpecsMapper;
 
-@Service
-@Transactional
+//@Service
+@Component
+//@Transactional
 public class BookSpecsServiceImpl implements BookSpecsService{
 	@Resource
 	private BookSpecsMapper bookSpecsMapper;

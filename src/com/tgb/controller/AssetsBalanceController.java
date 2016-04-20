@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tgb.model.AssetsBalance;
 import com.tgb.service.AssetsBalanceService;
+import com.tgb.service.BookService;
 
 @Controller
-@Component
 @RequestMapping("/assets_balance")
 public class AssetsBalanceController {
 	@Autowired
