@@ -48,7 +48,7 @@ public class AssetsBalanceServiceImpl implements AssetsBalanceService{
 		return assetsBalanceMapper.update(assetsBalance);
 	}
 
-	public boolean delete(String id) {
+	public boolean delete(String id, String table_name) {
 		return assetsBalanceMapper.delete(id);
 	}
 

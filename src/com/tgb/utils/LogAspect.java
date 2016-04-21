@@ -80,47 +80,32 @@ public class LogAspect {
         logService.log(log);
 	}	
 	
-	@Around("execution(* com.tgb.service.impl.*.delete(..)) && args(id)")
-	public Object deleteLogInsert(ProceedingJoinPoint pjp, String id) throws Throwable {
+	@Around("execution(* com.tgb.service.impl.*.delete(..)) && args(id, table_name)")
+	public Object deleteLogInsert(ProceedingJoinPoint pjp, Object id, String table_name) throws Throwable {
 		System.out.println("This is deleteLogInsert with args!");
 		int userId = 89757;
 		
 		Object result = null;
 	    // 环绕通知处理方法
-	    try {	
-	    	
-	    	// 获取方法参数(被删除的影片id)
-	    	//String id = (String)pjp.getArgs()[0];
-	 		//XuanTi obj = null; // 选题对象
-	    	//if(id != null) {
-	    		// 删除前先查询出影片对象
-	    		//obj = xuanTiService.findById(id);
-	    	//}
-	 		
+	    try {		 		
 	    	//执行删除影片操作
 	    	result = pjp.proceed();
-	    	
-	    	//if(obj != null) {
 	    		
-		        // 创建日志对象
-		    	Log log = new Log();
-				log.setUserId(userId); // 用户编号
-				log.setCreateDate(new Date()); // 操作时间
-				
-				StringBuffer msg = new StringBuffer("被删除的 id： ");
-				msg.append(id);
-				
-				// 获取方法名   
-		        //String methodName = pjp.getSignature().getName();  
-		        // 获取操作内容  
-		        //String opContent = optionContent(pjp.getArgs(), methodName);  
-				
-				log.setContent(msg.toString()); // 操作内容
-				
-				log.setOperation("删除"); // 操作
-				
-				logService.log(log); // 添加日志
-	    	//}	    	
+	        // 创建日志对象
+	    	Log log = new Log();
+			log.setUserId(userId); // 用户编号
+			log.setCreateDate(new Date()); // 操作时间
+			
+			StringBuffer msg = new StringBuffer("被删除的表格: ");
+			msg.append(table_name);
+			msg.append(" ; 被删除的 id: ");
+			msg.append(id.toString());
+			
+			log.setContent(msg.toString()); // 操作内容
+			
+			log.setOperation("删除"); // 操作
+			
+			logService.log(log); // 添加日志  	
 	    }
 	    catch(Exception ex) {
 	        ex.printStackTrace();

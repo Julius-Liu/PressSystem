@@ -230,7 +230,7 @@ public class XuanTiController {
 	public void delXuanTi(String id, HttpServletRequest request, HttpServletResponse response) {
 		String result = "{\"result\":\"error\"}";		
 		System.out.println("id = " + id);
-		if(xuanTiService.delete(id)) {
+		if(xuanTiService.delete(id, "XuanTi")) {
 			result = "{\"result\":\"success\"}";
 		}
 		

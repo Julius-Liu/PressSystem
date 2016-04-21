@@ -125,8 +125,8 @@ function QueryXuanTi() {
 }
 
 /* 删除 选题 */
-function DelXuanTi(id){
-	$.get("<%=basePath%>xuan_ti/delXuanTi?id=" + id,function(data){
+function DelXuanTi(id) {
+	$.get("<%=basePath%>xuan_ti/delXuanTi?id=" + id, function(data){
 		if("success" == data.result){
 			alert("删除成功！");
 			window.location.reload();

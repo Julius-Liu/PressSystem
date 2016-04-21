@@ -6,7 +6,7 @@ import com.tgb.model.AssetsBalance;
 public interface AssetsBalanceService {
 	void save(AssetsBalance assetsBalance);
 	boolean update(AssetsBalance assetsBalance);			
-	boolean delete(String id);
+	boolean delete(String id, String table_name);
 	AssetsBalance findById(String id);
 	List<AssetsBalance> findAll();
 	

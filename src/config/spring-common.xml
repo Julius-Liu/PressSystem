@@ -22,7 +22,8 @@
 
 	<!-- 加入Aspectj配置 -->    
 	
-    <aop:aspectj-autoproxy />    
+	<!-- 如果Spring决定一个bean要被切入，那么Spring就会为这个bean自动生成代理来插入外来的方法，保证通知被执行 -->
+    <aop:aspectj-autoproxy />
         
     <!-- 选题业务逻辑对象，这是连接点 -->
     <bean class="com.tgb.service.impl.XuanTiServiceImpl" />

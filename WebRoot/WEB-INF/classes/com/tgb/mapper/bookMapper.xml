@@ -25,7 +25,7 @@
 		update book set book_name=#{book_name}, 
 			sub_book_name=#{sub_book_name}, 
 			ISBN=#{ISBN}, 
-			price=#{price}} 
+			price=#{price}
 		where id=#{id}
 	</update>
 	

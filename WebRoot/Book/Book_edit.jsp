@@ -63,6 +63,11 @@
     <form action="" name="bookForm">
 	<table width='100%' cellspacing='1' cellpadding='3' class="tablewidth">
 
+	<tr>
+	    <td width=30%>图书编号：</td>
+	    <td width=70%><input id="id" name="id" value="${book.id}" type="hidden" size="10" /></td>
+	</tr>
+
   	<tr>
     	<td width=30%>图书名称：</td>
     	<td width=70%><input id="book_name" name="book_name" value="${book.book_name}" type="text" size="20" /></td>

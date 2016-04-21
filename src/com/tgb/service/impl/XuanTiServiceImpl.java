@@ -52,7 +52,7 @@ public class XuanTiServiceImpl implements XuanTiService{
 		return xuanTiMapper.update(xuanTi);
 	}
 
-	public boolean delete(String id) {
+	public boolean delete(String id, String table_name) {
 		return xuanTiMapper.delete(id);
 	}
 

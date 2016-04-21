@@ -124,7 +124,7 @@ public class AssetsBalanceController {
 	public void delAssetsBalance(String id, HttpServletRequest request, HttpServletResponse response) {
 		String result = "{\"result\":\"error\"}";		
 		System.out.println("id = " + id);
-		if(assetsBalanceService.delete(id)) {
+		if(assetsBalanceService.delete(id, "AssetsBalance")) {
 			result = "{\"result\":\"success\"}";
 		}
 		

@@ -43,6 +43,7 @@ body {
 -->
 </style>
 
+<script type="text/javascript" src="<%=basePath %>js/jquery-1.7.1.js"></script>
 <script type="text/javascript" src="<%=basePath %>js/calendar.js"></script>
 <script type="text/javascript">
 var  highlightcolor='#c1ebff';
@@ -115,9 +116,9 @@ function QueryBook() {
 }
 
 /* 删除 书本 */
-function DelBook(id){
-	$.get("<%=basePath%>book/delBook?id=" + id,function(data){
-		if("success" == data.result){
+function DelBook(id) {
+	$.get("<%=basePath%>book/delBook?id=" + id, function(data){
+		if("success" == data.result) {
 			alert("删除成功！");
 			window.location.reload();
 		}else{
@@ -207,7 +208,7 @@ ISBN：<input type=text name="ISBN" value="<%=ISBN%>"/>&nbsp;
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE4">
 		            	<span style="cursor:hand;" onclick="location.href='<%=basePath %>book/checkBook?id=<%=book.getId() %>'"><a href='#'><img src="<%=basePath %>images/vie.gif" width="16" height="16"/>详细</a></span>&nbsp;
 		            	<span style="cursor:hand;" onclick="location.href='<%=basePath %>book/getBook?id=<%=book.getId() %>'"><a href='#'><img src="<%=basePath %>images/edt.gif" width="16" height="16"/>编辑</a></span>&nbsp;
-            			<span style="cursor:hand;" onclick=""><a href="javascript:DelBook('<%=book.getId()%>')"><img src="<%=basePath %>images/del.gif" width="16" height="16"/>删除</a></span>
+            			<span style="cursor:hand;" onclick=""><a href="javascript:DelBook('<%=book.getId() %>')"><img src="<%=basePath %>images/del.gif" width="16" height="16"/>删除</a></span>
 		            </div></td>
 		          </tr>
 		          <% } %>
