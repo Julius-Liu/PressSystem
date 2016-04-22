@@ -27,7 +27,7 @@
         
     <!-- 选题业务逻辑对象，这是连接点 -->
     <bean class="com.tgb.service.impl.XuanTiServiceImpl" />
-    <bean class="com.tgb.service.impl.BookServiceImpl" />    
+    <bean class="com.tgb.service.impl.BookServiceImpl" />   
     
     <!-- 日志 AOP -->
     <bean id="logAspect" class="com.tgb.utils.LogAspect" />

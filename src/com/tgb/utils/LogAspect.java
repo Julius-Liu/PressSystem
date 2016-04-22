@@ -21,6 +21,7 @@ import java.util.Date;
 import java.lang.reflect.Method;
 
 @Aspect
+@Component
 public class LogAspect {
 	@Autowired
 	private LogService logService;	

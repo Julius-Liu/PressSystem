@@ -8,10 +8,17 @@
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-4.0.xsd
 	http://www.springframework.org/schema/mvc
-	http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+	http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">	
 
 	<!-- 注解扫描包，查找@Controller，找到所有的Controller -->
 	<context:component-scan base-package="com.tgb" />
+
+	<!-- 扫描 bean 名称 -->
+    <!-- <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator"> -->
+        <!-- <property name="beanNames" value="*ServiceImpl"/> -->			<!-- 只为后缀是“ServiceImpl”的  bean 生成代理 -->
+        <!-- <property name="interceptorNames" value="logService"/> -->	<!-- 拦截器名称 -->
+        <!-- <property name="optimize" value="true"/> -->					<!-- 是否对代理生成策略进行优化 -->
+    <!-- </bean> -->
 
 	<!-- 开启注解 -->
 	<mvc:annotation-driven />
