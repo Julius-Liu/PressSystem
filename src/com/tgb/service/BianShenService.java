@@ -2,6 +2,7 @@ package com.tgb.service;
 
 import java.util.List;
 import com.tgb.model.BianShen;
+import org.springframework.stereotype.Component;
 
 public interface BianShenService {
 	void save(BianShen bianShen);

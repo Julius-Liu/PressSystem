@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
-@Component
-@Transactional
+//@Service
+//@Component
+//@Transactional
 public interface XuanTiService {
 	//@Transactional
 	void save(XuanTi xuanTi);
