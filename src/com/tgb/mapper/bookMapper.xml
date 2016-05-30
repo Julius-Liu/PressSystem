@@ -8,7 +8,7 @@
  
 <mapper namespace="com.tgb.mapper.BookMapper">
 	
-	<insert id="save" parameterType="Book">
+	<insert id="insert" parameterType="Book">
 		insert into book(id, 
 			book_name, 
 			sub_book_name, 

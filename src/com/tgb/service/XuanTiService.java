@@ -11,13 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 //@Component
 //@Transactional
 public interface XuanTiService {
-	//@Transactional
-	void save(XuanTi xuanTi);
-	
-	//@Transactional
+
+	void insert(XuanTi xuanTi);
+
 	boolean update(XuanTi xuanTi);			// 更新选题信息	
-	
-	//@Transactional
+
 	boolean delete(String id, String table_name);
 	
 	XuanTi findById(String id);

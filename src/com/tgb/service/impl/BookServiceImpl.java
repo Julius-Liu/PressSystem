@@ -39,8 +39,8 @@ public class BookServiceImpl implements BookService{
 	
 	private int PAGE_SIZE = 10;
 	
-	public void save(Book book) {
-		bookMapper.save(book);		
+	public void insert(Book book) {
+		bookMapper.insert(book);		
 	}
 
 	public boolean update(Book book) {

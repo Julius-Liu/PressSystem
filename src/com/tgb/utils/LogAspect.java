@@ -26,9 +26,9 @@ public class LogAspect {
 	@Autowired
 	private LogService logService;	
 	
-	@AfterReturning(pointcut="execution(* com.tgb.service.impl.*.save(..))", 
+	@AfterReturning(pointcut="execution(* com.tgb.service.impl.*.insert(..))", 
 			argNames="returnValue", returning="returnValue")
-	public void saveLogInsert(JoinPoint joinPoint, Object returnValue) throws Throwable {
+	public void insertLog(JoinPoint joinPoint, Object returnValue) throws Throwable {
 		System.out.println("This is saveLogInsert!");
 		int userId = 89757;
 		
@@ -56,7 +56,7 @@ public class LogAspect {
 	
 	@AfterReturning(pointcut="execution(* com.tgb.service.impl.*.update(..))", 
 			argNames="returnValue", returning="returnValue")
-	public void updateLogInsert(JoinPoint joinPoint, Object returnValue) throws Throwable {
+	public void updateLog(JoinPoint joinPoint, Object returnValue) throws Throwable {
 		System.out.println("This is updateLogInsert!");
 		int userId = 89757;
 		
@@ -82,7 +82,7 @@ public class LogAspect {
 	}	
 	
 	@Around("execution(* com.tgb.service.impl.*.delete(..)) && args(id, table_name)")
-	public Object deleteLogInsert(ProceedingJoinPoint pjp, Object id, String table_name) throws Throwable {
+	public Object deleteLog(ProceedingJoinPoint pjp, Object id, String table_name) throws Throwable {
 		System.out.println("This is deleteLogInsert with args!");
 		int userId = 89757;
 		

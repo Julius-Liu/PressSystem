@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 public interface XuanTiMapper {
-	void save(XuanTi xuanTi);
+	void insert(XuanTi xuanTi);
 	boolean update(XuanTi xuanTi);			// 更新选题信息
 	boolean delete(String id);
 	XuanTi findById(String id);

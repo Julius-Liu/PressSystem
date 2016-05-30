@@ -44,8 +44,8 @@ public class XuanTiServiceImpl implements XuanTiService{
 	 * 保存选题
 	 * @see com.tgb.service.XuanTiService#save(com.tgb.model.XuanTi)
 	 */
-	public void save(XuanTi xuanTi) {
-		xuanTiMapper.save(xuanTi);
+	public void insert(XuanTi xuanTi) {
+		xuanTiMapper.insert(xuanTi);
 	}
 
 	public boolean update(XuanTi xuanTi) {

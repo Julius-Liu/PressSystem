@@ -8,36 +8,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.tgb.mapper.XuanTiMapper;
-import com.tgb.model.XuanTi;
 import com.tgb.mapper.BookMapper;
 import com.tgb.model.Book;
+import com.tgb.service.BookService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/config/spring-common.xml")
-public class XuanTiTest {
-	@Autowired
-	private XuanTiMapper xuanTiMapper;
+public class BookTest {
 	
 	@Autowired
-	private BookMapper bookMapper;
+	private BookService bookService;
+	
+	
+	/*@Test
+	public void addNewBook() {
+		Book newBook = new Book();
+		newBook.setBook_name("保持警惕2");
+		newBook.setPrice(35);
+		//bookMapper.save(newBook);		
+		bookService.insert(newBook);
+	}*/
+	
 	
 	@Test
-	public void testAddXuanTi() {
-		XuanTi xuanTi = new XuanTi();
-		xuanTi.setId("XT0048");
-		xuanTi.setType("语言文字");
-		xuanTi.setYear("2013");
-		xuanTi.setSeason(2);
-		xuanTi.setDepartment("图书编辑部");
-		xuanTi.setOriginator("刘开");
-		xuanTi.setSource(1);
-		xuanTi.setFirst_comments(1);
-		xuanTi.setStatus(1);
-		xuanTi.setThe_book_id(2);
-		xuanTiMapper.insert(xuanTi);		
+	public void updateBook() {
+		Book oldBook = bookService.findById(58);
+		oldBook.setBook_name("有一个AA貌似要走了");
+		bookService.update(oldBook);
 	}
-	
 	/*@Test
 	public void testFindAll() {
 		List<XuanTi> xuanTiList = xuanTiMapper.findAll();

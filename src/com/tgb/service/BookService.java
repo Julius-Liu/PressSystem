@@ -4,7 +4,7 @@ import java.util.List;
 import com.tgb.model.Book;
 
 public interface BookService {
-	void save(Book book);
+	void insert(Book book);
 	boolean update(Book book);			// 更新图书信息	
 	boolean delete(int id);
 	Book findById(int id);

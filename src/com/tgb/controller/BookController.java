@@ -69,7 +69,7 @@ public class BookController {
 	 */
 	@RequestMapping("/addBook")
 	public String addBook(Book book, HttpServletRequest request) {
-		bookService.save(book);
+		bookService.insert(book);
 		return "redirect:queryBook?book_name=&sub_book_name=&ISBN=&currentPage=1";
 	}
 	

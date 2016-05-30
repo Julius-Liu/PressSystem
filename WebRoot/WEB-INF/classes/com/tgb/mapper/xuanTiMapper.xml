@@ -8,7 +8,7 @@
  
 <mapper namespace="com.tgb.mapper.XuanTiMapper">
 	
-	<insert id="save" parameterType="XuanTi">
+	<insert id="insert" parameterType="XuanTi">
 		insert into xuan_ti(id, 
 			type, 
 			year, 

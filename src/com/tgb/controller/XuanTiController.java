@@ -111,7 +111,7 @@ public class XuanTiController {
 	 */
 	@RequestMapping("/addXuanTi")
 	public String addXuanTi(XuanTi xuanTi, HttpServletRequest request) {
-		xuanTiService.save(xuanTi);
+		xuanTiService.insert(xuanTi);
 		
 //		BeanFactory factory = new ClassPathXmlApplicationContext("config/bean.xml");		
 //		XuanTiService xuanTiServiceBean = (XuanTiService)factory.getBean("xuanTiService");
